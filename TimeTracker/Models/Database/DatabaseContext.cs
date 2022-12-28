@@ -27,6 +27,11 @@ public class DatabaseContext : DbContext
         this._dbPath = "Data.db";
     }
 
+    public DatabaseContext(string dbPath)
+    {
+        this._dbPath = dbPath;
+    }
+    
     // ==============
     // Overridden methods
     // ==============
