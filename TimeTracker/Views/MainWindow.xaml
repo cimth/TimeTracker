@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTracker"
         xmlns:viewModels="clr-namespace:TimeTracker.ViewModels"
-        xmlns:create="clr-namespace:TimeTracker.Views.Create"
+        xmlns:createUpdate="clr-namespace:TimeTracker.Views.CreateUpdate"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="600" Width="1200">
-    <Grid></Grid>
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left">
+            <Button Command="{Binding ShowCreateUpdateEntryDialogCommand}">
+                Create Entry
+            </Button>
+            <Button Command="{Binding ShowCreateUpdateCategoryDialogCommand}">
+                Create Category
+            </Button>
+        </StackPanel>
+        
+        <Grid>
+        </Grid>
+    </DockPanel>
 </Window>
