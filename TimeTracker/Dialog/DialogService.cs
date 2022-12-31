@@ -7,22 +7,45 @@ namespace TimeTracker.Dialog;
 
 public class DialogService
 {
+    // ==============
+    // Fields
+    // ==============
+    
+    private Window? _currentDialog;
+    
+    // ==============
+    // Common methods
+    // ==============
+    
+    public void CloseCurrentDialog()
+    {
+        this._currentDialog?.Hide();
+    }
+    
+    // ==============
+    // Create / Update Entries
+    // ==============
+    
     public void ShowCreateUpdateEntryDialog(CreateUpdateEntryViewModel viewModel, Entry? entry = null)
     {
-        // Set the category to update if necessary.
-        // If the category is null, the dialog is opened for creating a new category.
+        // Set the entry to update if necessary.
+        // If the entry is null, the dialog is opened for creating a new entry.
         if (entry != null)
         {
             viewModel.Entry = entry;
         }
         
         // Open the dialog.
-        Window dialog = new CreateUpdateEntryWindow
+        this._currentDialog = new CreateUpdateEntryWindow
         {
             DataContext = viewModel
         };
-        dialog.ShowDialog();
+        this._currentDialog.ShowDialog();
     }
+
+    // ==============
+    // Create / Update Categories
+    // ==============
 
     public void ShowCreateUpdateCategoryDialog(CreateUpdateCategoryViewModel viewModel, Category? category = null)
     {
@@ -34,10 +57,10 @@ public class DialogService
         }
         
         // Open the dialog.
-        Window dialog = new CreateUpdateCategoryWindow
+        this._currentDialog = new CreateUpdateCategoryWindow
         {
             DataContext = viewModel
         };
-        dialog.ShowDialog();
+        this._currentDialog.ShowDialog();
     }
 }

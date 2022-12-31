@@ -39,7 +39,7 @@ public class MainWindowViewModel
         this._dialogService = new DialogService();
         
         // Create the View Models.
-        this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService);
+        this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService, this._dialogService);
         
         // Initialize the Commands of this View Model.
         this.ShowCreateUpdateEntryDialogCommand = new DelegateCommand(ShowCreateUpdateEntryDialog);

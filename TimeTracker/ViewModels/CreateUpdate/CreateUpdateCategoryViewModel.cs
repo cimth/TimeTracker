@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Input;
+using TimeTracker.Dialog;
 using TimeTracker.Models.Entities;
 using TimeTracker.Models.Services;
 using TimeTracker.Utils;
@@ -42,17 +43,19 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     // ==============
     
     private readonly CategoryService _categoryService;
+    private readonly DialogService _dialogService;
 
     private Category _category = null!;
     private bool _isInputValid;
-    
+
     // ==============
     // Initialization
     // ==============
 
-    public CreateUpdateCategoryViewModel(CategoryService categoryService)
+    public CreateUpdateCategoryViewModel(CategoryService categoryService, DialogService dialogService)
     {
         this._categoryService = categoryService;
+        this._dialogService = dialogService;
 
         this.SubmitCommand = new DelegateCommand(this.Submit);
         this.UpdateStateAfterInputCommand = new DelegateCommand(this.UpdateStateAfterInput);
@@ -62,7 +65,7 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     
     private void Initialize()
     {
-        this.Category = new Category("New Category");
+        this.Category = this._categoryService.ReadAll()[1]; // new Category("New Category");
         this.IsInputValid = true;
     }
     
@@ -92,6 +95,9 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
         {
             this.UpdateCategory();
         }
+        
+        // Close the dialog.
+        this._dialogService.CloseCurrentDialog();
     }
 
     private void CreateCategory()
