@@ -17,4 +17,13 @@ public class Category
     {
         this.Name = name;
     }
+    
+    // ==============
+    // Overridden methods
+    // ==============
+
+    public override string ToString()
+    {
+        return $"[Id: '{this.Id}', Name: '{this.Name}']";
+    }
 }
