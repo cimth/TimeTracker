@@ -20,9 +20,10 @@ public class MainWindowViewModel
     // Fields
     // ==============
 
-    private CreateUpdateCategoryViewModel _createUpdateCategoryViewModel;
+    private readonly CreateUpdateEntryViewModel _createUpdateEntryViewModel;
+    private readonly CreateUpdateCategoryViewModel _createUpdateCategoryViewModel;
 
-    private DialogService _dialogService;
+    private readonly DialogService _dialogService;
 
     // ==============
     // Initialization
@@ -34,11 +35,13 @@ public class MainWindowViewModel
         DatabaseContext dbContext = new DatabaseContext();
         dbContext.DoMigrations();
         
+        EntryService entryService = new EntryService(dbContext);
         CategoryService categoryService = new CategoryService(dbContext);
 
         this._dialogService = new DialogService();
         
         // Create the View Models.
+        this._createUpdateEntryViewModel = new CreateUpdateEntryViewModel(entryService, categoryService, this._dialogService);
         this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService, this._dialogService);
         
         // Initialize the Commands of this View Model.
@@ -52,7 +55,7 @@ public class MainWindowViewModel
 
     private void ShowCreateUpdateEntryDialog()
     {
-        this._dialogService.ShowCreateUpdateEntryDialog(null);
+        this._dialogService.ShowCreateUpdateEntryDialog(this._createUpdateEntryViewModel);
     }
 
     private void ShowCreateUpdateCategoryDialog()

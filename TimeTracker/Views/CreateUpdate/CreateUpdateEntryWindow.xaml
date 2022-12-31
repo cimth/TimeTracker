@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              WindowStartupLocation="CenterScreen"
              Width="500"
@@ -23,16 +24,30 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
         <!-- Category -->
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
             <!-- Category -->
             <Label>Category</Label>
-            <ComboBox>
-                <ComboBoxItem>Category 1</ComboBoxItem>
-                <ComboBoxItem>Category 2</ComboBoxItem>
-                <ComboBoxItem>Category 3</ComboBoxItem>
+            <ComboBox ItemsSource="{Binding Categories}" 
+                      SelectedValue="{Binding Entry.Category}"
+                      DisplayMemberPath="Name"
+                      Focusable="False"
+                      IsEditable="True"
+                      IsReadOnly="True"
+                      Text="-- Select Category --">
+                <!-- 
+                    Use Interaction.Triggers to bind the events to commands.
+                    With the elements XML properties, only Code-Behind methods can be called.
+                -->
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="SelectionChanged">
+                        <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
             </ComboBox>
         </StackPanel>
         
@@ -44,12 +59,48 @@
         
         <DatePicker Grid.Column="0" Grid.Row="2"
                     Name="DtpStart"
-                    Margin="0,0,5,0" />
+                    Margin="0,0,5,0"
+                    Focusable="False"
+                    SelectedDate="{Binding Entry.Start}">
+            <!-- 
+                Use Interaction.Triggers to bind the events to commands.
+                With the elements XML properties, only Code-Behind methods can be called.
+            -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectedDateChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </DatePicker>
         
         <TextBox Grid.Column="0" Grid.Row="3"
-                 Height="{Binding ElementName=DtpStart, Path=ActualHeight}"
-                 Margin="0,10,5,0"
-                 VerticalContentAlignment="Center" />
+                 Margin="0,10,5,0" 
+                 VerticalContentAlignment="Center"
+                 Padding="3"
+                 Text="{Binding InputRawStart, UpdateSourceTrigger=PropertyChanged}"
+                 GotFocus="TextBox_OnGotFocus">
+            <!-- 
+                Use Interaction.Triggers to bind the events to commands.
+                With the elements XML properties, only Code-Behind methods can be called.
+            -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="TextChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            
+            <!-- Mark red when invalid input -->
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsInputRawStartValid}" 
+                                     Value="False">
+                            <Setter Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         
         <!-- End -->
         <Label Grid.Column="1" Grid.Row="1"
@@ -58,11 +109,48 @@
         </Label>
         
         <DatePicker Grid.Column="1" Grid.Row="2"
-                    Margin="5,0,0,0" />
+                    Margin="5,0,0,0"
+                    Focusable="False"
+                    SelectedDate="{Binding Entry.End}">
+            <!-- 
+                Use Interaction.Triggers to bind the events to commands.
+                With the elements XML properties, only Code-Behind methods can be called.
+            -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectedDateChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </DatePicker>
         
         <TextBox Grid.Column="1" Grid.Row="3"
-                 Margin="5,10,0,0"
-                 VerticalContentAlignment="Center" />
+                 Margin="5,10,0,0" 
+                 VerticalContentAlignment="Center"
+                 Padding="3"
+                 Text="{Binding InputRawEnd, UpdateSourceTrigger=PropertyChanged}"
+                 GotFocus="TextBox_OnGotFocus">
+            <!-- 
+                    Use Interaction.Triggers to bind events to commands.
+                    With the elements XML properties, only Code-Behind methods can be called.
+                -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="TextChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            
+            <!-- Mark red when invalid input -->
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsInputRawEndValid}" 
+                                     Value="False">
+                            <Setter Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         
         <!-- Pause -->
         <Label Grid.Column="0" Grid.Row="4"
@@ -70,14 +158,89 @@
             Pause
         </Label>
         
-        <TextBox Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"
+        <TextBox Grid.Column="0" Grid.Row="5"
+                 Name="TxtPause"
+                 Margin="0,0,5,0" 
+                 VerticalContentAlignment="Center"
                  Height="{Binding ElementName=DtpStart, Path=ActualHeight}"
-                 VerticalContentAlignment="Center" />
+                 Padding="3"
+                 Text="{Binding InputRawPause, UpdateSourceTrigger=PropertyChanged}"
+                 GotFocus="TextBox_OnGotFocus">
+            <!-- 
+                Use Interaction.Triggers to bind events to commands.
+                With the elements XML properties, only Code-Behind methods can be called.
+            -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="TextChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            
+            <!-- Mark red when invalid input -->
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsInputRawPauseValid}" 
+                                     Value="False">
+                            <Setter Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        
+        <!-- Total Time -->
+        <Label Grid.Column="1" Grid.Row="4"
+               Margin="0,10,0,0">
+            Total Time
+        </Label>
+        
+        <TextBox Grid.Column="1" Grid.Row="5"
+                 Margin="5,0,0,0" 
+                 VerticalContentAlignment="Center"
+                 Padding="3"
+                 IsEnabled="False"
+                 Text="{Binding Entry.TotalTime, StringFormat=hh\\:mm, Mode=OneWay}">
+            <!-- 
+                Use Interaction.Triggers to bind events to commands.
+                With the elements XML properties, only Code-Behind methods can be called.
+            -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="TextChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </TextBox>
+        
+        <!-- Notes -->
+        <Label Grid.Column="0" Grid.Row="6"
+               Margin="0,10,0,0">
+            Notes
+        </Label>
+        
+        <TextBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
+                 VerticalContentAlignment="Center"
+                 Height="{Binding ElementName=DtpStart, Path=ActualHeight}"
+                 Padding="3"
+                 Text="{Binding Entry.Notes, UpdateSourceTrigger=PropertyChanged}"
+                 GotFocus="TextBox_OnGotFocus">
+            <!-- 
+                    Use Interaction.Triggers to bind events to commands.
+                    With the elements XML properties, only Code-Behind methods can be called.
+                -->
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="TextChanged">
+                    <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </TextBox>
         
         <!-- Submit -->
-        <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" 
+        <Button Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" 
                 Margin="0,20,0,0"
-                HorizontalContentAlignment="Center">
+                HorizontalContentAlignment="Center"
+                Command="{Binding SubmitCommand}"
+                IsEnabled="{Binding IsInputValid}">
             Create
         </Button>
     </Grid>
