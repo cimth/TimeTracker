@@ -51,7 +51,7 @@ public class EntryTest
 
         TimeSpan pause = new TimeSpan(pauseHours, pauseMinutes, 0);
         TimeSpan targetTotal = new TimeSpan(3, 0, 0).Subtract(pause);
-        TimeSpan realTotal = entry.GetTotalTime();
+        TimeSpan realTotal = entry.TotalTime;
         
         Assert.That(realTotal, Is.EqualTo(targetTotal));
     }
@@ -68,7 +68,7 @@ public class EntryTest
 
         TimeSpan pause = new TimeSpan(pauseHours, pauseMinutes, 0);
         TimeSpan targetTotal = new TimeSpan(5, 30, 0).Subtract(pause);
-        TimeSpan realTotal = entry.GetTotalTime();
+        TimeSpan realTotal = entry.TotalTime;
         
         Assert.That(realTotal, Is.EqualTo(targetTotal));
     }

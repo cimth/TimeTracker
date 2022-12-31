@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace TimeTracker.Models.Entities;
 
@@ -8,7 +10,7 @@ public class Entry
     // Properties
     // ==============
     
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public Category? Category { get; set; }
     
@@ -18,6 +20,9 @@ public class Entry
     public TimeSpan Pause { get; set; }
     
     public string Notes { get; set; }
+    
+    [NotMapped]
+    public TimeSpan TotalTime => this.End.Subtract(this.Start).Subtract(this.Pause);
     
     // ==============
     // Initialization
@@ -43,13 +48,13 @@ public class Entry
         this.Pause = pause;
         this.Notes = notes;
     }
-
+    
     // ==============
-    // Methods
+    // Overridden methods
     // ==============
 
-    public TimeSpan GetTotalTime()
+    public override string ToString()
     {
-        return this.End.Subtract(this.Start).Subtract(this.Pause);
+        return $"[Id: '{this.Id}', Category: '{this.Category}', Start: '{this.Start.ToString(CultureInfo.CurrentCulture)}', End: '{this.End.ToString(CultureInfo.CurrentCulture)}', Pause: '{this.Pause.ToString()}', Notes: '{this.Notes}']";
     }
 }
