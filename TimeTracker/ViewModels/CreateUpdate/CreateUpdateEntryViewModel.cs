@@ -103,7 +103,7 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
 
     private void InitializeEntry()
     {
-        this.Entry = new Entry(null, DateTime.Now.Date, DateTime.Now.Date, TimeSpan.Zero, "");
+        this.Entry = new Entry(null, DateTime.Today, DateTime.Today, TimeSpan.Zero, "");
     }
 
     private void InitializeCategories()
