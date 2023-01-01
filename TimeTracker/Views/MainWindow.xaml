@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TimeTracker"
         xmlns:viewModels="clr-namespace:TimeTracker.ViewModels"
         xmlns:createUpdate="clr-namespace:TimeTracker.Views.CreateUpdate"
+        xmlns:read="clr-namespace:TimeTracker.Views.Read"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="600" Width="1200">
@@ -23,6 +24,7 @@
         </StackPanel>
         
         <Grid>
+            <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
         </Grid>
     </DockPanel>
 </Window>

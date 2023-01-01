@@ -4,11 +4,18 @@ using TimeTracker.Models.Database;
 using TimeTracker.Models.Services;
 using TimeTracker.ViewModels.Command;
 using TimeTracker.ViewModels.CreateUpdate;
+using TimeTracker.ViewModels.Read;
 
 namespace TimeTracker.ViewModels;
 
 public class MainWindowViewModel
 {
+    // ==============
+    // Properties
+    // ==============
+    
+   public ReadCategoriesViewModel ReadCategoriesViewModel { get; }
+    
     // ==============
     // Commands
     // ==============
@@ -43,6 +50,8 @@ public class MainWindowViewModel
         // Create the View Models.
         this._createUpdateEntryViewModel = new CreateUpdateEntryViewModel(entryService, categoryService, this._dialogService);
         this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService, this._dialogService);
+        
+        this.ReadCategoriesViewModel = new ReadCategoriesViewModel(categoryService);
         
         // Initialize the Commands of this View Model.
         this.ShowCreateUpdateEntryDialogCommand = new DelegateCommand(ShowCreateUpdateEntryDialog);

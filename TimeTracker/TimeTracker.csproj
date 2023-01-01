@@ -31,9 +31,4 @@
       </Page>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Views\Converters" />
-      <Folder Include="Views\Entry" />
-    </ItemGroup>
-
 </Project>
