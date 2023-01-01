@@ -61,7 +61,8 @@
                     Name="DtpStart"
                     Margin="0,0,5,0"
                     Focusable="False"
-                    SelectedDate="{Binding Entry.Start}">
+                    SelectedDate="{Binding Entry.Start}"
+                    SelectedDateChanged="DtpStart_OnSelectedDateChanged">
             <!-- 
                 Use Interaction.Triggers to bind the events to commands.
                 With the elements XML properties, only Code-Behind methods can be called.
@@ -109,6 +110,7 @@
         </Label>
         
         <DatePicker Grid.Column="1" Grid.Row="2"
+                    Name="DtpEnd"
                     Margin="5,0,0,0"
                     Focusable="False"
                     SelectedDate="{Binding Entry.End}">
@@ -121,6 +123,13 @@
                     <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
                 </b:EventTrigger>
             </b:Interaction.Triggers>
+            
+            <!-- Only allow dates behind or same as the start date -->
+            <!--
+            <DatePicker.BlackoutDates>
+                <CalendarDateRange Start="{Binding Entry.Start}" />
+            </DatePicker.BlackoutDates>
+            -->
         </DatePicker>
         
         <TextBox Grid.Column="1" Grid.Row="3"
