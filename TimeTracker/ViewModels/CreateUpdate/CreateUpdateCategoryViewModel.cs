@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Input;
 using TimeTracker.Dialog;
 using TimeTracker.Models.Entities;
@@ -13,6 +12,18 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     // ==============
     // Properties
     // ==============
+
+    public string WindowTitle
+    {
+        get => this._windowTitle;
+        set => SetField(ref this._windowTitle, value);
+    }
+
+    public string SubmitButtonText
+    {
+        get => this._submitButtonText;
+        set => SetField(ref this._submitButtonText, value);
+    }
 
     public Category Category
     {
@@ -44,6 +55,9 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     
     private readonly CategoryService _categoryService;
     private readonly DialogService _dialogService;
+    
+    private string _windowTitle;
+    private string _submitButtonText;
 
     private Category _category = null!;
     private bool _isInputValid;
@@ -59,14 +73,16 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
 
         this.SubmitCommand = new DelegateCommand(this.Submit);
         this.UpdateStateAfterInputCommand = new DelegateCommand(this.UpdateStateAfterInput);
-
-        this.Initialize();
     }
     
-    private void Initialize()
+    public void Initialize(Category? category = null)
     {
-        this.Category = this._categoryService.ReadAll()[1]; // new Category("New Category");
-        this.IsInputValid = true;
+        this.WindowTitle = category == null ? "Create Category" : "Update Category";
+        this.SubmitButtonText = category == null ? "Create" : "Save";
+        
+        this.Category = category ?? new Category("New Category");
+        
+        this.UpdateStateAfterInput();
     }
     
     // ==============

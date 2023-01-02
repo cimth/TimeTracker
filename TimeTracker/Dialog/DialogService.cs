@@ -49,13 +49,9 @@ public class DialogService
 
     public void ShowCreateUpdateCategoryDialog(CreateUpdateCategoryViewModel viewModel, Category? category = null)
     {
-        // Set the category to update if necessary.
-        // If the category is null, the dialog is opened for creating a new category.
-        if (category != null)
-        {
-            viewModel.Category = category;
-        }
-        
+        // Initialize the View Model with the selected category or with a new category.
+        viewModel.Initialize(category);
+
         // Open the dialog.
         this._currentDialog = new CreateUpdateCategoryWindow
         {
