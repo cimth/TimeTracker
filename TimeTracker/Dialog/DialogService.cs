@@ -28,12 +28,8 @@ public class DialogService
     
     public void ShowCreateUpdateEntryDialog(CreateUpdateEntryViewModel viewModel, Entry? entry = null)
     {
-        // Set the entry to update if necessary.
-        // If the entry is null, the dialog is opened for creating a new entry.
-        if (entry != null)
-        {
-            viewModel.Entry = entry;
-        }
+        // Initialize the View Model with the selected entry or with a new entry.
+        viewModel.Initialize(entry);
         
         // Open the dialog.
         this._currentDialog = new CreateUpdateEntryWindow

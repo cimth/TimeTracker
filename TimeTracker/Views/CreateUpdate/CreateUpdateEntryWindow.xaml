@@ -6,6 +6,7 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              WindowStartupLocation="CenterScreen"
+             Title="{Binding WindowTitle}"
              Width="500"
              SizeToContent="Height">
     <Grid VerticalAlignment="Center"
@@ -249,8 +250,7 @@
                 Margin="0,20,0,0"
                 HorizontalContentAlignment="Center"
                 Command="{Binding SubmitCommand}"
-                IsEnabled="{Binding IsInputValid}">
-            Create
-        </Button>
+                IsEnabled="{Binding IsInputValid}"
+                Content="{Binding SubmitButtonText}" />
     </Grid>
 </Window>

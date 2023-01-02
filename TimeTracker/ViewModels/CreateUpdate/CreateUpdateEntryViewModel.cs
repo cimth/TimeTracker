@@ -15,6 +15,18 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
     // ==============
     // Properties
     // ==============
+    
+    public string WindowTitle
+    {
+        get => this._windowTitle;
+        set => SetField(ref this._windowTitle, value);
+    }
+
+    public string SubmitButtonText
+    {
+        get => this._submitButtonText;
+        set => SetField(ref this._submitButtonText, value);
+    }
 
     public Entry Entry
     {
@@ -75,6 +87,9 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
     private readonly EntryService _entryService;
     private readonly CategoryService _categoryService;
     private readonly DialogService _dialogService;
+    
+    private string _windowTitle;
+    private string _submitButtonText;
 
     private Entry _entry = null!;
     private bool _isInputValid;
@@ -96,19 +111,23 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         this.SubmitCommand = new DelegateCommand(this.Submit);
         this.UpdateStateAfterInputCommand = new DelegateCommand(this.UpdateStateAfterInput);
         
-        this.InitializeCategories();
-        this.InitializeEntry();
-        this.UpdateStateAfterInput();
-    }
-
-    private void InitializeEntry()
-    {
-        this.Entry = new Entry(null, DateTime.Today, DateTime.Today, TimeSpan.Zero, "");
+        this.Initialize();
     }
 
     private void InitializeCategories()
     {
         this.Categories = this._categoryService.ReadAll();
+    }
+    
+    public void Initialize(Entry? entry = null)
+    {
+        this.WindowTitle = entry == null ? "Create Entry" : "Update Entry";
+        this.SubmitButtonText = entry == null ? "Create" : "Save";
+        
+        this.Entry = entry ?? new Entry(null, DateTime.Today, DateTime.Today, TimeSpan.Zero, "");
+        
+        this.InitializeCategories();
+        this.UpdateStateAfterInput();
     }
     
     // ==============
