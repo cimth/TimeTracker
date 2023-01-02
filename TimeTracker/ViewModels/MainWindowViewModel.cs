@@ -15,6 +15,7 @@ public class MainWindowViewModel
     // ==============
     
    public ReadCategoriesViewModel ReadCategoriesViewModel { get; }
+   public ReadEntriesViewModel ReadEntriesViewModel { get; }
     
     // ==============
     // Commands
@@ -52,6 +53,7 @@ public class MainWindowViewModel
         this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService, this._dialogService);
         
         this.ReadCategoriesViewModel = new ReadCategoriesViewModel(categoryService, this._dialogService, this._createUpdateCategoryViewModel);
+        this.ReadEntriesViewModel = new ReadEntriesViewModel(entryService, this._dialogService, this._createUpdateEntryViewModel);
         
         // Initialize the Commands of this View Model.
         this.ShowCreateUpdateEntryDialogCommand = new DelegateCommand(ShowCreateUpdateEntryDialog);

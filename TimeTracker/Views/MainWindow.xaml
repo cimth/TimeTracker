@@ -24,7 +24,10 @@
         </StackPanel>
         
         <Grid>
+            <!--
             <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
+            -->
+            <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
         </Grid>
     </DockPanel>
 </Window>
