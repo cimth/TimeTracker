@@ -51,7 +51,7 @@ public class MainWindowViewModel
         this._createUpdateEntryViewModel = new CreateUpdateEntryViewModel(entryService, categoryService, this._dialogService);
         this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService, this._dialogService);
         
-        this.ReadCategoriesViewModel = new ReadCategoriesViewModel(categoryService);
+        this.ReadCategoriesViewModel = new ReadCategoriesViewModel(categoryService, this._dialogService, this._createUpdateCategoryViewModel);
         
         // Initialize the Commands of this View Model.
         this.ShowCreateUpdateEntryDialogCommand = new DelegateCommand(ShowCreateUpdateEntryDialog);

@@ -8,7 +8,8 @@
              mc:Ignorable="d"
              d:DesignWidth="300" d:DesignHeight="100" >
     <Grid>
-        <templates:BasicDataGrid ItemsSource="{Binding Categories}">
+        <templates:BasicDataGrid ItemsSource="{Binding Categories}"
+                                 SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
                 <!-- Name -->
                 <DataGridTextColumn Binding="{Binding Name}" 
@@ -40,7 +41,10 @@
                             <UniformGrid Rows="1">
                                 <!-- Update -->
                                 <Button Padding="10, 5"
-                                        Margin="5">Update</Button>
+                                        Margin="5"
+                                        Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                                    Update
+                                </Button>
                                 
                                 <!-- Delete -->
                                 <Button Padding="10, 5"
