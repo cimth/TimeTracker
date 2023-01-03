@@ -23,6 +23,7 @@ public class ReadEntriesViewModel
     // Commands
     // ==============
     
+    public ICommand CreateCommand { get; }
     public ICommand UpdateCommand { get; }
     
     // ==============
@@ -47,6 +48,7 @@ public class ReadEntriesViewModel
 
         this._createUpdateEntryViewModel = createUpdateEntryViewModel;
 
+        this.CreateCommand = new DelegateCommand(this.Create);
         this.UpdateCommand = new DelegateCommand(this.Update);
         
         this.InitializeEntries();
@@ -60,6 +62,11 @@ public class ReadEntriesViewModel
     // ==============
     // Command actions
     // ==============
+    
+    private void Create()
+    {
+        this._dialogService.ShowCreateUpdateEntryDialog(this._createUpdateEntryViewModel);
+    }
 
     private void Update()
     {

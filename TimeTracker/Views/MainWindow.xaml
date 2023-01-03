@@ -14,20 +14,11 @@
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left">
-            <Button Command="{Binding ShowCreateUpdateEntryDialogCommand}">
-                Create Entry
-            </Button>
-            <Button Command="{Binding ShowCreateUpdateCategoryDialogCommand}">
-                Create Category
-            </Button>
-        </StackPanel>
-        
         <Grid>
-            <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
             <!--
-            <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
+            <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
             -->
+            <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
         </Grid>
     </DockPanel>
 </Window>

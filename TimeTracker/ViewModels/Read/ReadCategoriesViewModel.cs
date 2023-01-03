@@ -23,6 +23,7 @@ public class ReadCategoriesViewModel
     // Commands
     // ==============
     
+    public ICommand CreateCommand { get; }
     public ICommand UpdateCommand { get; }
     
     // ==============
@@ -47,6 +48,7 @@ public class ReadCategoriesViewModel
 
         this._createUpdateCategoryViewModel = createUpdateCategoryViewModel;
 
+        this.CreateCommand = new DelegateCommand(this.Create);
         this.UpdateCommand = new DelegateCommand(this.Update);
         
         this.InitializeCategories();
@@ -60,6 +62,11 @@ public class ReadCategoriesViewModel
     // ==============
     // Command actions
     // ==============
+    
+    private void Create()
+    {
+        this._dialogService.ShowCreateUpdateCategoryDialog(this._createUpdateCategoryViewModel);
+    }
 
     private void Update()
     {

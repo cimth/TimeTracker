@@ -7,55 +7,69 @@
              xmlns:templates="clr-namespace:TimeTracker.Views.Templates"
              mc:Ignorable="d"
              d:DesignWidth="300" d:DesignHeight="100" >
-    <Grid>
-        <templates:BasicDataGrid ItemsSource="{Binding Categories}"
-                                 SelectedItem="{Binding SelectedCategory}">
-            <DataGrid.Columns>
-                <!-- Name -->
-                <DataGridTextColumn Binding="{Binding Name}" 
-                                    Width="*">
-                    <!-- Header -->
-                    <DataGridTextColumn.Header>
-                        <TextBlock Text="Name" />
-                    </DataGridTextColumn.Header>
+    <DockPanel>
+        <!-- Create a new Category -->
+        <StackPanel DockPanel.Dock="Top"
+                    Background="WhiteSmoke">
+            <Button Command="{Binding CreateCommand}"
+                    HorizontalAlignment="Left"
+                    Margin="5" Padding="3">
+                Create Category
+            </Button>
+        </StackPanel>
+        
+        <!-- List with Categories -->
+        <Grid>
+            <templates:BasicDataGrid ItemsSource="{Binding Categories}"
+                                     SelectedItem="{Binding SelectedCategory}">
+                <DataGrid.Columns>
+                    <!-- Name -->
+                    <DataGridTextColumn Binding="{Binding Name}" 
+                                        Width="*">
+                        <!-- Header -->
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="Name" />
+                        </DataGridTextColumn.Header>
+                        
+                        <!-- Style -->
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     
-                    <!-- Style -->
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                
-                <!-- Actions -->
-                <DataGridTemplateColumn>
-                    <!-- Header -->
-                    <DataGridTemplateColumn.Header>
-                        <TextBlock Text="Actions" />
-                    </DataGridTemplateColumn.Header>
-                    
-                    <!-- Cell Template -->
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <UniformGrid Rows="1">
-                                <!-- Update -->
-                                <Button Padding="10, 5"
-                                        Margin="5"
-                                        Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
-                                    Update
-                                </Button>
-                                
-                                <!-- Delete -->
-                                <Button Padding="10, 5"
-                                        Margin="5">Delete</Button>
-                                
-                            </UniformGrid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </templates:BasicDataGrid>
-    </Grid>
+                    <!-- Actions -->
+                    <DataGridTemplateColumn>
+                        <!-- Header -->
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Text="Actions" />
+                        </DataGridTemplateColumn.Header>
+                        
+                        <!-- Cell Template -->
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <UniformGrid Rows="1">
+                                    <!-- Update -->
+                                    <Button Padding="10, 5"
+                                            Margin="5"
+                                            Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                                        Update
+                                    </Button>
+                                    
+                                    <!-- Delete -->
+                                    <Button Padding="10, 5"
+                                            Margin="5">Delete</Button>
+                                    
+                                </UniformGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </templates:BasicDataGrid>
+        </Grid>
+        
+    </DockPanel>
 </UserControl>
