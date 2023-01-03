@@ -4,9 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TimeTracker.Views.Read"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:templates="clr-namespace:TimeTracker.Views.Templates"
              mc:Ignorable="d"
              d:DesignWidth="700" d:DesignHeight="100" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!-- Styles -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Uid="DataGridStyles" Source="../../Styles/DataGridStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- CollectionView to group the shown Entries -->
+            <CollectionViewSource x:Key="GridGroups" Source="{Binding Entries}">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="WeekGroupName" />
+                </CollectionViewSource.GroupDescriptions>
+                <CollectionViewSource.SortDescriptions>
+                    <scm:SortDescription PropertyName="Start" />
+                </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <DockPanel>
         <!-- Create a new Entry -->
         <StackPanel DockPanel.Dock="Top"
@@ -20,8 +41,14 @@
         
         <!-- List with Entries -->
         <Grid>
-            <templates:BasicDataGrid ItemsSource="{Binding Entries}"
+            <templates:BasicDataGrid ItemsSource="{Binding Source={StaticResource GridGroups}}"
                                      SelectedItem="{Binding SelectedEntry}">
+                <!-- Group all Entries by week -->
+                <DataGrid.GroupStyle>
+                    <GroupStyle ContainerStyle="{StaticResource WeekGroup}" />
+                </DataGrid.GroupStyle>
+
+                <!-- Columns definitions -->
                 <DataGrid.Columns>
                     <!-- Category -->
                     <DataGridTextColumn Binding="{Binding Category.Name}">
@@ -187,6 +214,9 @@
                         </DataGridTemplateColumn.CellTemplate>
                         
                     </DataGridTemplateColumn>
+                    
+                    <!-- Empty column for the scrollbar -->
+                    <DataGridTextColumn IsReadOnly="True" /> 
                 </DataGrid.Columns>
             </templates:BasicDataGrid>
         </Grid>

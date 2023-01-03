@@ -37,6 +37,7 @@ public class Entry : NotifyPropertyChangedImpl
         {
             SetField(ref this._start, value);
             OnPropertyChanged(nameof(this.TotalTime));
+            OnPropertyChanged(nameof(this.WeekGroupName));
         }
     }
 
@@ -47,6 +48,7 @@ public class Entry : NotifyPropertyChangedImpl
         {
             SetField(ref this._end, value);
             OnPropertyChanged(nameof(this.TotalTime));
+            OnPropertyChanged(nameof(this.WeekGroupName));
         }
     }
 
@@ -68,6 +70,9 @@ public class Entry : NotifyPropertyChangedImpl
     
     [NotMapped]
     public TimeSpan TotalTime => this.End.Subtract(this.Start).Subtract(this.Pause);
+
+    [NotMapped] 
+    public string WeekGroupName => WeekGroupUtil.GetWeekGroupName(this);
     
     // ==============
     // Fields
