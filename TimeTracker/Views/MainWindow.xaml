@@ -13,12 +13,50 @@
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
+    
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    
     <DockPanel>
-        <Grid>
-            <!--
-            <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
-            -->
+        <StackPanel DockPanel.Dock="Left" 
+                    MinWidth="300"
+                    Background="LavenderBlush"
+                    VerticalAlignment="Stretch">
+            <!-- Choose whether Categories or Entries should be shown. -->
+            <StackPanel Margin="5" 
+                        Background="White">
+                <Label>Navigation</Label>
+                <StackPanel Margin="10">
+                    <ToggleButton Padding="5"
+                                  Margin="5"
+                                  IsChecked="{Binding IsCategoriesViewShown}"
+                                  Command="{Binding ShowCategoriesViewCommand}">Categories</ToggleButton>
+                    <ToggleButton Padding="5"
+                                  Margin="5"
+                                  IsChecked="{Binding IsEntriesViewShown}"
+                                  Command="{Binding ShowEntriesViewCommand}">Entries</ToggleButton>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Filters for the main view -->
+            <StackPanel Margin="5" 
+                        Background="White">
+                <Label>Filters</Label>
+                <StackPanel Margin="10">
+                    
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        
+        <!-- Entries View -->
+        <StackPanel Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
             <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
-        </Grid>
+        </StackPanel>
+        
+        <!-- Categories View -->
+        <StackPanel Visibility="{Binding IsCategoriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
+        </StackPanel>
     </DockPanel>
 </Window>
