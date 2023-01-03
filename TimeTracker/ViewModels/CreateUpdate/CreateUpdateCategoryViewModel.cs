@@ -24,16 +24,20 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
         get => this._submitButtonText;
         set => SetField(ref this._submitButtonText, value);
     }
+    
+    /*
+     * Input values
+     */
 
-    public Category Category
+    public string InputName
     {
-        get => this._category;
-        set
-        {
-            SetField(ref this._category, value);
-            this.UpdateStateAfterInput();
-        }
+        get => this._inputName;
+        set => SetField(ref this._inputName, value);
     }
+    
+    /*
+     * Input validation
+     */
 
     public bool IsInputValid
     {
@@ -55,11 +59,16 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     
     private readonly CategoryService _categoryService;
     private readonly DialogService _dialogService;
-    
-    private string _windowTitle;
-    private string _submitButtonText;
 
-    private Category _category = null!;
+    private string _windowTitle = null!;            // Not null after Initialize().
+    private string _submitButtonText = null!;       // Not null after Initialize().
+
+    private Category? _originalCategory;
+    
+    // Input values
+    private string _inputName = null!;              // Not null after Initialize().
+    
+    // Input validation
     private bool _isInputValid;
 
     // ==============
@@ -77,12 +86,40 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     
     public void Initialize(Category? category = null)
     {
+        // Save the original category (might be null if a new entry should be created).
+        // The GUI does not bind to the original category but to separate variables for each input field
+        // to avoid changing the original data even if the changes are not saved.
+        this._originalCategory = category;
+        
+        // Adjust the GUI texts depending on whether creating or updating an entry.
         this.WindowTitle = category == null ? "Create Category" : "Update Category";
         this.SubmitButtonText = category == null ? "Create" : "Save";
         
-        this.Category = category ?? new Category("New Category");
-        
+        // Initialize the data bound to the GUI.
+        this.InitializeInput();
         this.UpdateStateAfterInput();
+    }
+    
+    private void InitializeInput()
+    {
+        if (this._originalCategory == null)
+        {
+            this.InitializeCreateInput();
+        }
+        else
+        {
+            this.InitializeUpdateInput(this._originalCategory);
+        }
+    }
+    
+    private void InitializeCreateInput()
+    {
+        this.InputName = "New Category";
+    }
+
+    private void InitializeUpdateInput(Category category)
+    {
+        this.InputName = category.Name;
     }
     
     // ==============
@@ -91,7 +128,7 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
 
     private void UpdateStateAfterInput()
     {
-        this.IsInputValid = !string.IsNullOrWhiteSpace(this.Category.Name);
+        this.IsInputValid = !string.IsNullOrWhiteSpace(this.InputName);
     }
 
     private void Submit()
@@ -103,7 +140,7 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
         }
         
         // Create / update the category.
-        if (this.Category.Id == null)
+        if (this._originalCategory == null)
         {
             this.CreateCategory();
         }
@@ -118,11 +155,23 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
 
     private void CreateCategory()
     {
-        this._categoryService.Create(this.Category);
+        Category category = this.GetCategoryFromInput();
+        this._categoryService.Create(category);
     }
 
     private void UpdateCategory()
     {
+        // Get the updated data and save them into the original entry.
+        Category updatedCategory = this.GetCategoryFromInput();
+
+        this._originalCategory!.Name = updatedCategory.Name;
+        
+        // Save the changes into the database.
         this._categoryService.Update();
+    }
+
+    private Category GetCategoryFromInput()
+    {
+        return new Category(this.InputName);
     }
 }

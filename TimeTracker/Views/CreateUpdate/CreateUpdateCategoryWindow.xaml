@@ -16,7 +16,7 @@
         
         <TextBox VerticalContentAlignment="Center"
                  Padding="3"
-                 Text="{Binding Category.Name, UpdateSourceTrigger=PropertyChanged}">
+                 Text="{Binding InputName, UpdateSourceTrigger=PropertyChanged}">
             <!-- 
                     Use Interaction.Triggers to bind events to commands.
                     With the elements XML properties, only Code-Behind methods can be called.

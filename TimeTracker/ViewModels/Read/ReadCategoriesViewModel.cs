@@ -63,7 +63,6 @@ public class ReadCategoriesViewModel
 
     private void Update()
     {
-        Console.WriteLine($"Update: {this.SelectedCategory?.Name}");
         this._dialogService.ShowCreateUpdateCategoryDialog(this._createUpdateCategoryViewModel, this.SelectedCategory);
     }
 
