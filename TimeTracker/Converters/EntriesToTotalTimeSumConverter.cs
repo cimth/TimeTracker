@@ -6,14 +6,14 @@ using TimeTracker.Models.Entities;
 
 namespace TimeTracker.Converters;
 
-public class EntryToTotalTimeSumConverter : IValueConverter
+public class EntryToTotalTimeSumConverter : IMultiValueConverter
 {
-    public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         TimeSpan sum = TimeSpan.Zero;
         
         // Add the total time of each entry to the sum.
-        if (value is ReadOnlyObservableCollection<Object> items)
+        if (values[0] is ReadOnlyObservableCollection<Object> items)
         {
             foreach (var item in items)
             {
@@ -27,7 +27,7 @@ public class EntryToTotalTimeSumConverter : IValueConverter
         return sum.ToString("hh\\:mm");
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TimeTracker.Views.Read"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:templates="clr-namespace:TimeTracker.Views.Templates"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              d:DesignWidth="700" d:DesignHeight="100" >
     <UserControl.Resources>
@@ -16,7 +17,8 @@
             </ResourceDictionary.MergedDictionaries>
             
             <!-- CollectionView to group the shown Entries -->
-            <CollectionViewSource x:Key="GridGroups" Source="{Binding Entries}">
+            <CollectionViewSource x:Key="GridGroups" Source="{Binding Entries}"
+                                  IsLiveGroupingRequested="True">
                 <CollectionViewSource.GroupDescriptions>
                     <PropertyGroupDescription PropertyName="WeekGroupName" />
                 </CollectionViewSource.GroupDescriptions>
@@ -42,7 +44,8 @@
         <!-- List with Entries -->
         <Grid>
             <templates:BasicDataGrid ItemsSource="{Binding Source={StaticResource GridGroups}}"
-                                     SelectedItem="{Binding SelectedEntry}">
+                                     SelectedItem="{Binding SelectedEntry}"
+                                     SourceUpdated="FrameworkElement_OnSourceUpdated">
                 <!-- Group all Entries by week -->
                 <DataGrid.GroupStyle>
                     <GroupStyle ContainerStyle="{StaticResource WeekGroup}" />

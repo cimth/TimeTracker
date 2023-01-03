@@ -23,8 +23,17 @@
                                 <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Right">
                                     <TextBlock Text=" | Total Time: " />
-                                    <TextBlock Text="{Binding Items, Converter={StaticResource EntryToTotalTimeSumConverter}}"
-                                               FontWeight="Bold"/>
+                                    <TextBlock FontWeight="Bold">
+                                        <TextBlock.Text>
+                                            <!-- Bind to the actual needed Items object and to Items.Count (though not needed)
+                                                 to notice changes on the groups after updating an Entry.
+                                                 See: https://stackoverflow.com/questions/53940895/datagrid-group-header-not-updating-on-new-record -->
+                                            <MultiBinding Converter="{StaticResource EntryToTotalTimeSumConverter}">
+                                                <Binding Path="Items" />
+                                                <Binding Path="Items.Count" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </Expander.Header>
