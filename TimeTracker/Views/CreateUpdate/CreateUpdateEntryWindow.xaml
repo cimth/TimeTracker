@@ -34,7 +34,7 @@
             <!-- Category -->
             <Label>Category</Label>
             <ComboBox ItemsSource="{Binding Categories}" 
-                      SelectedValue="{Binding Entry.Category}"
+                      SelectedValue="{Binding InputCategory}"
                       DisplayMemberPath="Name"
                       Focusable="False"
                       IsEditable="True"
@@ -62,7 +62,7 @@
                     Name="DtpStart"
                     Margin="0,0,5,0"
                     Focusable="False"
-                    SelectedDate="{Binding Entry.Start}"
+                    SelectedDate="{Binding InputStartDate}"
                     SelectedDateChanged="DtpStart_OnSelectedDateChanged">
             <!-- 
                 Use Interaction.Triggers to bind the events to commands.
@@ -79,7 +79,7 @@
                  Margin="0,10,5,0" 
                  VerticalContentAlignment="Center"
                  Padding="3"
-                 Text="{Binding InputRawStart, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding InputStartTime, UpdateSourceTrigger=PropertyChanged}"
                  GotFocus="TextBox_OnGotFocus">
             <!-- 
                 Use Interaction.Triggers to bind the events to commands.
@@ -95,7 +95,7 @@
             <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsInputRawStartValid}" 
+                        <DataTrigger Binding="{Binding IsInputStartTimeValid}" 
                                      Value="False">
                             <Setter Property="Foreground" Value="Red" />
                         </DataTrigger>
@@ -114,7 +114,7 @@
                     Name="DtpEnd"
                     Margin="5,0,0,0"
                     Focusable="False"
-                    SelectedDate="{Binding Entry.End}">
+                    SelectedDate="{Binding InputEndDate}">
             <!-- 
                 Use Interaction.Triggers to bind the events to commands.
                 With the elements XML properties, only Code-Behind methods can be called.
@@ -124,20 +124,13 @@
                     <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>
                 </b:EventTrigger>
             </b:Interaction.Triggers>
-            
-            <!-- Only allow dates behind or same as the start date -->
-            <!--
-            <DatePicker.BlackoutDates>
-                <CalendarDateRange Start="{Binding Entry.Start}" />
-            </DatePicker.BlackoutDates>
-            -->
         </DatePicker>
         
         <TextBox Grid.Column="1" Grid.Row="3"
                  Margin="5,10,0,0" 
                  VerticalContentAlignment="Center"
                  Padding="3"
-                 Text="{Binding InputRawEnd, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding InputEndTime, UpdateSourceTrigger=PropertyChanged}"
                  GotFocus="TextBox_OnGotFocus">
             <!-- 
                     Use Interaction.Triggers to bind events to commands.
@@ -153,7 +146,7 @@
             <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsInputRawEndValid}" 
+                        <DataTrigger Binding="{Binding IsInputEndTimeValid}" 
                                      Value="False">
                             <Setter Property="Foreground" Value="Red" />
                         </DataTrigger>
@@ -174,7 +167,7 @@
                  VerticalContentAlignment="Center"
                  Height="{Binding ElementName=DtpStart, Path=ActualHeight}"
                  Padding="3"
-                 Text="{Binding InputRawPause, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding InputPauseTime, UpdateSourceTrigger=PropertyChanged}"
                  GotFocus="TextBox_OnGotFocus">
             <!-- 
                 Use Interaction.Triggers to bind events to commands.
@@ -190,7 +183,7 @@
             <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsInputRawPauseValid}" 
+                        <DataTrigger Binding="{Binding IsInputPauseTimeValid}" 
                                      Value="False">
                             <Setter Property="Foreground" Value="Red" />
                         </DataTrigger>
@@ -210,7 +203,7 @@
                  VerticalContentAlignment="Center"
                  Padding="3"
                  IsEnabled="False"
-                 Text="{Binding Entry.TotalTime, StringFormat=hh\\:mm, Mode=OneWay}">
+                 Text="{Binding TotalTime, StringFormat=hh\\:mm, Mode=OneWay}">
             <!-- 
                 Use Interaction.Triggers to bind events to commands.
                 With the elements XML properties, only Code-Behind methods can be called.
@@ -232,7 +225,7 @@
                  VerticalContentAlignment="Center"
                  Height="{Binding ElementName=DtpStart, Path=ActualHeight}"
                  Padding="3"
-                 Text="{Binding Entry.Notes, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding InputNotes, UpdateSourceTrigger=PropertyChanged}"
                  GotFocus="TextBox_OnGotFocus">
             <!-- 
                     Use Interaction.Triggers to bind events to commands.

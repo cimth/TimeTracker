@@ -28,18 +28,57 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         set => SetField(ref this._submitButtonText, value);
     }
 
-    public Entry Entry
+    public List<Category> Categories { get; private set; } = null!;     // Not null after Initialize().
+    
+    /*
+     * Input values.
+     *
+     * Note:
+     * Use raw strings for time input to avoid a weird user experience when entering a time.
+     */
+
+    public Category? InputCategory
     {
-        get => this._entry;
-        set
-        {
-            SetField(ref this._entry, value);
-            this.UpdateStateAfterInput();
-        }
+        get => this._inputCategory;
+        set => SetField(ref this._inputCategory, value);
     }
 
-    public List<Category> Categories { get; private set; } = null!;
-    
+    public DateTime InputStartDate
+    {
+        get => this._inputStartDate;
+        set => SetField(ref this._inputStartDate, value);
+    }
+
+    public DateTime InputEndDate
+    {
+        get => this._inputEndDate;
+        set => SetField(ref this._inputEndDate, value);
+    }
+
+    public string InputStartTime
+    {
+        get => this._inputStartTime;
+        set => SetField(ref this._inputStartTime, value);
+    }
+
+    public string InputEndTime
+    {
+        get => this._inputEndTime;
+        set => SetField(ref this._inputEndTime, value);
+    }
+
+    public string InputPauseTime
+    {
+        get => this._inputTimePauseTime;
+        set => SetField(ref this._inputTimePauseTime, value);
+    }
+
+    public string InputNotes
+    {
+        get => this._inputNotes;
+        set => SetField(ref this._inputNotes, value);
+    }
+
     /*
      * Input validation
      */
@@ -50,26 +89,32 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         set => SetField(ref this._isInputValid, value);
     }
 
-    public string InputRawStart { get; set; } = "00:00";
-    public string InputRawEnd { get; set; } = "00:00";
-    public string InputRawPause { get; set; } = "00:00";
+    public bool IsInputStartTimeValid
+    {
+        get => this._isInputStartTimeValid;
+        private set => SetField(ref this._isInputStartTimeValid, value);
+    }
+    
+    public bool IsInputEndTimeValid
+    {
+        get => this._isInputEndTimeValid;
+        private set => SetField(ref this._isInputEndTimeValid, value);
+    }
+    
+    public bool IsInputPauseTimeValid
+    {
+        get => this._isInputPauseTimeValid;
+        private set => SetField(ref this._isInputPauseTimeValid, value);
+    }
+    
+    /*
+     * The total time (readonly from the GUI)!
+     */
 
-    public bool IsInputRawStartValid
+    public string TotalTime
     {
-        get => this._isInputRawStartValid;
-        private set => SetField(ref this._isInputRawStartValid, value);
-    }
-    
-    public bool IsInputRawEndValid
-    {
-        get => this._isInputRawEndValid;
-        private set => SetField(ref this._isInputRawEndValid, value);
-    }
-    
-    public bool IsInputRawPauseValid
-    {
-        get => this._isInputRawPauseValid;
-        private set => SetField(ref this._isInputRawPauseValid, value);
+        get => this._totalTime;
+        private set => SetField(ref this._totalTime, value);
     }
 
     // ==============
@@ -88,15 +133,31 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
     private readonly CategoryService _categoryService;
     private readonly DialogService _dialogService;
     
-    private string _windowTitle;
-    private string _submitButtonText;
+    private string _windowTitle = null!;            // Not null after Initialize().
+    private string _submitButtonText = null!;       // Not null after Initialize().
 
-    private Entry _entry = null!;
+    private Entry? _originalEntry;
+
+    // Input values
+    private Category? _inputCategory;
+    
+    private DateTime _inputStartDate;
+    private DateTime _inputEndDate;
+
+    private string _inputStartTime = null!;         // Not null after Initialize().
+    private string _inputEndTime = null!;           // Not null after Initialize().
+    private string _inputTimePauseTime = null!;     // Not null after Initialize().
+
+    private string _inputNotes = null!;             // Not null after Initialize().
+
+    // Input validation
     private bool _isInputValid;
     
-    private bool _isInputRawStartValid;
-    private bool _isInputRawEndValid;
-    private bool _isInputRawPauseValid;
+    private bool _isInputStartTimeValid;
+    private bool _isInputEndTimeValid;
+    private bool _isInputPauseTimeValid;
+    
+    private string _totalTime = null!;              // Not null after Initialize().
 
     // ==============
     // Initialization
@@ -110,24 +171,70 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
 
         this.SubmitCommand = new DelegateCommand(this.Submit);
         this.UpdateStateAfterInputCommand = new DelegateCommand(this.UpdateStateAfterInput);
+    }
+
+    public void Initialize(Entry? entry = null)
+    {
+        // Save the original entry (might be null if a new entry should be created).
+        // The GUI does not bind to the original entry but to separate variables for each input field
+        // to avoid changing the original data even if the changes are not saved.
+        this._originalEntry = entry;
         
-        this.Initialize();
+        // Adjust the GUI texts depending on whether creating or updating an entry.
+        this.WindowTitle = this._originalEntry == null ? "Create Entry" : "Update Entry";
+        this.SubmitButtonText = this._originalEntry == null ? "Create" : "Save";
+        
+        // Initialize the data bound to the GUI.
+        this.InitializeInput();
+        this.InitializeCategories();
+        this.UpdateStateAfterInput();
+    }
+
+    private void InitializeInput()
+    {
+        if (this._originalEntry == null)
+        {
+            this.InitializeCreateInput();
+        }
+        else
+        {
+            this.InitializeUpdateInput(this._originalEntry);
+        }
+    }
+    
+    private void InitializeCreateInput()
+    {
+        this.InputCategory = null;
+            
+        this.InputStartDate = DateTime.Today;
+        this.InputStartTime = "00:00";
+            
+        this.InputEndDate = DateTime.Today;
+        this.InputEndTime = "00:00";
+            
+        this.InputPauseTime = "00:00";
+
+        this.InputNotes = "";
+    }
+
+    private void InitializeUpdateInput(Entry entry)
+    {
+        this.InputCategory = entry.Category;
+            
+        this.InputStartDate = entry.Start.Date;
+        this.InputStartTime = entry.Start.TimeOfDay.ToString("hh\\:mm");
+
+        this.InputEndDate = entry.End.Date;
+        this.InputEndTime = entry.End.TimeOfDay.ToString("hh\\:mm");
+            
+        this.InputPauseTime = entry.Pause.ToString("hh\\:mm");
+
+        this.InputNotes = entry.Notes;
     }
 
     private void InitializeCategories()
     {
         this.Categories = this._categoryService.ReadAll();
-    }
-    
-    public void Initialize(Entry? entry = null)
-    {
-        this.WindowTitle = entry == null ? "Create Entry" : "Update Entry";
-        this.SubmitButtonText = entry == null ? "Create" : "Save";
-        
-        this.Entry = entry ?? new Entry(null, DateTime.Today, DateTime.Today, TimeSpan.Zero, "");
-        
-        this.InitializeCategories();
-        this.UpdateStateAfterInput();
     }
     
     // ==============
@@ -137,10 +244,28 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
     private void UpdateStateAfterInput()
     {
         bool allTimeInputIsValid = this.ValidateTimeInput();
-        this.UpdateTimeValues();
-        
-        this.IsInputValid = this.Entry.Category != null
+        this.UpdateTotalTime(allTimeInputIsValid);
+
+        this.IsInputValid = this.InputCategory != null
                             && allTimeInputIsValid;
+    }
+
+    private void UpdateTotalTime(bool allTimeInputIsValid)
+    {
+        string newTotal = "--:--";
+        
+        if (allTimeInputIsValid)
+        {
+            TimeSpan start = this.GetTimeFromRawInput(this.InputStartTime);
+            TimeSpan end = this.GetTimeFromRawInput(this.InputEndTime);
+            TimeSpan pause = this.GetTimeFromRawInput(this.InputPauseTime);
+
+            TimeSpan total = end.Subtract(start).Subtract(pause);
+            
+            newTotal = total.ToString("hh\\:mm");
+        }
+
+        this.TotalTime = newTotal;
     }
 
     private void Submit()
@@ -150,9 +275,9 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         {
             return;
         }
-        
+
         // Create / update the entry.
-        if (this.Entry.Id == null)
+        if (this._originalEntry == null)
         {
             this.CreateEntry();
         }
@@ -167,12 +292,38 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
 
     private void CreateEntry()
     {
-        this._entryService.Create(this.Entry);
+        Entry entry = this.GetEntryFromInput();
+        this._entryService.Create(entry);
     }
 
     private void UpdateEntry()
     {
+        // Get the updated data and save them into the original entry.
+        Entry updatedEntry = this.GetEntryFromInput();
+
+        this._originalEntry!.Category = updatedEntry.Category;
+        this._originalEntry!.Start = updatedEntry.Start;
+        this._originalEntry!.End = updatedEntry.End;
+        this._originalEntry!.Pause = updatedEntry.Pause;
+        this._originalEntry!.Notes = updatedEntry.Notes;
+        
+        // Save the changes into the database.
         this._entryService.Update();
+    }
+
+    private Entry GetEntryFromInput()
+    {
+        // Convert the raw time input to actual time objects.
+        TimeSpan startTime = GetTimeFromRawInput(this.InputStartTime);
+        TimeSpan endTime = GetTimeFromRawInput(this.InputEndTime);
+        TimeSpan pauseTime = GetTimeFromRawInput(this.InputPauseTime);
+        
+        // Create the DateTime objects for the entry.
+        DateTime start = this.InputStartDate + startTime;
+        DateTime end = this.InputEndDate + endTime;
+        
+        // Create and return the entry.
+        return new Entry(this.InputCategory, start, end, pauseTime, this.InputNotes);
     }
     
     // ==============
@@ -182,77 +333,55 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
     private bool ValidateTimeInput()
     {
         // Check the raw inputs.
-        this.IsInputRawStartValid = this.IsValidTime(this.InputRawStart);
-        this.IsInputRawEndValid = this.IsValidTime(this.InputRawEnd);
-        this.IsInputRawPauseValid = this.IsValidTime(this.InputRawPause);
+        this.IsInputStartTimeValid = this.IsValidTime(this.InputStartTime);
+        this.IsInputEndTimeValid = this.IsValidTime(this.InputEndTime);
+        this.IsInputPauseTimeValid = this.IsValidTime(this.InputPauseTime);
         
         // Check if the end time is after the start time.
         // If not so, mark both as invalid.
-        if (this.IsInputRawStartValid && this.IsInputRawEndValid)
+        if (this.IsInputStartTimeValid && this.IsInputEndTimeValid)
         {
             bool isEndTimeAfterStartTime = this.IsEndTimeAfterStart();
-            this.IsInputRawEndValid = isEndTimeAfterStartTime;
-            this.IsInputRawStartValid = isEndTimeAfterStartTime;
+            this.IsInputEndTimeValid = isEndTimeAfterStartTime;
+            this.IsInputStartTimeValid = isEndTimeAfterStartTime;
         }
         
         // Check if the pause time is not higher than the difference between the end and start time.
-        if (this.IsInputRawStartValid && this.IsInputRawEndValid && this.IsInputRawPauseValid)
+        if (this.IsInputStartTimeValid && this.IsInputEndTimeValid && this.IsInputPauseTimeValid)
         {
-            this.IsInputRawPauseValid = this.IsPauseTimeLessThanDifferenceBetweenStartAndEnd();
+            this.IsInputPauseTimeValid = this.IsPauseTimeLessThanDifferenceBetweenStartAndEnd();
         }
         
         // Return true if all time input is valid.
-        return this.IsInputRawStartValid && this.IsInputRawEndValid && this.IsInputRawPauseValid;
+        return this.IsInputStartTimeValid && this.IsInputEndTimeValid && this.IsInputPauseTimeValid;
     }
     
-    private bool IsValidTime(string input)
+    private bool IsValidTime(string? input)
     {
-        Regex timeRegex = new Regex("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
-        return timeRegex.IsMatch(input);
+        if (input != null)
+        {
+            Regex timeRegex = new Regex("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+            return timeRegex.IsMatch(input);
+        }
+
+        return false;
     }
 
     private bool IsEndTimeAfterStart()
     {
-        TimeSpan start = this.GetTimeFromRawInput(this.InputRawStart);
-        TimeSpan end = this.GetTimeFromRawInput(this.InputRawEnd);
+        TimeSpan start = this.GetTimeFromRawInput(this.InputStartTime);
+        TimeSpan end = this.GetTimeFromRawInput(this.InputEndTime);
         
         return start.CompareTo(end) < 0;
     }
     
     private bool IsPauseTimeLessThanDifferenceBetweenStartAndEnd()
     {
-        TimeSpan start = this.GetTimeFromRawInput(this.InputRawStart);
-        TimeSpan end = this.GetTimeFromRawInput(this.InputRawEnd);
-        TimeSpan pause = this.GetTimeFromRawInput(this.InputRawPause);
+        TimeSpan start = this.GetTimeFromRawInput(this.InputStartTime);
+        TimeSpan end = this.GetTimeFromRawInput(this.InputEndTime);
+        TimeSpan pause = this.GetTimeFromRawInput(this.InputPauseTime);
         
         return end.Subtract(start) > pause;
-    }
-
-    private void UpdateTimeValues()
-    {
-        // Start
-        if (this.IsInputRawStartValid)
-        {
-            TimeSpan time = this.GetTimeFromRawInput(this.InputRawStart);
-            this.Entry.Start = this.Entry.Start.Date + time;
-        }
-        
-        // End
-        if (this.IsInputRawEndValid)
-        {
-            TimeSpan time = this.GetTimeFromRawInput(this.InputRawEnd);
-            this.Entry.End = this.Entry.End.Date + time;
-        }
-        
-        // Pause
-        if (this.IsInputRawPauseValid)
-        {
-            TimeSpan pause = this.GetTimeFromRawInput(this.InputRawPause);
-            this.Entry.Pause = pause;
-        }
-
-        // Update the displayed entry.
-        OnPropertyChanged(nameof(this.Entry));
     }
 
     private TimeSpan GetTimeFromRawInput(string input)
