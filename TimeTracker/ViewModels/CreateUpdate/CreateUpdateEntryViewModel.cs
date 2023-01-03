@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TimeTracker.Dialog;
@@ -29,7 +30,7 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         set => SetField(ref this._submitButtonText, value);
     }
 
-    public List<Category> Categories { get; private set; } = null!;     // Not null after Initialize().
+    public ObservableCollection<Category> Categories { get; private set; } = null!;     // Not null after Initialize().
     
     /*
      * Input values.
@@ -186,8 +187,8 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         this.SubmitButtonText = this._originalEntry == null ? "Create" : "Save";
         
         // Initialize the data bound to the GUI.
+        this.Categories = this._categoryService.Categories;
         this.InitializeInput();
-        this.InitializeCategories();
         this.UpdateStateAfterInput();
     }
 
@@ -231,11 +232,6 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         this.InputPauseTime = entry.Pause.ToString("hh\\:mm");
 
         this.InputNotes = entry.Notes;
-    }
-
-    private void InitializeCategories()
-    {
-        this.Categories = this._categoryService.ReadAll();
     }
     
     // ==============

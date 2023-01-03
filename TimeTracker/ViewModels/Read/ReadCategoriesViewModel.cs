@@ -50,13 +50,8 @@ public class ReadCategoriesViewModel
 
         this.CreateCommand = new DelegateCommand(this.Create);
         this.UpdateCommand = new DelegateCommand(this.Update);
-        
-        this.InitializeCategories();
-    }
-    
-    private void InitializeCategories()
-    {
-        this.Categories = new ObservableCollection<Category>(this._categoryService.ReadAll());
+
+        this.Categories = this._categoryService.Categories;
     }
     
     // ==============

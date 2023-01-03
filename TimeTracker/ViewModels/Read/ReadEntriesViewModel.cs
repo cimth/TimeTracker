@@ -50,13 +50,8 @@ public class ReadEntriesViewModel
 
         this.CreateCommand = new DelegateCommand(this.Create);
         this.UpdateCommand = new DelegateCommand(this.Update);
-        
-        this.InitializeEntries();
-    }
-    
-    private void InitializeEntries()
-    {
-        this.Entries = new ObservableCollection<Entry>(this._entryService.ReadAll());
+
+        this.Entries = this._entryService.Entries;
     }
     
     // ==============

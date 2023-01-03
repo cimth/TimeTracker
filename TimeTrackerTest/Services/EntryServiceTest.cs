@@ -85,7 +85,7 @@ public class EntryServiceTest
         this._entryService.Create(entry);
 
         // Get the entry back from the database.
-        List<Entry> entries = this._entryService.ReadAll();
+        List<Entry> entries = this._entryService.Entries.ToList();
         
         Assert.IsTrue(entries.Count == 1);
         Assert.That(entries[0], Is.EqualTo(entry));
@@ -111,7 +111,7 @@ public class EntryServiceTest
         this._entryService.Update();
         
         // Check if the database entry was updated correctly.
-        Entry updatedEntry = this._entryService.ReadAll()[0];
+        Entry updatedEntry = this._entryService.Entries.ToList()[0];
         Assert.That(updatedEntry, Is.EqualTo((entry)));
     }
     
@@ -128,6 +128,6 @@ public class EntryServiceTest
         this._entryService.Delete(entry);
         
         // Check if the database is empty now.
-        Assert.IsTrue(this._entryService.ReadAll().Count == 0);
+        Assert.IsTrue(this._entryService.Entries.ToList().Count == 0);
     }
 }

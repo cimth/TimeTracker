@@ -73,7 +73,7 @@ public class CategoryServiceTest
         this._categoryService.Create(category);
 
         // Get the category back from the database.
-        List<Category> categories = this._categoryService.ReadAll();
+        List<Category> categories = this._categoryService.Categories.ToList();
         
         Assert.IsTrue(categories.Count == 1);
         Assert.That(categories[0], Is.EqualTo(category));
@@ -93,7 +93,7 @@ public class CategoryServiceTest
         this._categoryService.Update();
         
         // Check if the database entry was updated correctly.
-        Category updatedCategory = this._categoryService.ReadAll()[0];
+        Category updatedCategory = this._categoryService.Categories.ToList()[0];
         Assert.That(updatedCategory, Is.EqualTo((category)));
     }
     
@@ -109,6 +109,6 @@ public class CategoryServiceTest
         this._categoryService.Delete(category);
         
         // Check if the database is empty now.
-        Assert.IsTrue(this._categoryService.ReadAll().Count == 0);
+        Assert.IsTrue(this._categoryService.Categories.Count == 0);
     }
 }
