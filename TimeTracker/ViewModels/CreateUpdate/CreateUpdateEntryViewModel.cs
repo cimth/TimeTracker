@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using TimeTracker.Dialog;
+using TimeTracker.Models;
 using TimeTracker.Models.Entities;
 using TimeTracker.Models.Services;
 using TimeTracker.Utils;
@@ -163,11 +164,11 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
     // Initialization
     // ==============
 
-    public CreateUpdateEntryViewModel(EntryService entryService, CategoryService categoryService, DialogService dialogService)
+    public CreateUpdateEntryViewModel(DependencyManager dependencyManager)
     {
-        this._entryService = entryService;
-        this._categoryService = categoryService;
-        this._dialogService = dialogService;
+        this._entryService = dependencyManager.EntryService;
+        this._categoryService = dependencyManager.CategoryService;
+        this._dialogService = dependencyManager.DialogService;
 
         this.SubmitCommand = new DelegateCommand(this.Submit);
         this.UpdateStateAfterInputCommand = new DelegateCommand(this.UpdateStateAfterInput);

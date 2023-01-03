@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using TimeTracker.Dialog;
+using TimeTracker.Models;
 using TimeTracker.Models.Database;
 using TimeTracker.Models.Services;
 using TimeTracker.Utils;
@@ -41,11 +42,6 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     // Fields
     // ==============
 
-    private readonly CreateUpdateEntryViewModel _createUpdateEntryViewModel;
-    private readonly CreateUpdateCategoryViewModel _createUpdateCategoryViewModel;
-
-    private readonly DialogService _dialogService;
-    
     private bool _isCategoriesViewShown;
     private bool _isEntriesViewShown;
 
@@ -55,29 +51,21 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     
     public MainWindowViewModel()
     {
-        // Create the Model instances that are shared by the View Models.
-        DatabaseContext dbContext = new DatabaseContext();
-        dbContext.DoMigrations();
+        // Initialize all dependencies (especially Models and View Models).
+        DependencyManager dependencyManager = new DependencyManager();
+        dependencyManager.InitializeDependencies();
         
-        EntryService entryService = new EntryService(dbContext);
-        CategoryService categoryService = new CategoryService(dbContext);
-
-        this._dialogService = new DialogService();
-        
-        // Create the View Models.
-        this._createUpdateEntryViewModel = new CreateUpdateEntryViewModel(entryService, categoryService, this._dialogService);
-        this._createUpdateCategoryViewModel = new CreateUpdateCategoryViewModel(categoryService, this._dialogService);
-        
-        this.ReadCategoriesViewModel = new ReadCategoriesViewModel(categoryService, this._dialogService, this._createUpdateCategoryViewModel);
-        this.ReadEntriesViewModel = new ReadEntriesViewModel(entryService, this._dialogService, this._createUpdateEntryViewModel);
-        
-        // Initialize the commands.
-        this.ShowCategoriesViewCommand = new DelegateCommand(this.ShowCategoriesView);
-        this.ShowEntriesViewCommand = new DelegateCommand(this.ShowEntriesView);
+        // Initialize the View Models for the main view.
+        this.ReadCategoriesViewModel = dependencyManager.ReadCategoriesViewModel;
+        this.ReadEntriesViewModel = dependencyManager.ReadEntriesViewModel;
         
         // Initialize the main view that is shown on startup.
         this.IsCategoriesViewShown = false;
         this.IsEntriesViewShown = true;
+        
+        // Initialize the commands.
+        this.ShowCategoriesViewCommand = new DelegateCommand(this.ShowCategoriesView);
+        this.ShowEntriesViewCommand = new DelegateCommand(this.ShowEntriesView);
     }
     
     // ==============

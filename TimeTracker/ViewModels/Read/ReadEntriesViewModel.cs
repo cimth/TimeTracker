@@ -2,8 +2,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TimeTracker.Dialog;
+using TimeTracker.Models;
 using TimeTracker.Models.Entities;
 using TimeTracker.Models.Services;
+using TimeTracker.Utils;
 using TimeTracker.ViewModels.Command;
 using TimeTracker.ViewModels.CreateUpdate;
 
@@ -39,14 +41,12 @@ public class ReadEntriesViewModel
     // Initialization
     // ==============
 
-    public ReadEntriesViewModel(EntryService entryService, 
-                                DialogService dialogService,
-                                CreateUpdateEntryViewModel createUpdateEntryViewModel)
+    public ReadEntriesViewModel(DependencyManager dependencyManager)
     {
-        this._entryService = entryService;
-        this._dialogService = dialogService;
+        this._entryService = dependencyManager.EntryService;
+        this._dialogService = dependencyManager.DialogService;
 
-        this._createUpdateEntryViewModel = createUpdateEntryViewModel;
+        this._createUpdateEntryViewModel = dependencyManager.CreateUpdateEntryViewModel;
 
         this.CreateCommand = new DelegateCommand(this.Create);
         this.UpdateCommand = new DelegateCommand(this.Update);
