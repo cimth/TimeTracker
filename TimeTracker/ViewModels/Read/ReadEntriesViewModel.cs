@@ -8,6 +8,7 @@ using TimeTracker.Models.Services;
 using TimeTracker.Utils;
 using TimeTracker.ViewModels.Command;
 using TimeTracker.ViewModels.CreateUpdate;
+using TimeTracker.ViewModels.Dialog;
 
 namespace TimeTracker.ViewModels.Read;
 
@@ -27,6 +28,7 @@ public class ReadEntriesViewModel
     
     public ICommand CreateCommand { get; }
     public ICommand UpdateCommand { get; }
+    public ICommand DeleteCommand { get; }
     
     // ==============
     // Fields
@@ -50,6 +52,7 @@ public class ReadEntriesViewModel
 
         this.CreateCommand = new DelegateCommand(this.Create);
         this.UpdateCommand = new DelegateCommand(this.Update);
+        this.DeleteCommand = new DelegateCommand(this.Delete);
 
         this.Entries = this._entryService.Entries;
     }
@@ -67,5 +70,27 @@ public class ReadEntriesViewModel
     {
         this._dialogService.ShowCreateUpdateEntryDialog(this._createUpdateEntryViewModel, this.SelectedEntry);
     }
+    
+    private void Delete()
+    {
+        // Only continue if a Entry is selected.
+        if (this.SelectedEntry == null)
+        {
+            return;
+        }
 
+        // Ask the user for confirmation.
+        ConfirmDialogViewModel confirmViewModel = new ConfirmDialogViewModel("Should the entry really be deleted?");
+        bool? result = this._dialogService.ShowConfirmDialog(confirmViewModel);
+
+        // Remove the Entry if the user confirmed.
+        if (result != null && result.Value)
+        {
+            this._entryService.Delete(this.SelectedEntry);
+            
+            // Show success dialog.
+            MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Success", "The entry was successfully deleted.");
+            this._dialogService.ShowMessageDialog(messageViewModel);
+        }
+    }
 }
