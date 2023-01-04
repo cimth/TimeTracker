@@ -22,7 +22,8 @@
 
           Background="White"
           GridLinesVisibility="Horizontal"
-          HorizontalGridLinesBrush="LightGray"
+          HorizontalGridLinesBrush="GhostWhite"
+          VerticalGridLinesBrush="GhostWhite"
           
           CellStyle="{StaticResource BasicDataGridCellStyle}">
 </DataGrid>
