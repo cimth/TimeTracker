@@ -10,11 +10,12 @@
     <DockPanel>
         <!-- Create a new Category -->
         <StackPanel DockPanel.Dock="Top"
-                    Background="WhiteSmoke">
+                    Background="{StaticResource AppTopBarBrush}">
             <Button Command="{Binding CreateCommand}"
                     HorizontalAlignment="Left"
                     Margin="5" Padding="3"
-                    Content="{DynamicResource Str_CreateCategory}"/>
+                    Content="{DynamicResource Str_CreateCategory}"
+                    Style="{StaticResource Button}"/>
             
         </StackPanel>
         

@@ -10,7 +10,7 @@
             <!-- IsSelected -->
             <Trigger Property="DataGridCell.IsSelected" Value="True">
                 <Setter Property="Foreground" Value="Black" />
-                <Setter Property="Background" Value="LightBlue" />
+                <Setter Property="Background" Value="{StaticResource AppSelectedBrush}" />
                 <Setter Property="BorderThickness" Value="0" />
             </Trigger>
         </Style.Triggers>
@@ -23,7 +23,7 @@
                 <ControlTemplate>
                     <!-- Summarize each group in an Expander -->
                     <Expander IsExpanded="True" 
-                              Background="PaleTurquoise"
+                              Background="{StaticResource GroupHeaderBrush}"
                               HorizontalAlignment="Stretch">
                         <!-- Header -->
                         <Expander.Header>
@@ -66,6 +66,80 @@
         </Setter>
     </Style>
     
+    <!-- Buttons -->
+    <Style x:Key="Button" TargetType="{x:Type Button}">
+        <!-- Default state -->
+        <!-- Note: The Template has to be overwritten for changing the IsChecked color etc. -->
+        <Setter Property="Background" Value="{StaticResource AppLightBrush}" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="{TemplateBinding Margin}" >
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <!-- Overwrite on different states. -->
+        <Style.Triggers>
+            <!-- IsMoueOver -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="ToggleButton" TargetType="{x:Type ToggleButton}">
+        <!-- Default state -->
+        <!-- Note: The Template has to be overwritten for changing the IsChecked color etc. -->
+        <Setter Property="Background" Value="{StaticResource AppLightBrush}" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="{TemplateBinding Margin}" >
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <!-- Overwrite on different states. -->
+        <Style.Triggers>
+            <!-- IsMoueOver -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
+            </Trigger>
+            
+            <!-- IsChecked -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource AppSelectedBrush}" />
+            </Trigger>
+            
+            <!-- IsMoueOver AND IsChecked -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsChecked" Value="True" />
+                </MultiTrigger.Conditions>
+                
+                <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <!-- Multiple times used styles -->
     <Style x:Key="Column" TargetType="{x:Type FrameworkElement}">
         <Setter Property="Margin" Value="5" />
@@ -78,7 +152,12 @@
     </Style>
     
     <Style x:Key="ColumnButton" TargetType="{x:Type Button}"
-           BasedOn="{StaticResource Column}">
+           BasedOn="{StaticResource Button}">
+        <!-- Add 'Column' style -->
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        
+        <!-- Add 'ColumnButton' style -->
         <Setter Property="Padding" Value="10, 5" />
     </Style>
     

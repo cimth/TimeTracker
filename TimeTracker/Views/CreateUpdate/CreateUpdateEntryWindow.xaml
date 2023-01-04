@@ -240,6 +240,7 @@
                 HorizontalContentAlignment="Center"
                 Command="{Binding SubmitCommand}"
                 IsEnabled="{Binding IsInputValid}"
-                Content="{Binding SubmitButtonText}" />
+                Content="{Binding SubmitButtonText}"
+                Style="{StaticResource Button}" />
     </Grid>
 </Window>

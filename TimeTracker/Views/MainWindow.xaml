@@ -21,7 +21,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" 
                     MinWidth="300"
-                    Background="LavenderBlush"
+                    Background="{StaticResource AppLeftBarBrush}"
                     VerticalAlignment="Stretch">
             <!-- Choose whether Categories or Entries should be shown. -->
             <StackPanel Margin="5" 
@@ -32,12 +32,14 @@
                                   Margin="5"
                                   IsChecked="{Binding IsCategoriesViewShown}"
                                   Command="{Binding ShowCategoriesViewCommand}" 
-                                  Content="{DynamicResource Str_Categories}" />
+                                  Content="{DynamicResource Str_Categories}"
+                                  Style="{StaticResource ToggleButton}" />
                     <ToggleButton Padding="5"
                                   Margin="5"
                                   IsChecked="{Binding IsEntriesViewShown}"
                                   Command="{Binding ShowEntriesViewCommand}"
-                                  Content="{DynamicResource Str_Entries}" />
+                                  Content="{DynamicResource Str_Entries}"
+                                  Style="{StaticResource ToggleButton}" />
                 </StackPanel>
             </StackPanel>
             

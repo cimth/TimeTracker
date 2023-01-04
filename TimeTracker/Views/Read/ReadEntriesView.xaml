@@ -32,11 +32,12 @@
     <DockPanel>
         <!-- Create a new Entry -->
         <StackPanel DockPanel.Dock="Top"
-                    Background="WhiteSmoke">
+                    Background="{StaticResource AppTopBarBrush}">
             <Button Command="{Binding CreateCommand}"
                     HorizontalAlignment="Left"
                     Margin="5" Padding="3"
-                    Content="{DynamicResource Str_CreateEntry}" />
+                    Content="{DynamicResource Str_CreateEntry}"
+                    Style="{StaticResource Button}" />
         </StackPanel>
         
         <!-- List with Entries -->
