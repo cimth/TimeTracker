@@ -1,7 +1,9 @@
 using System.Windows;
 using TimeTracker.Models.Entities;
 using TimeTracker.ViewModels.CreateUpdate;
+using TimeTracker.ViewModels.Dialog;
 using TimeTracker.Views.CreateUpdate;
+using TimeTracker.Views.Dialog;
 
 namespace TimeTracker.Dialog;
 
@@ -53,6 +55,38 @@ public class DialogService
         {
             DataContext = viewModel
         };
+        this._currentDialog.ShowDialog();
+    }
+    
+    // ==============
+    // Confirm dialog
+    // ==============
+    
+    public bool? ShowConfirmDialog(ConfirmDialogViewModel viewModel)
+    {
+        // Init dialog.
+        this._currentDialog = new ConfirmDialog
+        {
+            DataContext = viewModel
+        };
+        
+        // Show the dialog.
+        return this._currentDialog.ShowDialog();
+    }
+    
+    // ==============
+    // Message dialog
+    // ==============
+    
+    public void ShowMessageDialog(object viewModel)
+    {
+        // Init dialog.
+        this._currentDialog = new MessageDialog()
+        {
+            DataContext = viewModel
+        };
+        
+        // Show the dialog.
         this._currentDialog.ShowDialog();
     }
 }
