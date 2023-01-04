@@ -51,7 +51,8 @@
                                     </Button>
                                     
                                     <!-- Delete -->
-                                    <Button Style="{StaticResource ColumnButton}">
+                                    <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                            Style="{StaticResource ColumnButton}">
                                         Delete
                                     </Button>
                                     
