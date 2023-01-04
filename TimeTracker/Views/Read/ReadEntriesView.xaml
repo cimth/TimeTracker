@@ -45,6 +45,7 @@
             <templates:BasicDataGrid x:Name="DataGridEntries"
                                      ItemsSource="{Binding Source={StaticResource GridGroups}}"
                                      SelectedItem="{Binding SelectedEntry}"
+                                     HorizontalScrollBarVisibility="Disabled"
                                      LayoutUpdated="DataGridEntries_OnLayoutUpdated">
                 <!-- Group all Entries by week -->
                 <DataGrid.GroupStyle>
