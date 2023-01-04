@@ -56,7 +56,6 @@
                                          ItemsSource="{Binding Source={StaticResource GridGroups}}"
                                          SelectedItem="{Binding SelectedEntry}"
                                          HorizontalScrollBarVisibility="Disabled"
-                                         GridLinesVisibility="All"
                                          LayoutUpdated="DataGridEntries_OnLayoutUpdated">
                     <!-- Group all Entries by week -->
                     <DataGrid.GroupStyle>

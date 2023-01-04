@@ -21,7 +21,7 @@
           SelectionUnit="FullRow"
 
           Background="White"
-          GridLinesVisibility="Horizontal"
+          GridLinesVisibility="All"
           HorizontalGridLinesBrush="GhostWhite"
           VerticalGridLinesBrush="GhostWhite"
           
