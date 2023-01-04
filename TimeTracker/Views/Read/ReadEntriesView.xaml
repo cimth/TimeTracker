@@ -44,8 +44,7 @@
         <!-- List with Entries -->
         <Grid>
             <templates:BasicDataGrid ItemsSource="{Binding Source={StaticResource GridGroups}}"
-                                     SelectedItem="{Binding SelectedEntry}"
-                                     SourceUpdated="FrameworkElement_OnSourceUpdated">
+                                     SelectedItem="{Binding SelectedEntry}">
                 <!-- Group all Entries by week -->
                 <DataGrid.GroupStyle>
                     <GroupStyle ContainerStyle="{StaticResource WeekGroup}" />
