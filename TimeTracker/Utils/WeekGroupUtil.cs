@@ -20,7 +20,7 @@ public static class WeekGroupUtil
         DateTime endOfWeek = WeekGroupUtil.GetEndOfWeek(startOfWeek);
         
         // Return the formatted string for the computed week.
-        return $"Week {startOfWeek.ToShortDateString()} - {endOfWeek.ToShortDateString()}";
+        return $"{startOfWeek.ToShortDateString()} - {endOfWeek.ToShortDateString()}";
     }
 
     private static DateTime GetStartOfWeek(DateTime dateInWeek, DayOfWeek firstDayOfWeek, DayOfWeek dayInWeek)

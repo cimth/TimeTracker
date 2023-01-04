@@ -55,104 +55,57 @@
                 <!-- Columns definitions -->
                 <DataGrid.Columns>
                     <!-- Category -->
-                    <DataGridTextColumn Binding="{Binding Category.Name}">
+                    <DataGridTextColumn Binding="{Binding Category.Name}"
+                                        ElementStyle="{StaticResource Column}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Category" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Start date -->
-                    <DataGridTextColumn Binding="{Binding Start, StringFormat=d}">
+                    <DataGridTextColumn Binding="{Binding Start, StringFormat=d}"
+                                        ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Start Date" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Start time -->
-                    <DataGridTextColumn Binding="{Binding Start, StringFormat=t}">
+                    <DataGridTextColumn Binding="{Binding Start, StringFormat=t}"
+                                        ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Start Time" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- End date -->
-                    <DataGridTextColumn Binding="{Binding End, StringFormat=d}">
+                    <DataGridTextColumn Binding="{Binding End, StringFormat=d}"
+                                        ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="End Date" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- End time -->
-                    <DataGridTextColumn Binding="{Binding End, StringFormat=t}">
+                    <DataGridTextColumn Binding="{Binding End, StringFormat=t}"
+                                        ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="End Time" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Pause -->
-                    <DataGridTextColumn Binding="{Binding Pause, StringFormat=hh\\:mm}">
+                    <DataGridTextColumn Binding="{Binding Pause, StringFormat=hh\\:mm}"
+                                        ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Pause" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Total time -->
@@ -164,30 +117,20 @@
                         
                         <!-- Style -->
                         <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
+                            <Style TargetType="{x:Type TextBlock}"
+                                   BasedOn="{StaticResource ColumnCentered}">
                                 <Setter Property="FontWeight" Value="Bold" />
-                                
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Notes -->
-                    <DataGridTextColumn Binding="{Binding Notes}">
+                    <DataGridTextColumn Binding="{Binding Notes}"
+                                        ElementStyle="{StaticResource Column}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Notes" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Actions -->
@@ -202,15 +145,15 @@
                             <DataTemplate>
                                 <UniformGrid Rows="1">
                                     <!-- Update -->
-                                    <Button Padding="10, 5"
-                                            Margin="5"
-                                            Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                                    <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                            Style="{StaticResource ColumnButton}">
                                         Update
                                     </Button>
                                     
                                     <!-- Delete -->
-                                    <Button Padding="10, 5"
-                                            Margin="5">Delete</Button>
+                                    <Button Style="{StaticResource ColumnButton}">
+                                        Delete
+                                    </Button>
                                     
                                 </UniformGrid>
                             </DataTemplate>

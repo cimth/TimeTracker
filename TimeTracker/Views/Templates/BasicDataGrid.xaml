@@ -22,20 +22,7 @@
 
           Background="White"
           GridLinesVisibility="Horizontal"
-          HorizontalGridLinesBrush="LightGray">
-    
-    <!-- Styles -->
-    <DataGrid.CellStyle>
-        <Style TargetType="{x:Type DataGridCell}">
-            <Style.Triggers>
-                <!-- IsSelected -->
-                <Trigger Property="DataGridCell.IsSelected" Value="True">
-                    <Setter Property="Foreground" Value="Black" />
-                    <Setter Property="Background" Value="LightBlue" />
-                    <Setter Property="BorderThickness" Value="0" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </DataGrid.CellStyle>
-    
+          HorizontalGridLinesBrush="LightGray"
+          
+          CellStyle="{StaticResource BasicDataGridCellStyle}">
 </DataGrid>

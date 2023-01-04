@@ -4,30 +4,42 @@
     <!-- Converters -->
     <converters:EntryToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
     
+    <!-- Cell style for the basic data grid -->
+    <Style x:Key="BasicDataGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Style.Triggers>
+            <!-- IsSelected -->
+            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Background" Value="LightBlue" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <!-- Group all Entries by the week of their start date -->
     <Style x:Key="WeekGroup" TargetType="{x:Type GroupItem}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <!-- Summarize each group in an Expander -->
-                    <Expander IsExpanded="True" Background="PaleTurquoise">
+                    <Expander IsExpanded="True" 
+                              Background="PaleTurquoise"
+                              HorizontalAlignment="Stretch">
                         <!-- Header -->
                         <Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Name}" />
-                                    <TextBlock Text=" | Entries: " />
-                                    <TextBlock Text="{Binding Items.Count}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Right">
-                                    <TextBlock Text=" | Total Time: " />
+                            <Grid>
+                                <!-- Left side -->
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Week: " />
+                                    <TextBlock Text="{Binding Name}"
+                                               FontWeight="Bold"/>
+                                    <TextBlock Text=" | " />
+                                    <TextBlock Text="Total Time: " />
                                     <TextBlock FontWeight="Bold">
                                         <TextBlock.Text>
                                             <!-- Bind to the actual needed Items object and to Items.Count (though not needed)
-                                                 to notice changes on the groups after updating an Entry.
-                                                 See: https://stackoverflow.com/questions/53940895/datagrid-group-header-not-updating-on-new-record -->
+                                             to notice changes on the groups after updating an Entry.
+                                             See: https://stackoverflow.com/questions/53940895/datagrid-group-header-not-updating-on-new-record -->
                                             <MultiBinding Converter="{StaticResource EntryToTotalTimeSumConverter}">
                                                 <Binding Path="Items" />
                                                 <Binding Path="Items.Count" />
@@ -35,14 +47,31 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
-                            </StackPanel>
+                            </Grid>
                         </Expander.Header>
+                        
                         <!-- Content (i.e. the actual rows of the Entries) -->
                         <ItemsPresenter />
                     </Expander>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <!-- Multiple times used styles -->
+    <Style x:Key="Column" TargetType="{x:Type FrameworkElement}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
+    <Style x:Key="ColumnCentered" TargetType="{x:Type FrameworkElement}"
+           BasedOn="{StaticResource Column}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    
+    <Style x:Key="ColumnButton" TargetType="{x:Type Button}"
+           BasedOn="{StaticResource Column}">
+        <Setter Property="Padding" Value="10, 5" />
     </Style>
     
 </ResourceDictionary>

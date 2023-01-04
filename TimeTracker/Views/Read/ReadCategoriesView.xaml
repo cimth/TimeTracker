@@ -25,19 +25,12 @@
                 <DataGrid.Columns>
                     <!-- Name -->
                     <DataGridTextColumn Binding="{Binding Name}" 
-                                        Width="*">
+                                        Width="*"
+                                        ElementStyle="{StaticResource Column}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Name" />
                         </DataGridTextColumn.Header>
-                        
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="5" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     
                     <!-- Actions -->
@@ -52,21 +45,24 @@
                             <DataTemplate>
                                 <UniformGrid Rows="1">
                                     <!-- Update -->
-                                    <Button Padding="10, 5"
-                                            Margin="5"
-                                            Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                                    <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                            Style="{StaticResource ColumnButton}">
                                         Update
                                     </Button>
                                     
                                     <!-- Delete -->
-                                    <Button Padding="10, 5"
-                                            Margin="5">Delete</Button>
+                                    <Button Style="{StaticResource ColumnButton}">
+                                        Delete
+                                    </Button>
                                     
                                 </UniformGrid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         
                     </DataGridTemplateColumn>
+                    
+                    <!-- Empty column for the scrollbar -->
+                    <DataGridTextColumn IsReadOnly="True" /> 
                 </DataGrid.Columns>
             </templates:BasicDataGrid>
         </Grid>
