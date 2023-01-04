@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TimeTracker.Models.Database;
 using TimeTracker.Models.Entities;
 using TimeTracker.Models.Services;
+using TimeTracker.Utils;
 
 namespace TimeTrackerTest.Services;
 
@@ -13,6 +14,7 @@ public class CategoryServiceTest
 
     private DatabaseContext _dbContext = null!;
     private CategoryService _categoryService = null!;
+    private EntryService _entryService = null!;
     
     // ==============
     // Initialization before each test method
@@ -39,6 +41,7 @@ public class CategoryServiceTest
          * Initialize the needed dependencies.
          */
         this._categoryService = new CategoryService(this._dbContext);
+        this._entryService = new EntryService(this._dbContext);
     }
     
     // ==============
@@ -58,6 +61,17 @@ public class CategoryServiceTest
     private Category GetTestCategory()
     {
         return new Category("My Category");
+    }
+    
+    private Entry GetTestEntry(Category category)
+    {
+        return new Entry(
+            category,
+            new DateTime(2022, 12, 27, 15, 00, 00),
+            new DateTime(2022, 12, 27, 16, 50, 00),
+            new TimeSpan(0, 10, 0),
+            ""
+        );
     }
     
     // ==============
@@ -106,9 +120,43 @@ public class CategoryServiceTest
         this._categoryService.Create(category);
 
         // Delete the category.
-        this._categoryService.Delete(category);
+        bool isDeleted = this._categoryService.Delete(category);
         
         // Check if the database is empty now.
+        Assert.IsTrue(isDeleted);
         Assert.IsTrue(this._categoryService.Categories.Count == 0);
+    }
+    
+    [Test]
+    public void DeleteIsUsed()
+    {
+        // Add a category to the database.
+        Category category = this.GetTestCategory();
+        
+        this._categoryService.Create(category);
+        
+        // Add an entry to the database which uses the created category.
+        Entry entry = this.GetTestEntry(category);
+        this._entryService.Create(entry);
+
+        // Try to delete the category.
+        bool isDeleted = this._categoryService.Delete(category);
+        
+        // Check if the category was NOT deleted because it is still in use.
+        Assert.IsFalse(isDeleted);
+        Assert.IsFalse(this._categoryService.Categories.Count == 0);
+    }
+    
+    [Test]
+    public void IsCategoryUsed()
+    {
+        // Add an entry to the database.
+        Category category = this.GetTestCategory();
+        Entry entry = this.GetTestEntry(category);
+        
+        this._entryService.Create(entry);
+
+        // Check if IsCategoryUsed() works properly.
+        Assert.IsTrue(this._categoryService.IsCategoryUsed(category));
     }
 }

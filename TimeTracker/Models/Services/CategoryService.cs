@@ -64,11 +64,27 @@ public class CategoryService
     // Delete
     // ==============
 
-    public void Delete(Category category)
+    public bool Delete(Category category)
     {
-        this._dbContext.Remove(category);
-        this._dbContext.SaveChanges();
+        bool isCategoryUsed = this.IsCategoryUsed(category);
         
-        this.Categories.Remove(category);
+        if (!isCategoryUsed)
+        {
+            // Only delete if the category is not used.
+            this._dbContext.Remove(category);
+            this._dbContext.SaveChanges();
+
+            this.Categories.Remove(category);
+        }
+
+        return !isCategoryUsed;
+    }
+
+    public bool IsCategoryUsed(Category category)
+    {
+        Entry? entryWithCategory = this._dbContext.Entries
+                                                  .FirstOrDefault(entry => entry.Category != null && entry.Category.Equals(category));
+
+        return entryWithCategory != null;
     }
 }
