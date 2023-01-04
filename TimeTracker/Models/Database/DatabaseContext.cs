@@ -22,14 +22,9 @@ public class DatabaseContext : DbContext
     // Initialization
     // ==============
 
-    public DatabaseContext()
+    public DatabaseContext(string? dbPath = null)
     {
-        this._dbPath = "Data.db";
-    }
-
-    public DatabaseContext(string dbPath)
-    {
-        this._dbPath = dbPath;
+        this._dbPath = dbPath ?? "Data.db";
     }
     
     // ==============
