@@ -62,6 +62,22 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
+                    <!-- Day name (of start date) -->
+                    <DataGridTextColumn Binding="{Binding Start, StringFormat=dddd}">
+                        <!-- Header -->
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource Str_DayName}" />
+                        </DataGridTextColumn.Header>
+                        
+                        <!-- Style -->
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}"
+                                   BasedOn="{StaticResource ColumnCentered}">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    
                     <!-- Start date -->
                     <DataGridTextColumn Binding="{Binding Start, StringFormat=d}"
                                         ElementStyle="{StaticResource ColumnCentered}">

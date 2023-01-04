@@ -50,4 +50,5 @@
     <system:String x:Key="Str_EntryDeletedSuccess">The Entry was successfully deleted.</system:String>
     
     <system:String x:Key="Str_Week">Week</system:String>
+    <system:String x:Key="Str_DayName">Day</system:String>
 </ResourceDictionary>
