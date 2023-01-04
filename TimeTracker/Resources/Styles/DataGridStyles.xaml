@@ -10,7 +10,7 @@
             <!-- IsSelected -->
             <Trigger Property="DataGridCell.IsSelected" Value="True">
                 <Setter Property="Foreground" Value="Black" />
-                <Setter Property="Background" Value="{StaticResource AppSelectedBrush}" />
+                <Setter Property="Background" Value="{StaticResource AppSelectedLightBrush}" />
                 <Setter Property="BorderThickness" Value="0" />
             </Trigger>
         </Style.Triggers>
@@ -125,7 +125,7 @@
             
             <!-- IsChecked -->
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource AppSelectedBrush}" />
+                <Setter Property="Background" Value="{StaticResource AppSelectedMediumBrush}" />
             </Trigger>
             
             <!-- IsMoueOver AND IsChecked -->

@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Colors -->
     <Color x:Key="AppLight">SeaShell</Color>
-    <Color x:Key="AppSelected">Pink</Color>
+    <Color x:Key="AppSelectedLight">LavenderBlush</Color>
+    <Color x:Key="AppSelectedMedium">Pink</Color>
     <Color x:Key="AppHighlighted">MistyRose</Color>
     
     <Color x:Key="AppLeftBar">LavenderBlush</Color>
@@ -12,7 +13,8 @@
     
     <!-- Brushes (You have to use Brushes when setting a Background color or similar) -->
     <SolidColorBrush x:Key="AppLightBrush" Color="{StaticResource AppLight}" />
-    <SolidColorBrush x:Key="AppSelectedBrush" Color="{StaticResource AppSelected}" />
+    <SolidColorBrush x:Key="AppSelectedLightBrush" Color="{StaticResource AppSelectedLight}" />
+    <SolidColorBrush x:Key="AppSelectedMediumBrush" Color="{StaticResource AppSelectedMedium}" />
     <SolidColorBrush x:Key="AppHighlightedBrush" Color="{StaticResource AppHighlighted}" />
     
     <SolidColorBrush x:Key="AppLeftBarBrush" Color="{StaticResource AppLeftBar}" />
