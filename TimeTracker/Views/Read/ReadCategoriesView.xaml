@@ -9,62 +9,72 @@
              d:DesignWidth="300" d:DesignHeight="100" >
     <DockPanel>
         <!-- Create a new Category -->
-        <StackPanel DockPanel.Dock="Top"
-                    Background="{StaticResource AppTopBarBrush}">
+        <Border DockPanel.Dock="Top"
+                    Background="{StaticResource AppTopBarBrush}"
+                    BorderThickness="5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+            </Border.Effect>
+                
             <Button Command="{Binding CreateCommand}"
                     HorizontalAlignment="Left"
                     Margin="5" Padding="3"
                     Content="{DynamicResource Str_CreateCategory}"
                     Style="{StaticResource Button}"/>
-            
-        </StackPanel>
+        </Border>
         
         <!-- List with Categories -->
-        <Grid>
-            <templates:BasicDataGrid ItemsSource="{Binding Categories}"
-                                     SelectedItem="{Binding SelectedCategory}">
-                <DataGrid.Columns>
-                    <!-- Name -->
-                    <DataGridTextColumn Binding="{Binding Name}" 
-                                        Width="*"
-                                        ElementStyle="{StaticResource Column}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_CategoryName}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- Actions -->
-                    <DataGridTemplateColumn>
-                        <!-- Header -->
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_Actions}" />
-                        </DataGridTemplateColumn.Header>
+        <Border BorderThickness="5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+            </Border.Effect>
+        
+            <Grid>
+                <templates:BasicDataGrid ItemsSource="{Binding Categories}"
+                                         SelectedItem="{Binding SelectedCategory}">
+                    <DataGrid.Columns>
+                        <!-- Name -->
+                        <DataGridTextColumn Binding="{Binding Name}" 
+                                            Width="*"
+                                            ElementStyle="{StaticResource Column}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_CategoryName}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                         
-                        <!-- Cell Template -->
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <UniformGrid Rows="1">
-                                    <!-- Update -->
-                                    <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}"
-                                            Content="{DynamicResource Str_Update}" />
-                                    
-                                    <!-- Delete -->
-                                    <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}"
-                                            Content="{DynamicResource Str_Delete}" />
-                                </UniformGrid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
+                        <!-- Actions -->
+                        <DataGridTemplateColumn>
+                            <!-- Header -->
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_Actions}" />
+                            </DataGridTemplateColumn.Header>
+                            
+                            <!-- Cell Template -->
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <UniformGrid Rows="1">
+                                        <!-- Update -->
+                                        <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                                Style="{StaticResource ColumnButton}"
+                                                Content="{DynamicResource Str_Update}" />
+                                        
+                                        <!-- Delete -->
+                                        <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                                Style="{StaticResource ColumnButton}"
+                                                Content="{DynamicResource Str_Delete}" />
+                                    </UniformGrid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            
+                        </DataGridTemplateColumn>
                         
-                    </DataGridTemplateColumn>
-                    
-                    <!-- Empty column for the scrollbar -->
-                    <DataGridTextColumn IsReadOnly="True" /> 
-                </DataGrid.Columns>
-            </templates:BasicDataGrid>
-        </Grid>
+                        <!-- Empty column for the scrollbar -->
+                        <DataGridTextColumn IsReadOnly="True" /> 
+                    </DataGrid.Columns>
+                </templates:BasicDataGrid>
+            </Grid>
+        </Border>
         
     </DockPanel>
 </UserControl>

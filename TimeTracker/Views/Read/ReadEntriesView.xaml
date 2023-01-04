@@ -31,156 +31,167 @@
     
     <DockPanel>
         <!-- Create a new Entry -->
-        <StackPanel DockPanel.Dock="Top"
-                    Background="{StaticResource AppTopBarBrush}">
+        <Border DockPanel.Dock="Top"
+                Background="{StaticResource AppTopBarBrush}"
+                BorderThickness="5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+            </Border.Effect>
+                
             <Button Command="{Binding CreateCommand}"
                     HorizontalAlignment="Left"
                     Margin="5" Padding="3"
                     Content="{DynamicResource Str_CreateEntry}"
                     Style="{StaticResource Button}" />
-        </StackPanel>
+        </Border>
         
         <!-- List with Entries -->
-        <Grid>
-            <templates:BasicDataGrid x:Name="DataGridEntries"
-                                     ItemsSource="{Binding Source={StaticResource GridGroups}}"
-                                     SelectedItem="{Binding SelectedEntry}"
-                                     HorizontalScrollBarVisibility="Disabled"
-                                     GridLinesVisibility="All"
-                                     LayoutUpdated="DataGridEntries_OnLayoutUpdated">
-                <!-- Group all Entries by week -->
-                <DataGrid.GroupStyle>
-                    <GroupStyle ContainerStyle="{StaticResource WeekGroup}" />
-                </DataGrid.GroupStyle>
+        <Border BorderThickness="5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+            </Border.Effect>
+            
+            <Grid>
+                <templates:BasicDataGrid x:Name="DataGridEntries"
+                                         ItemsSource="{Binding Source={StaticResource GridGroups}}"
+                                         SelectedItem="{Binding SelectedEntry}"
+                                         HorizontalScrollBarVisibility="Disabled"
+                                         GridLinesVisibility="All"
+                                         LayoutUpdated="DataGridEntries_OnLayoutUpdated">
+                    <!-- Group all Entries by week -->
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource WeekGroup}" />
+                    </DataGrid.GroupStyle>
 
-                <!-- Columns definitions -->
-                <DataGrid.Columns>
-                    <!-- Category -->
-                    <DataGridTextColumn Binding="{Binding Category.Name}"
-                                        ElementStyle="{StaticResource Column}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_Category}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- Day name (of start date) -->
-                    <DataGridTextColumn Binding="{Binding Start, StringFormat=dddd}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_DayName}" />
-                        </DataGridTextColumn.Header>
+                    <!-- Columns definitions -->
+                    <DataGrid.Columns>
+                        <!-- Category -->
+                        <DataGridTextColumn Binding="{Binding Category.Name}"
+                                            ElementStyle="{StaticResource Column}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_Category}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                         
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}"
-                                   BasedOn="{StaticResource ColumnCentered}">
-                                <Setter Property="FontWeight" Value="Bold" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    
-                    <!-- Start date -->
-                    <DataGridTextColumn Binding="{Binding Start, StringFormat=d}"
-                                        ElementStyle="{StaticResource ColumnCentered}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryStartDate}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- Start time -->
-                    <DataGridTextColumn Binding="{Binding Start, StringFormat=t}"
-                                        ElementStyle="{StaticResource ColumnCentered}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryStartTime}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- End date -->
-                    <DataGridTextColumn Binding="{Binding End, StringFormat=d}"
-                                        ElementStyle="{StaticResource ColumnCentered}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryEndDate}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- End time -->
-                    <DataGridTextColumn Binding="{Binding End, StringFormat=t}"
-                                        ElementStyle="{StaticResource ColumnCentered}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryEndTime}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- Pause -->
-                    <DataGridTextColumn Binding="{Binding Pause, StringFormat=hh\\:mm}"
-                                        ElementStyle="{StaticResource ColumnCentered}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryPause}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- Total time -->
-                    <DataGridTextColumn Binding="{Binding TotalTime, StringFormat=hh\\:mm}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryTotalTime}" />
-                        </DataGridTextColumn.Header>
+                        <!-- Day name (of start date) -->
+                        <DataGridTextColumn Binding="{Binding Start, StringFormat=dddd}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_DayName}" />
+                            </DataGridTextColumn.Header>
+                            
+                            <!-- Style -->
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}"
+                                       BasedOn="{StaticResource ColumnCentered}">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                         
-                        <!-- Style -->
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}"
-                                   BasedOn="{StaticResource ColumnCentered}">
-                                <Setter Property="FontWeight" Value="Bold" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    
-                    <!-- Notes -->
-                    <DataGridTextColumn Binding="{Binding Notes}"
-                                        ElementStyle="{StaticResource Column}">
-                        <!-- Header -->
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_EntryNotes}" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    
-                    <!-- Actions -->
-                    <DataGridTemplateColumn>
-                        <!-- Header -->
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock Text="{DynamicResource Str_Actions}" />
-                        </DataGridTemplateColumn.Header>
+                        <!-- Start date -->
+                        <DataGridTextColumn Binding="{Binding Start, StringFormat=d}"
+                                            ElementStyle="{StaticResource ColumnCentered}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryStartDate}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                         
-                        <!-- Cell Template -->
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <UniformGrid Rows="1">
-                                    <!-- Update -->
-                                    <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}"
-                                            Content="{DynamicResource Str_Update}" />
-                                    
-                                    <!-- Delete -->
-                                    <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}"
-                                            Content="{DynamicResource Str_Delete}" />
-                                    
-                                </UniformGrid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
+                        <!-- Start time -->
+                        <DataGridTextColumn Binding="{Binding Start, StringFormat=t}"
+                                            ElementStyle="{StaticResource ColumnCentered}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryStartTime}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                         
-                    </DataGridTemplateColumn>
-                    
-                    <!-- Empty column for the scrollbar -->
-                    <DataGridTextColumn IsReadOnly="True" /> 
-                </DataGrid.Columns>
-            </templates:BasicDataGrid>
-        </Grid>
+                        <!-- End date -->
+                        <DataGridTextColumn Binding="{Binding End, StringFormat=d}"
+                                            ElementStyle="{StaticResource ColumnCentered}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryEndDate}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        
+                        <!-- End time -->
+                        <DataGridTextColumn Binding="{Binding End, StringFormat=t}"
+                                            ElementStyle="{StaticResource ColumnCentered}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryEndTime}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        
+                        <!-- Pause -->
+                        <DataGridTextColumn Binding="{Binding Pause, StringFormat=hh\\:mm}"
+                                            ElementStyle="{StaticResource ColumnCentered}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryPause}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        
+                        <!-- Total time -->
+                        <DataGridTextColumn Binding="{Binding TotalTime, StringFormat=hh\\:mm}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryTotalTime}" />
+                            </DataGridTextColumn.Header>
+                            
+                            <!-- Style -->
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}"
+                                       BasedOn="{StaticResource ColumnCentered}">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        
+                        <!-- Notes -->
+                        <DataGridTextColumn Binding="{Binding Notes}"
+                                            ElementStyle="{StaticResource Column}">
+                            <!-- Header -->
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_EntryNotes}" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        
+                        <!-- Actions -->
+                        <DataGridTemplateColumn>
+                            <!-- Header -->
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock Text="{DynamicResource Str_Actions}" />
+                            </DataGridTemplateColumn.Header>
+                            
+                            <!-- Cell Template -->
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <UniformGrid Rows="1">
+                                        <!-- Update -->
+                                        <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                                Style="{StaticResource ColumnButton}"
+                                                Content="{DynamicResource Str_Update}" />
+                                        
+                                        <!-- Delete -->
+                                        <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                                Style="{StaticResource ColumnButton}"
+                                                Content="{DynamicResource Str_Delete}" />
+                                        
+                                    </UniformGrid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            
+                        </DataGridTemplateColumn>
+                        
+                        <!-- Empty column for the scrollbar -->
+                        <DataGridTextColumn IsReadOnly="True" /> 
+                    </DataGrid.Columns>
+                </templates:BasicDataGrid>
+            </Grid>
+        </Border>
     </DockPanel>
 </UserControl>

@@ -19,48 +19,68 @@
     </Window.Resources>
     
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left" 
-                    MinWidth="300"
-                    Background="{StaticResource AppLeftBarBrush}"
-                    VerticalAlignment="Stretch">
-            <!-- Choose whether Categories or Entries should be shown. -->
-            <StackPanel Margin="5" 
-                        Background="White">
-                <Label Content="{DynamicResource Str_Navigation}" />
-                <StackPanel Margin="10">
-                    <ToggleButton Padding="5"
-                                  Margin="5"
-                                  IsChecked="{Binding IsCategoriesViewShown}"
-                                  Command="{Binding ShowCategoriesViewCommand}" 
-                                  Content="{DynamicResource Str_Categories}"
-                                  Style="{StaticResource ToggleButton}" />
-                    <ToggleButton Padding="5"
-                                  Margin="5"
-                                  IsChecked="{Binding IsEntriesViewShown}"
-                                  Command="{Binding ShowEntriesViewCommand}"
-                                  Content="{DynamicResource Str_Entries}"
-                                  Style="{StaticResource ToggleButton}" />
-                </StackPanel>
-            </StackPanel>
+        <Border DockPanel.Dock="Left" 
+                MinWidth="300"
+                Background="{StaticResource AppLeftBarBrush}"
+                VerticalAlignment="Stretch"
+                BorderThickness="5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+            </Border.Effect>
             
-            <!-- Filters for the main view -->
-            <StackPanel Margin="5" 
-                        Background="White">
-                <Label Content="{DynamicResource Str_Filters}" />
-                <StackPanel Margin="10">
+            <StackPanel>
+                <!-- Choose whether Categories or Entries should be shown. -->
+                <Border>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                    </Border.Effect>
                     
-                </StackPanel>
+                    <StackPanel Margin="5" 
+                                Background="White">
+                        <Label Content="{DynamicResource Str_Navigation}" />
+                        <StackPanel Margin="10">
+                            <ToggleButton Padding="5"
+                                          Margin="5"
+                                          IsChecked="{Binding IsCategoriesViewShown}"
+                                          Command="{Binding ShowCategoriesViewCommand}" 
+                                          Content="{DynamicResource Str_Categories}"
+                                          Style="{StaticResource ToggleButton}" />
+                            <ToggleButton Padding="5"
+                                          Margin="5"
+                                          IsChecked="{Binding IsEntriesViewShown}"
+                                          Command="{Binding ShowEntriesViewCommand}"
+                                          Content="{DynamicResource Str_Entries}"
+                                          Style="{StaticResource ToggleButton}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            
+                <!-- Filters for the main view -->
+                <Border>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                    </Border.Effect>
+                    
+                    <StackPanel Margin="5" 
+                                Background="White">
+                        <Label Content="{DynamicResource Str_Filters}" />
+                        <StackPanel Margin="10">
+                        
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
             </StackPanel>
-        </StackPanel>
+        </Border>
         
         <!-- Entries View -->
         <StackPanel Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
             <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
         </StackPanel>
-        
+    
         <!-- Categories View -->
         <StackPanel Visibility="{Binding IsCategoriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
             <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
         </StackPanel>
+        
     </DockPanel>
 </Window>
