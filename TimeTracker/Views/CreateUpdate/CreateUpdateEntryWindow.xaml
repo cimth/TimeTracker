@@ -32,14 +32,14 @@
         <!-- Category -->
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
             <!-- Category -->
-            <Label>Category</Label>
+            <Label Content="{DynamicResource Str_Category}" />
             <ComboBox ItemsSource="{Binding Categories}" 
                       SelectedValue="{Binding InputCategory}"
                       DisplayMemberPath="Name"
                       Focusable="False"
                       IsEditable="True"
                       IsReadOnly="True"
-                      Text="-- Select Category --">
+                      Text="{DynamicResource Str_SelectCategory}">
                 <!-- 
                     Use Interaction.Triggers to bind the events to commands.
                     With the elements XML properties, only Code-Behind methods can be called.
@@ -54,9 +54,9 @@
         
         <!-- Start -->
         <Label Grid.Column="0" Grid.Row="1"
-               Margin="0,10,0,0">
-            Start
-        </Label>
+               Margin="0,10,0,0"
+               Content="{DynamicResource Str_EntryStart}" />
+        
         
         <DatePicker Grid.Column="0" Grid.Row="2"
                     Name="DtpStart"
@@ -106,9 +106,8 @@
         
         <!-- End -->
         <Label Grid.Column="1" Grid.Row="1"
-               Margin="0,10,0,0">
-            End
-        </Label>
+               Margin="0,10,0,0"
+               Content="{DynamicResource Str_EntryEnd}" />
         
         <DatePicker Grid.Column="1" Grid.Row="2"
                     Name="DtpEnd"
@@ -157,9 +156,8 @@
         
         <!-- Pause -->
         <Label Grid.Column="0" Grid.Row="4"
-               Margin="0,10,0,0">
-            Pause
-        </Label>
+               Margin="0,10,0,0"
+               Content="{DynamicResource Str_EntryPause}" />
         
         <TextBox Grid.Column="0" Grid.Row="5"
                  Name="TxtPause"
@@ -194,9 +192,8 @@
         
         <!-- Total Time -->
         <Label Grid.Column="1" Grid.Row="4"
-               Margin="0,10,0,0">
-            Total Time
-        </Label>
+               Margin="0,10,0,0"
+               Content="{DynamicResource Str_EntryTotalTime}" />
         
         <TextBox Grid.Column="1" Grid.Row="5"
                  Margin="5,0,0,0" 
@@ -217,9 +214,8 @@
         
         <!-- Notes -->
         <Label Grid.Column="0" Grid.Row="6"
-               Margin="0,10,0,0">
-            Notes
-        </Label>
+               Margin="0,10,0,0"
+               Content="{DynamicResource Str_EntryNotes}" />
         
         <TextBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
                  VerticalContentAlignment="Center"
@@ -228,9 +224,9 @@
                  Text="{Binding InputNotes, UpdateSourceTrigger=PropertyChanged}"
                  GotFocus="TextBox_OnGotFocus">
             <!-- 
-                    Use Interaction.Triggers to bind events to commands.
-                    With the elements XML properties, only Code-Behind methods can be called.
-                -->
+                Use Interaction.Triggers to bind events to commands.
+                With the elements XML properties, only Code-Behind methods can be called.
+            -->
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="TextChanged">
                     <b:InvokeCommandAction Command="{Binding UpdateStateAfterInputCommand}"/>

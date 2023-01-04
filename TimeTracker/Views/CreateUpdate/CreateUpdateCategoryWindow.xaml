@@ -12,7 +12,7 @@
     <StackPanel Margin="20">
         
         <!-- Name -->
-        <Label>Name</Label>
+        <Label Content="{DynamicResource Str_CategoryName}" />
         
         <TextBox VerticalContentAlignment="Center"
                  Padding="3"

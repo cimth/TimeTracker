@@ -80,7 +80,7 @@ public class ReadEntriesViewModel
         }
 
         // Ask the user for confirmation.
-        ConfirmDialogViewModel confirmViewModel = new ConfirmDialogViewModel("Should the entry really be deleted?");
+        ConfirmDialogViewModel confirmViewModel = new ConfirmDialogViewModel("Str_ConfirmDeleteEntry");
         bool? result = this._dialogService.ShowConfirmDialog(confirmViewModel);
 
         // Remove the Entry if the user confirmed.
@@ -89,7 +89,7 @@ public class ReadEntriesViewModel
             this._entryService.Delete(this.SelectedEntry);
             
             // Show success dialog.
-            MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Success", "The entry was successfully deleted.");
+            MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Str_Success", "Str_EntryDeletedSuccess");
             this._dialogService.ShowMessageDialog(messageViewModel);
         }
     }

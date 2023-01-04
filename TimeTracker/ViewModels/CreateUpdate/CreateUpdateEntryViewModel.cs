@@ -183,8 +183,8 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         this._originalEntry = entry;
         
         // Adjust the GUI texts depending on whether creating or updating an entry.
-        this.WindowTitle = this._originalEntry == null ? "Create Entry" : "Update Entry";
-        this.SubmitButtonText = this._originalEntry == null ? "Create" : "Save";
+        this.WindowTitle = this._originalEntry == null ? LanguageUtil.GiveLocalizedString("Str_CreateEntry") : LanguageUtil.GiveLocalizedString("Str_UpdateEntry");
+        this.SubmitButtonText = this._originalEntry == null ? LanguageUtil.GiveLocalizedString("Str_Create") : LanguageUtil.GiveLocalizedString("Str_Save");
         
         // Initialize the data bound to the GUI.
         this.Categories = this._categoryService.Categories;

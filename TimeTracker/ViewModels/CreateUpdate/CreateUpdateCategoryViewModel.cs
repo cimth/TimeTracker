@@ -93,8 +93,8 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
         this._originalCategory = category;
         
         // Adjust the GUI texts depending on whether creating or updating an entry.
-        this.WindowTitle = category == null ? "Create Category" : "Update Category";
-        this.SubmitButtonText = category == null ? "Create" : "Save";
+        this.WindowTitle = category == null ? LanguageUtil.GiveLocalizedString("Str_CreateCategory") : LanguageUtil.GiveLocalizedString("Str_UpdateCategory");
+        this.SubmitButtonText = category == null ? LanguageUtil.GiveLocalizedString("Str_Create") : LanguageUtil.GiveLocalizedString("Str_Save");
         
         // Initialize the data bound to the GUI.
         this.InitializeInput();
@@ -115,7 +115,7 @@ public class CreateUpdateCategoryViewModel : NotifyPropertyChangedImpl
     
     private void InitializeCreateInput()
     {
-        this.InputName = "New Category";
+        this.InputName = LanguageUtil.GiveLocalizedString("Str_NewCategory");
     }
 
     private void InitializeUpdateInput(Category category)

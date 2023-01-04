@@ -1,5 +1,6 @@
 using System.Windows;
 using TimeTracker.Models.Entities;
+using TimeTracker.Utils;
 using TimeTracker.ViewModels.CreateUpdate;
 using TimeTracker.ViewModels.Dialog;
 using TimeTracker.Views.CreateUpdate;
@@ -33,11 +34,14 @@ public class DialogService
         // Initialize the View Model with the selected entry or with a new entry.
         viewModel.Initialize(entry);
         
-        // Open the dialog.
+        // Initialize the dialog. Explicitly add resources to make the localized strings accessible.
         this._currentDialog = new CreateUpdateEntryWindow
         {
             DataContext = viewModel
         };
+        this._currentDialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
+        
+        // Show the dialog.
         this._currentDialog.ShowDialog();
     }
 
@@ -50,11 +54,14 @@ public class DialogService
         // Initialize the View Model with the selected category or with a new category.
         viewModel.Initialize(category);
 
-        // Open the dialog.
+        // Initialize the dialog. Explicitly add resources to make the localized strings accessible.
         this._currentDialog = new CreateUpdateCategoryWindow
         {
             DataContext = viewModel
         };
+        this._currentDialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
+        
+        // Show the dialog.
         this._currentDialog.ShowDialog();
     }
     
@@ -64,11 +71,12 @@ public class DialogService
     
     public bool? ShowConfirmDialog(ConfirmDialogViewModel viewModel)
     {
-        // Init dialog.
+        // Initialize the dialog. Explicitly add resources to make the localized strings accessible.
         this._currentDialog = new ConfirmDialog
         {
             DataContext = viewModel
         };
+        this._currentDialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
         
         // Show the dialog.
         return this._currentDialog.ShowDialog();
@@ -80,11 +88,12 @@ public class DialogService
     
     public void ShowMessageDialog(object viewModel)
     {
-        // Init dialog.
+        // Initialize the dialog. Explicitly add resources to make the localized strings accessible.
         this._currentDialog = new MessageDialog()
         {
             DataContext = viewModel
         };
+        this._currentDialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
         
         // Show the dialog.
         this._currentDialog.ShowDialog();

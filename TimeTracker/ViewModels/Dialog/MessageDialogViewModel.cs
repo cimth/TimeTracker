@@ -16,9 +16,9 @@ public class MessageDialogViewModel : NotifyPropertyChangedImpl
     // Initialization
     // ==============
     
-    public MessageDialogViewModel(string titleText, string messageText)
+    public MessageDialogViewModel(string titleResourceName, string messageResourceName)
     {
-        this.DialogTitle = titleText;
-        this.DialogMessage = messageText;
+        this.DialogTitle = LanguageUtil.GiveLocalizedString(titleResourceName);
+        this.DialogMessage = LanguageUtil.GiveLocalizedString(messageResourceName);
     }
 }

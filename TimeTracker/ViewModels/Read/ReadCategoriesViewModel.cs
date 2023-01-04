@@ -78,7 +78,7 @@ public class ReadCategoriesViewModel
         }
 
         // Ask the user for confirmation.
-        ConfirmDialogViewModel confirmViewModel = new ConfirmDialogViewModel("Should the category really be deleted?");
+        ConfirmDialogViewModel confirmViewModel = new ConfirmDialogViewModel("Str_ConfirmDeleteCategory");
         bool? result = this._dialogService.ShowConfirmDialog(confirmViewModel);
 
         // Remove the category if the user confirmed.
@@ -89,12 +89,12 @@ public class ReadCategoriesViewModel
             // Show success / error dialog.
             if (success)
             {
-                MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Success", "The category was successfully deleted.");
+                MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Str_Success", "Str_CategoryDeletedSuccess");
                 this._dialogService.ShowMessageDialog(messageViewModel);
             }
             else
             {
-                MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Error", "The category cannot be deleted because it is used in at least one Entry.");
+                MessageDialogViewModel messageViewModel = new MessageDialogViewModel("Str_Error", "Str_CategoryNotDeletedBecauseInUse");
                 this._dialogService.ShowMessageDialog(messageViewModel);
             }
         }

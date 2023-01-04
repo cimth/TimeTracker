@@ -13,9 +13,9 @@
                     Background="WhiteSmoke">
             <Button Command="{Binding CreateCommand}"
                     HorizontalAlignment="Left"
-                    Margin="5" Padding="3">
-                Create Category
-            </Button>
+                    Margin="5" Padding="3"
+                    Content="{DynamicResource Str_CreateCategory}"/>
+            
         </StackPanel>
         
         <!-- List with Categories -->
@@ -29,7 +29,7 @@
                                         ElementStyle="{StaticResource Column}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Name" />
+                            <TextBlock Text="{DynamicResource Str_CategoryName}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -37,7 +37,7 @@
                     <DataGridTemplateColumn>
                         <!-- Header -->
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="Actions" />
+                            <TextBlock Text="{DynamicResource Str_Actions}" />
                         </DataGridTemplateColumn.Header>
                         
                         <!-- Cell Template -->
@@ -46,16 +46,13 @@
                                 <UniformGrid Rows="1">
                                     <!-- Update -->
                                     <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}">
-                                        Update
-                                    </Button>
+                                            Style="{StaticResource ColumnButton}"
+                                            Content="{DynamicResource Str_Update}" />
                                     
                                     <!-- Delete -->
                                     <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}">
-                                        Delete
-                                    </Button>
-                                    
+                                            Style="{StaticResource ColumnButton}"
+                                            Content="{DynamicResource Str_Delete}" />
                                 </UniformGrid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

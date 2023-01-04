@@ -1,0 +1,53 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Net.Primitives">
+    <system:String x:Key="Str_WindowTitle">TimeTracker</system:String>
+    <system:String x:Key="Str_ConfirmDialog">Bestätigen</system:String>
+    
+    <system:String x:Key="Str_Navigation">Navigation</system:String>
+    <system:String x:Key="Str_Filters">Filter</system:String>
+    
+    <system:String x:Key="Str_Error">Fehler!</system:String>
+    <system:String x:Key="Str_Success">Erfolgreich!</system:String>
+    
+    <system:String x:Key="Str_Ok">OK</system:String>
+    <system:String x:Key="Str_Yes">Ja</system:String>
+    <system:String x:Key="Str_No">Nein</system:String>
+    <system:String x:Key="Str_Create">Erstellen</system:String>
+    <system:String x:Key="Str_Update">Ändern</system:String>
+    <system:String x:Key="Str_Delete">Löschen</system:String>
+    <system:String x:Key="Str_Save">Speichern</system:String>
+    <system:String x:Key="Str_Actions">Aktionen</system:String>
+    
+    <system:String x:Key="Str_Category">Kategorie</system:String>
+    <system:String x:Key="Str_Categories">Kategorien</system:String>
+    <system:String x:Key="Str_CategoryName">Name</system:String>
+    
+    <system:String x:Key="Str_CreateCategory">Kategorie erstellen</system:String>
+    <system:String x:Key="Str_UpdateCategory">Kategorie ändern</system:String>
+    <system:String x:Key="Str_ConfirmDeleteCategory">Soll die Kategorie wirklich gelöscht werden?</system:String>
+    <system:String x:Key="Str_CategoryDeletedSuccess">Die Kategorie wurde erfolgreich gelöscht.</system:String>
+    <system:String x:Key="Str_CategoryNotDeletedBecauseInUse">Die Kategorie kann nicht gelöscht werden, da sie in mindestens einem Eintrag verwendet wird.</system:String>
+    
+    <system:String x:Key="Str_NewCategory">Neue Kategorie</system:String>
+    <system:String x:Key="Str_SelectCategory">-- Kategorie auswählen --</system:String>
+    
+    <system:String x:Key="Str_Entries">Einträge</system:String>
+    
+    <system:String x:Key="Str_EntryStart">Start</system:String>
+    <system:String x:Key="Str_EntryStartDate">Startdatum</system:String>
+    <system:String x:Key="Str_EntryStartTime">Startzeit</system:String>
+    <system:String x:Key="Str_EntryEnd">End</system:String>
+    <system:String x:Key="Str_EntryEndDate">Enddatum</system:String>
+    <system:String x:Key="Str_EntryEndTime">Endzeit</system:String>
+    <system:String x:Key="Str_EntryPause">Pause</system:String>
+    <system:String x:Key="Str_EntryTotalTime">Gesamtzeit</system:String>
+    <system:String x:Key="Str_EntryNotes">Anmerkungen</system:String>
+    
+    <system:String x:Key="Str_CreateEntry">Eintrag erstellen</system:String>
+    <system:String x:Key="Str_UpdateEntry">Eintrag ändern</system:String>
+    <system:String x:Key="Str_ConfirmDeleteEntry">Soll der Eintrag wirklich gelöscht werden?</system:String>
+    <system:String x:Key="Str_EntryDeletedSuccess">Der Eintrag wurde erfolgreich gelöscht.</system:String>
+    
+    <system:String x:Key="Str_Week">Woche</system:String>
+</ResourceDictionary>

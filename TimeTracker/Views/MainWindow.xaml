@@ -26,23 +26,25 @@
             <!-- Choose whether Categories or Entries should be shown. -->
             <StackPanel Margin="5" 
                         Background="White">
-                <Label>Navigation</Label>
+                <Label Content="{DynamicResource Str_Navigation}" />
                 <StackPanel Margin="10">
                     <ToggleButton Padding="5"
                                   Margin="5"
                                   IsChecked="{Binding IsCategoriesViewShown}"
-                                  Command="{Binding ShowCategoriesViewCommand}">Categories</ToggleButton>
+                                  Command="{Binding ShowCategoriesViewCommand}" 
+                                  Content="{DynamicResource Str_Categories}" />
                     <ToggleButton Padding="5"
                                   Margin="5"
                                   IsChecked="{Binding IsEntriesViewShown}"
-                                  Command="{Binding ShowEntriesViewCommand}">Entries</ToggleButton>
+                                  Command="{Binding ShowEntriesViewCommand}"
+                                  Content="{DynamicResource Str_Entries}" />
                 </StackPanel>
             </StackPanel>
             
             <!-- Filters for the main view -->
             <StackPanel Margin="5" 
                         Background="White">
-                <Label>Filters</Label>
+                <Label Content="{DynamicResource Str_Filters}" />
                 <StackPanel Margin="10">
                     
                 </StackPanel>

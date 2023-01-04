@@ -14,8 +14,8 @@ public class ConfirmDialogViewModel : NotifyPropertyChangedImpl
     // Initialization
     // ==============
     
-    public ConfirmDialogViewModel(string requestText)
+    public ConfirmDialogViewModel(string requestResourceName)
     {
-        this.Request = requestText;
+        this.Request = LanguageUtil.GiveLocalizedString(requestResourceName);
     }
 }

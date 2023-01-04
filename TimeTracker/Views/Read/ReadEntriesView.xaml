@@ -35,9 +35,8 @@
                     Background="WhiteSmoke">
             <Button Command="{Binding CreateCommand}"
                     HorizontalAlignment="Left"
-                    Margin="5" Padding="3">
-                Create Entry
-            </Button>
+                    Margin="5" Padding="3"
+                    Content="{DynamicResource Str_CreateEntry}" />
         </StackPanel>
         
         <!-- List with Entries -->
@@ -59,7 +58,7 @@
                                         ElementStyle="{StaticResource Column}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Category" />
+                            <TextBlock Text="{DynamicResource Str_Category}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -68,7 +67,7 @@
                                         ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Start Date" />
+                            <TextBlock Text="{DynamicResource Str_EntryStartDate}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -77,7 +76,7 @@
                                         ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Start Time" />
+                            <TextBlock Text="{DynamicResource Str_EntryStartTime}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -86,7 +85,7 @@
                                         ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="End Date" />
+                            <TextBlock Text="{DynamicResource Str_EntryEndDate}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -95,7 +94,7 @@
                                         ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="End Time" />
+                            <TextBlock Text="{DynamicResource Str_EntryEndTime}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -104,7 +103,7 @@
                                         ElementStyle="{StaticResource ColumnCentered}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Pause" />
+                            <TextBlock Text="{DynamicResource Str_EntryPause}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -112,7 +111,7 @@
                     <DataGridTextColumn Binding="{Binding TotalTime, StringFormat=hh\\:mm}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Total Time" />
+                            <TextBlock Text="{DynamicResource Str_EntryTotalTime}" />
                         </DataGridTextColumn.Header>
                         
                         <!-- Style -->
@@ -129,7 +128,7 @@
                                         ElementStyle="{StaticResource Column}">
                         <!-- Header -->
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Notes" />
+                            <TextBlock Text="{DynamicResource Str_EntryNotes}" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     
@@ -137,7 +136,7 @@
                     <DataGridTemplateColumn>
                         <!-- Header -->
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="Actions" />
+                            <TextBlock Text="{DynamicResource Str_Actions}" />
                         </DataGridTemplateColumn.Header>
                         
                         <!-- Cell Template -->
@@ -146,15 +145,13 @@
                                 <UniformGrid Rows="1">
                                     <!-- Update -->
                                     <Button Command="{Binding Path=DataContext.UpdateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}">
-                                        Update
-                                    </Button>
+                                            Style="{StaticResource ColumnButton}"
+                                            Content="{DynamicResource Str_Update}" />
                                     
                                     <!-- Delete -->
                                     <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                            Style="{StaticResource ColumnButton}">
-                                        Delete
-                                    </Button>
+                                            Style="{StaticResource ColumnButton}"
+                                            Content="{DynamicResource Str_Delete}" />
                                     
                                 </UniformGrid>
                             </DataTemplate>
