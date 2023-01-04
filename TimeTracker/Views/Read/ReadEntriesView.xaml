@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <!-- Styles -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Uid="DataGridStyles" Source="../../Styles/DataGridStyles.xaml" />
+                <ResourceDictionary x:Uid="DataGridStyles" Source="/Resources/Styles/DataGridStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <!-- CollectionView to group the shown Entries -->

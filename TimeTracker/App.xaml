@@ -5,6 +5,6 @@
              StartupUri="Views/MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
-        <ResourceDictionary Source="../Styles/DataGridStyles.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/Resources/Styles/DataGridStyles.xaml"></ResourceDictionary>
     </Application.Resources>
 </Application>
