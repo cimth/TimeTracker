@@ -80,12 +80,12 @@ public class Entry : NotifyPropertyChangedImpl
 
     private int? _id;
     
-    private Category _category;
+    private Category? _category;
     
     private DateTime _start;
     private DateTime _end;
     private TimeSpan _pause;
-    private string _notes;
+    private string _notes = null!;      // Not null after constructors.
 
     // ==============
     // Initialization
