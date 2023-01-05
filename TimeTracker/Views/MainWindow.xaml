@@ -9,7 +9,8 @@
         xmlns:read="clr-namespace:TimeTracker.Views.Read"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="1200">
+        Title="{DynamicResource Str_WindowTitle}" 
+        Height="600" Width="1200">
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
