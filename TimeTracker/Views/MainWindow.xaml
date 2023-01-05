@@ -35,9 +35,22 @@
                         <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                     </Border.Effect>
                     
-                    <StackPanel Margin="5" 
-                                Background="White">
-                        <Label Content="{DynamicResource Str_Navigation}" />
+                    <GroupBox Margin="5" 
+                              Background="White">
+                        <!-- Header -->
+                        <GroupBox.Header>
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                </Border.Effect>
+                                <TextBlock Text="{DynamicResource Str_Navigation}"
+                                           Background="{StaticResource GroupHeaderBrush}"
+                                           Padding="5"
+                                           FontWeight="Bold" />  
+                            </Border>
+                        </GroupBox.Header>
+                        
+                        <!-- Content -->
                         <StackPanel Margin="10">
                             <ToggleButton Padding="5"
                                           Margin="5"
@@ -52,7 +65,7 @@
                                           Content="{DynamicResource Str_Entries}"
                                           Style="{StaticResource ToggleButton}" />
                         </StackPanel>
-                    </StackPanel>
+                    </GroupBox>
                 </Border>
             
                 <!-- Filters for the main view -->
@@ -61,13 +74,27 @@
                         <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                     </Border.Effect>
                     
-                    <StackPanel Margin="5" 
-                                Background="White">
-                        <Label Content="{DynamicResource Str_Filters}" />
-                        <StackPanel Margin="10">
+                    <GroupBox Margin="5"
+                              Background="White">
+                        <!-- Header -->
+                        <GroupBox.Header>
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                </Border.Effect>
+                                <TextBlock Text="{DynamicResource Str_Filters}"
+                                           Background="{StaticResource GroupHeaderBrush}"
+                                           Padding="5"
+                                           FontWeight="Bold" />  
+                            </Border>
+                        </GroupBox.Header>
                         
+                        <!-- Content -->
+                        <StackPanel Margin="10" 
+                                    Background="White">
+                            
                         </StackPanel>
-                    </StackPanel>
+                    </GroupBox>
                 </Border>
             </StackPanel>
         </Border>
