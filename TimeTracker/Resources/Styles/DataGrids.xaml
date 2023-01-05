@@ -1,9 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:converters="clr-namespace:TimeTracker.Converters"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- Converters -->
-    <converters:EntryToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
-    
     <!-- Cell style for the basic data grid -->
     <Style x:Key="BasicDataGridCellStyle" TargetType="{x:Type DataGridCell}">
         <Style.Triggers>
@@ -66,81 +62,7 @@
         </Setter>
     </Style>
     
-    <!-- Buttons -->
-    <Style x:Key="Button" TargetType="{x:Type Button}">
-        <!-- Default state -->
-        <!-- Note: The Template has to be overwritten for changing the IsChecked color etc. -->
-        <Setter Property="Background" Value="{StaticResource AppLightBrush}" />
-        
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            Padding="{TemplateBinding Padding}"
-                            Margin="{TemplateBinding Margin}" >
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        
-        <!-- Overwrite on different states. -->
-        <Style.Triggers>
-            <!-- IsMoueOver -->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-    
-    <Style x:Key="ToggleButton" TargetType="{x:Type ToggleButton}">
-        <!-- Default state -->
-        <!-- Note: The Template has to be overwritten for changing the IsChecked color etc. -->
-        <Setter Property="Background" Value="{StaticResource AppLightBrush}" />
-        
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            Padding="{TemplateBinding Padding}"
-                            Margin="{TemplateBinding Margin}" >
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        
-        <!-- Overwrite on different states. -->
-        <Style.Triggers>
-            <!-- IsMoueOver -->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
-            </Trigger>
-            
-            <!-- IsChecked -->
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource AppSelectedMediumBrush}" />
-            </Trigger>
-            
-            <!-- IsMoueOver AND IsChecked -->
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="IsChecked" Value="True" />
-                </MultiTrigger.Conditions>
-                
-                <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
-            </MultiTrigger>
-        </Style.Triggers>
-    </Style>
-    
-    <!-- Multiple times used styles -->
+    <!-- DataGrid columns -->
     <Style x:Key="Column" TargetType="{x:Type FrameworkElement}">
         <Setter Property="Margin" Value="5" />
         <Setter Property="VerticalAlignment" Value="Center" />

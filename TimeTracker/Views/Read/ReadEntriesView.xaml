@@ -10,10 +10,6 @@
              d:DesignWidth="700" d:DesignHeight="100" >
     <UserControl.Resources>
         <ResourceDictionary>
-            <!-- Styles -->
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Uid="DataGridStyles" Source="/Resources/Styles/DataGridStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             
             <!-- CollectionView to group the shown Entries -->
             <CollectionViewSource x:Key="GridGroups" Source="{Binding Entries}"

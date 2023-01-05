@@ -14,10 +14,6 @@
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
     
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </Window.Resources>
-    
     <DockPanel>
         <Border DockPanel.Dock="Left" 
                 MinWidth="300"
