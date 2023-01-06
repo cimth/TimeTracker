@@ -72,14 +72,14 @@ public class DialogService
     public bool? ShowConfirmDialog(ConfirmDialogViewModel viewModel)
     {
         // Initialize the dialog. Explicitly add resources to make the localized strings accessible.
-        this._currentDialog = new ConfirmDialog
+        Window dialog = new ConfirmDialog
         {
             DataContext = viewModel
         };
-        this._currentDialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
+        dialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
         
         // Show the dialog.
-        return this._currentDialog.ShowDialog();
+        return dialog.ShowDialog();
     }
     
     // ==============
@@ -89,13 +89,13 @@ public class DialogService
     public void ShowMessageDialog(object viewModel)
     {
         // Initialize the dialog. Explicitly add resources to make the localized strings accessible.
-        this._currentDialog = new MessageDialog()
+        Window dialog = new MessageDialog()
         {
             DataContext = viewModel
         };
-        this._currentDialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
+        dialog.Resources.MergedDictionaries.Add(LanguageUtil.LocalizedResourceDictionary);
         
         // Show the dialog.
-        this._currentDialog.ShowDialog();
+        dialog.ShowDialog();
     }
 }
