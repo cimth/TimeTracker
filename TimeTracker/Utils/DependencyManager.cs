@@ -43,16 +43,16 @@ public class DependencyManager
     // Initialization
     // ==============
     
-    public void InitializeDependencies()
+    public void InitializeDependencies(string databasePath)
     {
-        this.InitializeDatabase();
+        this.InitializeDatabase(databasePath);
         this.InitializeModels();
         this.InitializeViewModels();
     }
-
-    private void InitializeDatabase()
+    
+    private void InitializeDatabase(string databasePath)
     {
-        this._databaseContext = new DatabaseContext();
+        this._databaseContext = new DatabaseContext(databasePath);
         this._databaseContext.DoMigrations();
     }
 

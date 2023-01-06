@@ -53,7 +53,7 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     {
         // Initialize all dependencies (especially Models and View Models).
         DependencyManager dependencyManager = new DependencyManager();
-        dependencyManager.InitializeDependencies();
+        dependencyManager.InitializeDependencies("Data.db");
         
         // Initialize the View Models for the main view.
         this.ReadCategoriesViewModel = dependencyManager.ReadCategoriesViewModel;

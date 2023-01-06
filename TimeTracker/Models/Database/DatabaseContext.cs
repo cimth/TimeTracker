@@ -16,15 +16,15 @@ public class DatabaseContext : DbContext
     // Fields
     // ==============
 
-    private string _dbPath;
+    private readonly string _databasePath;
     
     // ==============
     // Initialization
     // ==============
 
-    public DatabaseContext(string? dbPath = null)
+    public DatabaseContext(string databasePath)
     {
-        this._dbPath = dbPath ?? "Data.db";
+        this._databasePath = databasePath;
     }
     
     // ==============
@@ -33,7 +33,7 @@ public class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite($"DataSource={this._dbPath}");
+        optionsBuilder.UseSqlite($"DataSource={this._databasePath}");
     }
     
     // ==============
