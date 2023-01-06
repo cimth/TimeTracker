@@ -11,10 +11,6 @@
         WindowStartupLocation="CenterScreen"
         Title="{DynamicResource Str_WindowTitle}" 
         Height="600" Width="1200">
-    <Window.DataContext>
-        <viewModels:MainWindowViewModel/>
-    </Window.DataContext>
-    
     <DockPanel>
         <Border DockPanel.Dock="Left" 
                 MinWidth="300"
