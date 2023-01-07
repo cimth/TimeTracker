@@ -6,4 +6,5 @@
     
     <!-- Custom converters -->
     <converters:EntryToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
+    <converters:FilePathToFileNameConverter x:Key="FilePathToFileNameConverter" />
 </ResourceDictionary>
