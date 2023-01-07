@@ -92,14 +92,17 @@
             </StackPanel>
         </Border>
         
-        <!-- Entries View -->
-        <StackPanel Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
-        </StackPanel>
-    
-        <!-- Categories View -->
-        <Grid Visibility="{Binding IsCategoriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
+        <!-- Main view -->
+        <Grid>
+            <!-- Entries View -->
+            <Grid Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <read:ReadEntriesView DataContext="{Binding ReadEntriesViewModel}" />
+            </Grid>
+        
+            <!-- Categories View -->
+            <Grid Visibility="{Binding IsCategoriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
+            </Grid>
         </Grid>
         
     </DockPanel>

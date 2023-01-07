@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 using TimeTracker.Dialog;
 using TimeTracker.Models;
@@ -12,16 +13,22 @@ using TimeTracker.ViewModels.Dialog;
 
 namespace TimeTracker.ViewModels.Read;
 
-public class ReadEntriesViewModel
+public class ReadEntriesViewModel : NotifyPropertyChangedImpl
 {
     // ==============
     // Properties
     // ==============
-    
-    public ObservableCollection<Entry> Entries { get; private set; } = null!;
-    
+
+    public ObservableCollection<Entry> Entries => this._entryService.Entries;
+
     public Entry? SelectedEntry { get; set; }
     
+    public bool ShowGrid
+    {
+        get => this._showGrid;
+        set => SetField(ref this._showGrid, value);
+    }
+
     // ==============
     // Commands
     // ==============
@@ -38,6 +45,8 @@ public class ReadEntriesViewModel
     private readonly DialogService _dialogService;
 
     private readonly CreateUpdateEntryViewModel _createUpdateEntryViewModel;
+    
+    private bool _showGrid;
 
     // ==============
     // Initialization
@@ -54,7 +63,17 @@ public class ReadEntriesViewModel
         this.UpdateCommand = new DelegateCommand(this.Update);
         this.DeleteCommand = new DelegateCommand(this.Delete);
 
-        this.Entries = this._entryService.Entries;
+        this.Entries.CollectionChanged += this.UpdateShowGrid;
+        this.UpdateShowGrid(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+    }
+    
+    // ==============
+    // Show / hide grid
+    // ==============
+
+    private void UpdateShowGrid(object? sender, NotifyCollectionChangedEventArgs eventArgs)
+    {
+        this.ShowGrid = this.Entries.Count > 0;
     }
     
     // ==============
