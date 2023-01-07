@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="{DynamicResource Str_WindowTitle}" 
+        WindowState="Maximized"
         Height="600" Width="1200">
     <DockPanel>
         <Border DockPanel.Dock="Left" 
