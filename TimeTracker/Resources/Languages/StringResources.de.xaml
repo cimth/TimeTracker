@@ -10,7 +10,7 @@
     <system:String x:Key="Str_Error">Fehler!</system:String>
     <system:String x:Key="Str_Success">Erfolgreich!</system:String>
     
-    <system:String x:Key="Str_NoItemsFound">Keine Einträge gefunden</system:String>
+    <system:String x:Key="Str_NoItemsFound">Keine Elemente gefunden</system:String>
     
     <system:String x:Key="Str_Ok">OK</system:String>
     <system:String x:Key="Str_Yes">Ja</system:String>
