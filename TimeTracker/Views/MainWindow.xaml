@@ -22,6 +22,36 @@
             </Border.Effect>
             
             <StackPanel>
+                <!-- File name -->
+                <Border>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                    </Border.Effect>
+                    
+                    <GroupBox Margin="5" 
+                              Background="White">
+                        <!-- Header -->
+                        <GroupBox.Header>
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                </Border.Effect>
+                                <TextBlock Text="{DynamicResource Str_UsedDatabaseFile}"
+                                           Background="{StaticResource GroupHeaderBrush}"
+                                           Padding="5"
+                                           FontWeight="Bold" />  
+                            </Border>
+                        </GroupBox.Header>
+                        
+                        <!-- Content -->
+                        <StackPanel Margin="10">
+                            <TextBlock Text="{Binding DatabaseFile}"
+                                       TextAlignment="Center"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </GroupBox>
+                </Border>
+                
                 <!-- Choose whether Categories or Entries should be shown. -->
                 <Border>
                     <Border.Effect>

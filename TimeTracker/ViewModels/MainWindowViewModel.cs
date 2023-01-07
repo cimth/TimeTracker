@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.IO;
+using System.Windows.Input;
 using TimeTracker.Utils;
 using TimeTracker.ViewModels.Command;
 using TimeTracker.ViewModels.Read;
@@ -10,6 +11,12 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     // ==============
     // Properties
     // ==============
+
+    public string DatabaseFile
+    {
+        get => this._databaseFile;
+        set => SetField(ref this._databaseFile, value);
+    }
 
     public bool IsCategoriesViewShown
     {
@@ -37,6 +44,8 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     // Fields
     // ==============
 
+    private string _databaseFile;
+    
     private bool _isCategoriesViewShown;
     private bool _isEntriesViewShown;
 
@@ -46,6 +55,8 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     
     public MainWindowViewModel(string databasePath)
     {
+        this.DatabaseFile = Path.GetFileName(databasePath);
+        
         // Initialize all dependencies (especially Models and View Models).
         DependencyManager dependencyManager = new DependencyManager();
         dependencyManager.InitializeDependencies(databasePath);

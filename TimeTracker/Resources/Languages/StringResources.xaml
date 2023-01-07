@@ -60,4 +60,5 @@
     <system:String x:Key="Str_CreateDatabaseFile">Create a new File</system:String>
     <system:String x:Key="Str_SelectDatabaseFile">Select File</system:String>
     <system:String x:Key="Str_SelectExistingDatabaseFile">Select a File from the File System</system:String>
+    <system:String x:Key="Str_UsedDatabaseFile">Current File</system:String>
 </ResourceDictionary>
