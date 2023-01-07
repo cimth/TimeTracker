@@ -1,8 +1,11 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
+using TimeTracker.Models.DatabaseConfiguration;
 using TimeTracker.ViewModels;
+using TimeTracker.ViewModels.DatabaseConfiguration;
 using TimeTracker.Views;
+using TimeTracker.Views.DatabaseConfiguration;
 
 namespace TimeTracker
 {
@@ -23,7 +26,7 @@ namespace TimeTracker
             // Select the database to open.
             // This is mandatory to continue with starting the app. If no valid database file is selected upon
             // the initialization, the App will be closed with a information message.
-            string? databasePath = this.SelectDatabase();
+            string? databasePath = this.SelectDatabaseFile();
             if (databasePath != null)
             {
                 this.ShowMainWindow(databasePath);
@@ -48,10 +51,25 @@ namespace TimeTracker
                 new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));   
         }
 
-        private string? SelectDatabase()
+        private string? SelectDatabaseFile()
         {
-            // TODO: Show dialog to select a database file
-            return "Data.db";
+            // Initialize the dialog to select (or open/create) a database file.
+            DatabaseConfigurator databaseConfigurator = new DatabaseConfigurator();
+            SelectDatabaseFileViewModel viewModel = new SelectDatabaseFileViewModel(databaseConfigurator);
+            SelectDatabaseFileWindow view = new SelectDatabaseFileWindow
+            {
+                DataContext = viewModel
+            };
+            
+            // Call Hide() and NOT Close() when the dialog should be closed because else the whole application
+            // would exit (since no other window is opened at this time).
+            viewModel.OnRequestClose += (_, _) => view.Hide();
+            
+            // Show the dialog.
+            view.ShowDialog();
+            
+            // Return the database file selected in the dialog.
+            return viewModel.SelectedDatabaseFile;
         }
 
         private void ShowMainWindow(string databasePath)

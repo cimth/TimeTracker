@@ -10,6 +10,8 @@
     <system:String x:Key="Str_Error">Fehler!</system:String>
     <system:String x:Key="Str_Success">Erfolgreich!</system:String>
     
+    <system:String x:Key="Str_NoItemsFound">Keine Einträge gefunden</system:String>
+    
     <system:String x:Key="Str_Ok">OK</system:String>
     <system:String x:Key="Str_Yes">Ja</system:String>
     <system:String x:Key="Str_No">Nein</system:String>
@@ -18,6 +20,7 @@
     <system:String x:Key="Str_Delete">Löschen</system:String>
     <system:String x:Key="Str_Save">Speichern</system:String>
     <system:String x:Key="Str_Actions">Aktionen</system:String>
+    <system:String x:Key="Str_Open">Öffnen</system:String>
     
     <system:String x:Key="Str_Category">Kategorie</system:String>
     <system:String x:Key="Str_Categories">Kategorien</system:String>
@@ -51,4 +54,10 @@
     
     <system:String x:Key="Str_Week">Woche</system:String>
     <system:String x:Key="Str_DayName">Tag</system:String>
+    
+    <system:String x:Key="Str_LastOpenedDatabaseFiles">Zuletzt geöffnete Dateien</system:String>
+    <system:String x:Key="Str_RemoveFromList">Aus Liste entfernen</system:String>
+    <system:String x:Key="Str_CreateDatabaseFile">Neue Datei erstellen</system:String>
+    <system:String x:Key="Str_SelectDatabaseFile">Datei auswählen</system:String>
+    <system:String x:Key="Str_SelectExistingDatabaseFile">Datei aus dem Dateisystem öffnen</system:String>
 </ResourceDictionary>
