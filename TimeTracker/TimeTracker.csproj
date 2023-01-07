@@ -5,6 +5,11 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <PackageId>TimeTracker</PackageId>
+        <Authors>Cindy Maria Thewes</Authors>
+        <Company>Cindy Maria Thewes</Company>
+        <Product>TimeTracker</Product>
+        <AssemblyTitle>TimeTracker</AssemblyTitle>
     </PropertyGroup>
 
     <ItemGroup>
