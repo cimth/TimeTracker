@@ -7,4 +7,5 @@
     <!-- Custom converters -->
     <converters:EntryToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
     <converters:FilePathToFileNameConverter x:Key="FilePathToFileNameConverter" />
+    <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
 </ResourceDictionary>
