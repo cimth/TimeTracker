@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Input;
 using TimeTracker.Utils;
 using TimeTracker.ViewModels.Command;
@@ -44,7 +45,7 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
     // Fields
     // ==============
 
-    private string _databaseFile;
+    private string _databaseFile = null!;       // Not null after constructor.
     
     private bool _isCategoriesViewShown;
     private bool _isEntriesViewShown;
