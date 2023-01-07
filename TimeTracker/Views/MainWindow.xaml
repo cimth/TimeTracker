@@ -98,9 +98,9 @@
         </StackPanel>
     
         <!-- Categories View -->
-        <StackPanel Visibility="{Binding IsCategoriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Visibility="{Binding IsCategoriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
             <read:ReadCategoriesView DataContext="{Binding ReadCategoriesViewModel}" />
-        </StackPanel>
+        </Grid>
         
     </DockPanel>
 </Window>

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 using TimeTracker.Dialog;
 using TimeTracker.Models.Entities;
@@ -10,15 +12,21 @@ using TimeTracker.ViewModels.Dialog;
 
 namespace TimeTracker.ViewModels.Read;
 
-public class ReadCategoriesViewModel
+public class ReadCategoriesViewModel : NotifyPropertyChangedImpl
 {
     // ==============
     // Properties
     // ==============
-    
-    public ObservableCollection<Category> Categories { get; private set; } = null!;
-    
+
+    public ObservableCollection<Category> Categories => this._categoryService.Categories;
+
     public Category? SelectedCategory { get; set; }
+    
+    public bool ShowGrid
+    {
+        get => this._showGrid;
+        set => SetField(ref this._showGrid, value);
+    }
     
     // ==============
     // Commands
@@ -36,6 +44,8 @@ public class ReadCategoriesViewModel
     private readonly DialogService _dialogService;
 
     private readonly CreateUpdateCategoryViewModel _createUpdateCategoryViewModel;
+    
+    private bool _showGrid;
 
     // ==============
     // Initialization
@@ -52,7 +62,17 @@ public class ReadCategoriesViewModel
         this.UpdateCommand = new DelegateCommand(this.Update);
         this.DeleteCommand = new DelegateCommand(this.Delete);
 
-        this.Categories = this._categoryService.Categories;
+        this.Categories.CollectionChanged += this.UpdateShowGrid;
+        this.UpdateShowGrid(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+    }
+    
+    // ==============
+    // Show / hide grid
+    // ==============
+
+    private void UpdateShowGrid(object? sender, NotifyCollectionChangedEventArgs eventArgs)
+    {
+        this.ShowGrid = this.Categories.Count > 0;
     }
     
     // ==============
