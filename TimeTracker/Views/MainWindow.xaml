@@ -92,7 +92,7 @@
                 </Border>
             
                 <!-- Filters for the main view -->
-                <Border>
+                <Border Visibility="Collapsed">
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                     </Border.Effect>
