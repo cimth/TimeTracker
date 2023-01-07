@@ -15,6 +15,12 @@ namespace TimeTracker
     public partial class App : Application
     {
         // ==============
+        // Fields
+        // ==============
+
+        private MainWindow _mainWindow = null!;     // Not null after App_OnStartup().
+        
+        // ==============
         // On startup
         // ==============
 
@@ -22,17 +28,24 @@ namespace TimeTracker
         {
             // Initialize the current culture to have access on the correct date and time formats.
             this.UseCurrentCultureInWpf();
+            
+            // Create the main window first to avoid closing the application after the 'Select database file' dialog
+            // is closed.
+            this._mainWindow = new MainWindow();
 
             // Select the database to open.
             // This is mandatory to continue with starting the app. If no valid database file is selected upon
             // the initialization, the App will be closed with a information message.
             string? databasePath = this.SelectDatabaseFile();
+            
             if (databasePath != null)
             {
+                // Start the actual application, i.e. show the main window.
                 this.ShowMainWindow(databasePath);
             }
             else
             {
+                // Close the application since no valid database path was selected.
                 Application.Current.Shutdown();
             }
         }
@@ -53,33 +66,30 @@ namespace TimeTracker
 
         private string? SelectDatabaseFile()
         {
-            // Initialize the dialog to select (or open/create) a database file.
+            // Show the dialog to select (or open/create) a database file.
             DatabaseConfigurator databaseConfigurator = new DatabaseConfigurator();
             SelectDatabaseFileViewModel viewModel = new SelectDatabaseFileViewModel(databaseConfigurator);
-            SelectDatabaseFileWindow view = new SelectDatabaseFileWindow
-            {
-                DataContext = viewModel
-            };
-            
-            // Call Hide() and NOT Close() when the dialog should be closed because else the whole application
-            // would exit (since no other window is opened at this time).
-            viewModel.OnRequestClose += (_, _) => view.Hide();
-            
-            // Show the dialog.
-            view.ShowDialog();
+            this.ShowSelectDatabaseFileDialog(viewModel);
             
             // Return the database file selected in the dialog.
             return viewModel.SelectedDatabaseFile;
         }
 
-        private void ShowMainWindow(string databasePath)
+        private void ShowSelectDatabaseFileDialog(SelectDatabaseFileViewModel viewModel)
         {
-            MainWindowViewModel viewModel = new MainWindowViewModel(databasePath);
-            MainWindow mainWindow = new MainWindow
+            SelectDatabaseFileWindow view = new SelectDatabaseFileWindow
             {
                 DataContext = viewModel
             };
-            mainWindow.Show();
+            viewModel.OnRequestClose += (_, _) => view.Close();
+            view.ShowDialog();
+        }
+
+        private void ShowMainWindow(string databasePath)
+        {
+            MainWindowViewModel viewModel = new MainWindowViewModel(databasePath);
+            this._mainWindow.DataContext = viewModel;
+            this._mainWindow.Show();
         }
     }
 }
