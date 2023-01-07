@@ -56,9 +56,17 @@ public class DatabaseConfigurator
     // Change the single config elements
     // ==============
     
-    public void AddDatabasePath(string databasePath)
+    public void SaveAsFirstDatabasePath(string databasePath)
     {
-        this.DatabaseConfig.DatabasePaths.Add(databasePath);
+        // Remove the path if already existing.
+        if (this.DatabaseConfig.DatabasePaths.Contains(databasePath))
+        {
+            this.RemoveDatabasePath(databasePath);
+        }
+        
+        // Insert the path as first.
+        // This behavior simulates a stack, so that the latest used path is the first one in the config file.
+        this.DatabaseConfig.DatabasePaths.Insert(0, databasePath);
         this.UpdateConfigFile();
     }
     
