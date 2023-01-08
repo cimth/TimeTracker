@@ -10,6 +10,7 @@
         <Company>Cindy Maria Thewes</Company>
         <Product>TimeTracker</Product>
         <AssemblyTitle>TimeTracker</AssemblyTitle>
+        <ApplicationIcon>Resources\Icons\TimeTracker 256.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
