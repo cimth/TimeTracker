@@ -5,7 +5,8 @@
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     
     <!-- Custom converters -->
-    <converters:EntryToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
+    <converters:EntryGroupToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
     <converters:FilePathToFileNameConverter x:Key="FilePathToFileNameConverter" />
     <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
+    <converters:TimeSpanToTotalHoursAndMinutesConverter x:Key="TimeSpanToTotalHoursAndMinutesConverter" />
 </ResourceDictionary>

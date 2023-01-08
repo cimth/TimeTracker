@@ -134,7 +134,7 @@
                             </DataGridTextColumn>
                             
                             <!-- Total time -->
-                            <DataGridTextColumn Binding="{Binding TotalTime, StringFormat=hh\\:mm}">
+                            <DataGridTextColumn Binding="{Binding TotalTime, Converter={StaticResource TimeSpanToTotalHoursAndMinutesConverter}}">
                                 <!-- Header -->
                                 <DataGridTextColumn.Header>
                                     <TextBlock Text="{DynamicResource Str_EntryTotalTime}" />
