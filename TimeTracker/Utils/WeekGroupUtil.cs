@@ -25,7 +25,8 @@ public static class WeekGroupUtil
 
     private static DateTime GetStartOfWeek(DateTime dateInWeek, DayOfWeek firstDayOfWeek, DayOfWeek dayInWeek)
     {
-        int daysToSubtract = dayInWeek - firstDayOfWeek;
+        // Use modulo to get the correct days also if Monday and not Sunday is the first day of the week.
+        int daysToSubtract = (dayInWeek - firstDayOfWeek + 7) % 7;
         return dateInWeek.AddDays(-daysToSubtract).Date;
     }
     
