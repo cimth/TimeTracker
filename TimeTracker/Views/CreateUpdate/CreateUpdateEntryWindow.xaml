@@ -200,7 +200,7 @@
                  VerticalContentAlignment="Center"
                  Padding="3"
                  IsEnabled="False"
-                 Text="{Binding TotalTime, StringFormat=hh\\:mm, Mode=OneWay}">
+                 Text="{Binding TotalTime, Mode=OneWay}">  <!-- TotalTime is already a correct formatted string here! -->
             <!-- 
                 Use Interaction.Triggers to bind events to commands.
                 With the elements XML properties, only Code-Behind methods can be called.

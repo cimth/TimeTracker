@@ -253,13 +253,14 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         
         if (allTimeInputIsValid)
         {
-            TimeSpan start = this.GetTimeFromRawInput(this.InputStartTime);
-            TimeSpan end = this.GetTimeFromRawInput(this.InputEndTime);
+            // Use the whole DateTime objects for start and end to compute the total time across different start
+            // and end date.
+            DateTime start = this.GetConvertedStartDateTimeFromInput();
+            DateTime end = this.GetConvertedEndDateTimeFromInput();
             TimeSpan pause = this.GetTimeFromRawInput(this.InputPauseTime);
 
             TimeSpan total = end.Subtract(start).Subtract(pause);
-            
-            newTotal = total.ToString("hh\\:mm");
+            newTotal = TimeSpanStringFormatter.FormatTotalHourAndMinutes(total);
         }
 
         this.TotalTime = newTotal;
@@ -310,17 +311,14 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
 
     private Entry GetEntryFromInput()
     {
-        // Convert the raw time input to actual time objects.
-        TimeSpan startTime = GetTimeFromRawInput(this.InputStartTime);
-        TimeSpan endTime = GetTimeFromRawInput(this.InputEndTime);
-        TimeSpan pauseTime = GetTimeFromRawInput(this.InputPauseTime);
-        
-        // Create the DateTime objects for the entry.
-        DateTime start = this.InputStartDate + startTime;
-        DateTime end = this.InputEndDate + endTime;
-        
+        // Convert the raw time input to actual DateTime and TimeSpan objects.
+        DateTime start = this.GetConvertedStartDateTimeFromInput();
+        DateTime end = this.GetConvertedEndDateTimeFromInput();
+
+        TimeSpan pause = this.GetTimeFromRawInput(this.InputPauseTime);
+
         // Create and return the entry.
-        return new Entry(this.InputCategory, start, end, pauseTime, this.InputNotes);
+        return new Entry(this.InputCategory, start, end, pause, this.InputNotes);
     }
     
     // ==============
@@ -366,16 +364,21 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
 
     private bool IsEndTimeAfterStart()
     {
-        TimeSpan start = this.GetTimeFromRawInput(this.InputStartTime);
-        TimeSpan end = this.GetTimeFromRawInput(this.InputEndTime);
+        // Use the whole DateTime objects for start and end to compute the total time across different start
+        // and end date.
+        DateTime start = this.GetConvertedStartDateTimeFromInput();
+        DateTime end = this.GetConvertedEndDateTimeFromInput();
         
         return start.CompareTo(end) < 0;
     }
     
     private bool IsPauseTimeLessThanDifferenceBetweenStartAndEnd()
     {
-        TimeSpan start = this.GetTimeFromRawInput(this.InputStartTime);
-        TimeSpan end = this.GetTimeFromRawInput(this.InputEndTime);
+        // Use the whole DateTime objects for start and end to compute the total time across different start
+        // and end date.
+        DateTime start = this.GetConvertedStartDateTimeFromInput();
+        DateTime end = this.GetConvertedEndDateTimeFromInput();
+        
         TimeSpan pause = this.GetTimeFromRawInput(this.InputPauseTime);
         
         return end.Subtract(start) > pause;
@@ -389,5 +392,15 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         int minutes = int.Parse(split[1]);
         
         return new TimeSpan(hours, minutes, 0);
+    }
+
+    private DateTime GetConvertedStartDateTimeFromInput()
+    {
+        return this.InputStartDate.Date + this.GetTimeFromRawInput(this.InputStartTime);
+    }
+    
+    private DateTime GetConvertedEndDateTimeFromInput()
+    {
+        return this.InputEndDate.Date + this.GetTimeFromRawInput(this.InputEndTime);
     }
 }
