@@ -32,6 +32,8 @@ namespace TimeTracker
             // Create the main window first to avoid closing the application after the 'Select database file' dialog
             // is closed.
             this._mainWindow = new MainWindow();
+            App.Current.MainWindow = this._mainWindow;
+            App.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             // Select the database to open.
             // This is mandatory to continue with starting the app. If no valid database file is selected upon
