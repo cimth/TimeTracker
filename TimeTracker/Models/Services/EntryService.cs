@@ -52,27 +52,13 @@ public class EntryService
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, this._dbContext.Entries.ToList());
     }
 
-    public void ReadAllByCategory(Category category)
-    {
-        List<Entry> filtered = this._dbContext.Entries
-                                              .Where(entry => entry.Category.Equals(category))
-                                              .ToList();
-        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
-    }
-    
-    public void ReadAllByCategories(List<Category> categories)
+    public void ReadWithFilters(List<Category> categories, string notes)
     {
         List<Entry> filtered = this._dbContext.Entries
                                               .Where(entry => categories.Contains(entry.Category))
+                                              .Where(entry => entry.Notes.ToLower().Contains(notes.ToLower()))
                                               .ToList();
-        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
-    }
-    
-    public void ReadAllByNotes(String notes)
-    {
-        List<Entry> filtered = this._dbContext.Entries
-            .Where(entry => entry.Notes.ToLower().Contains(notes.ToLower()))
-            .ToList();
+        
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
     }
     

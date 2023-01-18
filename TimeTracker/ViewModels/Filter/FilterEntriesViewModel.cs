@@ -81,8 +81,7 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
 
     private void ApplyFilters()
     {
-        this.FilterByCategories();
-        this.FilterByNotes();
+        this._entryService.ReadWithFilters(this.GetSelectedCategories(), this.InputNotes);
     }
 
     private void SelectAllCategories()
@@ -103,25 +102,20 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     }
     
     // ==============
-    // The actual filter methods
+    // Helping methods for filtering
     // ==============
     
-    private void FilterByCategories()
+    private List<Category> GetSelectedCategories()
     {
         List<Category> selected = new List<Category>();
         foreach (ObservableKeyValuePair<Category, bool> categorySelection in this.CategorySelections)
         {
+            // A category is selected when the value of the (key, value) pairs is true.
             if (categorySelection.Value)
             {
                 selected.Add(categorySelection.Key);
             }
         }
-        
-        this._entryService.ReadAllByCategories(selected);
-    }
-
-    private void FilterByNotes()
-    {
-        this._entryService.ReadAllByNotes(this.InputNotes);
+        return selected;
     }
 }
