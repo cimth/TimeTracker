@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using TimeTracker.Models.Database;
 using TimeTracker.Models.Entities;
+using TimeTracker.Utils;
 
 namespace TimeTracker.Models.Services;
 
@@ -11,8 +12,8 @@ public class CategoryService
     // ==============
     // Properties
     // ==============
-    
-    public ObservableCollection<Category> Categories { get; }
+
+    public ObservableCollection<Category> Categories { get; } = new();
 
     // ==============
     // Fields
@@ -27,7 +28,7 @@ public class CategoryService
     public CategoryService(DatabaseContext dbContext)
     {
         this._dbContext = dbContext;
-        this.Categories = new ObservableCollection<Category>(this.ReadAll());
+        this.ReadAll();
     }
     
     // ==============
@@ -46,9 +47,9 @@ public class CategoryService
     // Read
     // ==============
 
-    private List<Category> ReadAll()
+    private void ReadAll()
     {
-        return this._dbContext.Categories.ToList();
+        ObservableCollectionUtil.ChangeObservableCollection(this.Categories, this._dbContext.Categories.ToList());
     }
     
     // ==============
