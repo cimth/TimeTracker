@@ -28,7 +28,6 @@ public class CategoryService
     public CategoryService(DatabaseContext dbContext)
     {
         this._dbContext = dbContext;
-        this.ReadAll();
     }
     
     // ==============
@@ -47,7 +46,7 @@ public class CategoryService
     // Read
     // ==============
 
-    private void ReadAll()
+    public void ReadAll()
     {
         ObservableCollectionUtil.ChangeObservableCollection(this.Categories, this._dbContext.Categories.ToList());
     }

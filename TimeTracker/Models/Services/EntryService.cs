@@ -28,7 +28,6 @@ public class EntryService
     public EntryService(DatabaseContext dbContext)
     {
         this._dbContext = dbContext;
-        this.ReadAll();
     }
     
     // ==============
@@ -47,7 +46,7 @@ public class EntryService
     // Read
     // ==============
 
-    private void ReadAll()
+    public void ReadAll()
     {
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, this._dbContext.Entries.ToList());
     }

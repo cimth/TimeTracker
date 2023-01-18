@@ -38,7 +38,14 @@ public class EntryServiceTest
         /*
          * Initialize the needed dependencies.
          */
+        
         this._entryService = new EntryService(this._dbContext);
+        
+        /*
+         * Synchronize with all data from the database.
+         */
+        
+        this._entryService.ReadAll();
     }
     
     // ==============

@@ -40,8 +40,16 @@ public class CategoryServiceTest
         /*
          * Initialize the needed dependencies.
          */
+        
         this._categoryService = new CategoryService(this._dbContext);
         this._entryService = new EntryService(this._dbContext);
+        
+        /*
+         * Synchronize with all data from the database.
+         */
+        
+        this._categoryService.ReadAll();
+        this._entryService.ReadAll();
     }
     
     // ==============

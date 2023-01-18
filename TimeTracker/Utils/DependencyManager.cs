@@ -70,4 +70,10 @@ public class DependencyManager
         this.ReadCategoriesViewModel = new ReadCategoriesViewModel(this);
         this.ReadEntriesViewModel = new ReadEntriesViewModel(this);
     }
+
+    public void LoadData()
+    {
+        this.EntryService.ReadAll();
+        this.CategoryService.ReadAll();
+    }
 }
