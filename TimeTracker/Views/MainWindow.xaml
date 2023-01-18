@@ -7,6 +7,7 @@
         xmlns:viewModels="clr-namespace:TimeTracker.ViewModels"
         xmlns:createUpdate="clr-namespace:TimeTracker.Views.CreateUpdate"
         xmlns:read="clr-namespace:TimeTracker.Views.Read"
+        xmlns:filter="clr-namespace:TimeTracker.Views.Filter"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="{DynamicResource Str_WindowTitle}" 
@@ -93,7 +94,7 @@
                 </Border>
             
                 <!-- Filters for the main view -->
-                <Border Visibility="Collapsed">
+                <Border Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                     </Border.Effect>
@@ -116,7 +117,7 @@
                         <!-- Content -->
                         <StackPanel Margin="10" 
                                     Background="White">
-                            
+                            <filter:FilterEntriesView DataContext="{Binding FilterEntriesViewModel}" />
                         </StackPanel>
                     </GroupBox>
                 </Border>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -49,6 +50,22 @@ public class EntryService
     public void ReadAll()
     {
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, this._dbContext.Entries.ToList());
+    }
+
+    public void ReadAllByCategory(Category category)
+    {
+        List<Entry> filtered = this._dbContext.Entries
+                                              .Where(entry => entry.Category.Equals(category))
+                                              .ToList();
+        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
+    }
+    
+    public void ReadAllByCategories(List<Category> categories)
+    {
+        List<Entry> filtered = this._dbContext.Entries
+                                              .Where(entry => categories.Contains(entry.Category))
+                                              .ToList();
+        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
     }
     
     // ==============

@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Input;
 using TimeTracker.Utils;
 using TimeTracker.ViewModels.Command;
+using TimeTracker.ViewModels.Filter;
 using TimeTracker.ViewModels.Read;
 
 namespace TimeTracker.ViewModels;
@@ -33,6 +34,8 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
 
     public ReadCategoriesViewModel ReadCategoriesViewModel { get; }
     public ReadEntriesViewModel ReadEntriesViewModel { get; }
+    
+    public FilterEntriesViewModel FilterEntriesViewModel { get; }
     
     // ==============
     // Commands
@@ -66,6 +69,7 @@ public class MainWindowViewModel : NotifyPropertyChangedImpl
         // Initialize the View Models for the main view.
         this.ReadCategoriesViewModel = dependencyManager.ReadCategoriesViewModel;
         this.ReadEntriesViewModel = dependencyManager.ReadEntriesViewModel;
+        this.FilterEntriesViewModel = dependencyManager.FilterEntriesViewModel;
         
         // Initialize the main view that is shown on startup.
         this.IsCategoriesViewShown = false;

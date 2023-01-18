@@ -21,6 +21,8 @@
     <system:String x:Key="Str_Save">Save</system:String>
     <system:String x:Key="Str_Actions">Actions</system:String>
     <system:String x:Key="Str_Open">Open</system:String>
+    <system:String x:Key="Str_SelectAll">Select all</system:String>
+    <system:String x:Key="Str_UnselectAll">Unselect All</system:String>
     
     <system:String x:Key="Str_Category">Category</system:String>
     <system:String x:Key="Str_Categories">Categories</system:String>
@@ -34,6 +36,7 @@
     
     <system:String x:Key="Str_NewCategory">New Category</system:String>
     <system:String x:Key="Str_SelectCategory">-- Select Category --</system:String>
+    <system:String x:Key="Str_FilterByCategory">-- Filter by Category --</system:String>
     
     <system:String x:Key="Str_Entries">Entries</system:String>
     

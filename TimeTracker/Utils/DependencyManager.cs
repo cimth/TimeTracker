@@ -2,6 +2,7 @@ using TimeTracker.Dialog;
 using TimeTracker.Models.Database;
 using TimeTracker.Models.Services;
 using TimeTracker.ViewModels.CreateUpdate;
+using TimeTracker.ViewModels.Filter;
 using TimeTracker.ViewModels.Read;
 
 namespace TimeTracker.Utils;
@@ -32,6 +33,8 @@ public class DependencyManager
     public ReadCategoriesViewModel ReadCategoriesViewModel { get; private set; } = null!;
 
     public ReadEntriesViewModel ReadEntriesViewModel { get; private set; } = null!;
+
+    public FilterEntriesViewModel FilterEntriesViewModel { get; private set; } = null!;
     
     // ==============
     // Fields
@@ -69,6 +72,7 @@ public class DependencyManager
         this.CreateUpdateEntryViewModel = new CreateUpdateEntryViewModel(this);
         this.ReadCategoriesViewModel = new ReadCategoriesViewModel(this);
         this.ReadEntriesViewModel = new ReadEntriesViewModel(this);
+        this.FilterEntriesViewModel = new FilterEntriesViewModel(this);
     }
 
     public void LoadData()
