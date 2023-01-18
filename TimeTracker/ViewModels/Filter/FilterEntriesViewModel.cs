@@ -41,7 +41,7 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     private readonly CategoryService _categoryService;
     private readonly EntryService _entryService;
     
-    private string _inputNotes;
+    private string _inputNotes = "";
 
     // ==============
     // Initialization
