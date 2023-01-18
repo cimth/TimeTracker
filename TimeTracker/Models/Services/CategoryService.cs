@@ -83,7 +83,7 @@ public class CategoryService
     public bool IsCategoryUsed(Category category)
     {
         Entry? entryWithCategory = this._dbContext.Entries
-                                                  .FirstOrDefault(entry => entry.Category != null && entry.Category.Equals(category));
+                                                  .FirstOrDefault(entry => entry.Category.Equals(category));
 
         return entryWithCategory != null;
     }

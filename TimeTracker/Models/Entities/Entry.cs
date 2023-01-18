@@ -24,7 +24,7 @@ public class Entry : NotifyPropertyChangedImpl
         set => SetField(ref this._id, value);
     }
 
-    public Category? Category
+    public Category Category
     {
         get => this._category; 
         set => SetField(ref this._category, value);
@@ -80,7 +80,7 @@ public class Entry : NotifyPropertyChangedImpl
 
     private int? _id;
     
-    private Category? _category;
+    private Category _category = null!;     // Not null after constructors.
     
     private DateTime _start;
     private DateTime _end;
@@ -91,7 +91,7 @@ public class Entry : NotifyPropertyChangedImpl
     // Initialization
     // ==============
 
-    public Entry(Category? category, DateTime start, DateTime end, TimeSpan pause, string notes) : this(start, end, pause, notes)
+    public Entry(Category category, DateTime start, DateTime end, TimeSpan pause, string notes) : this(start, end, pause, notes)
     {
         this.Category = category;
     }
