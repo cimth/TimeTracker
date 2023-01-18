@@ -18,7 +18,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <!-- Summarize each group in an Expander -->
-                    <Expander IsExpanded="True" 
+                    <Expander IsExpanded="{Binding Name, Mode=OneWay, Converter={StaticResource WeekGroupToIsExpandedConverter}}" 
                               Background="{StaticResource GroupHeaderBrush}"
                               HorizontalAlignment="Stretch">
                         <!-- Header -->

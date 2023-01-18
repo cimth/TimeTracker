@@ -1,11 +1,27 @@
 using System;
 using System.Globalization;
+using System.Runtime.Serialization;
 using TimeTracker.Models.Entities;
 
 namespace TimeTracker.Utils;
 
 public static class WeekGroupUtil
 {
+    public static bool IsCurrentWeek(string weekGroupName)
+    {
+        // Get the first day of the given week group.
+        string rawWeekGroupStart = weekGroupName.Substring(0, DateTimeFormatInfo.CurrentInfo.ShortDatePattern.Length);
+        DateTime weekGroupStart = DateTime.Parse(rawWeekGroupStart);
+
+        // Get the first day of the current week.
+        DateTime today = DateTime.Today;
+        DayOfWeek firstDayOfCurrentWeek = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+        DateTime currentWeekStart = WeekGroupUtil.GetStartOfWeek(today, firstDayOfCurrentWeek, today.DayOfWeek);
+        
+        // Return true if the week group is the current week.
+        return weekGroupStart.Equals(currentWeekStart);
+    }
+    
     public static string GetWeekGroupName(Entry entry)
     {
         // Get the date for whose group should be computed.
