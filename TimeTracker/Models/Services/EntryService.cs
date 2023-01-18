@@ -68,6 +68,14 @@ public class EntryService
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
     }
     
+    public void ReadAllByNotes(String notes)
+    {
+        List<Entry> filtered = this._dbContext.Entries
+            .Where(entry => entry.Notes.ToLower().Contains(notes.ToLower()))
+            .ToList();
+        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
+    }
+    
     // ==============
     // Update
     // ==============

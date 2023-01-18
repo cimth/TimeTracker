@@ -16,6 +16,12 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     // ==============
 
     public ObservableCollection<ObservableKeyValuePair<Category, bool>> CategorySelections { get; } = new();
+    
+    public string InputNotes
+    {
+        get => this._inputNotes;
+        set => SetField(ref this._inputNotes, value);
+    }
 
     // ==============
     // Commands
@@ -25,6 +31,8 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     
     public ICommand SelectAllCategoriesCommand { get; }
     public ICommand UnselectAllCategoriesCommand { get; }
+    
+    public ICommand ClearNotesCommand { get; }
 
     // ==============
     // Fields
@@ -32,6 +40,8 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
 
     private readonly CategoryService _categoryService;
     private readonly EntryService _entryService;
+    
+    private string _inputNotes;
 
     // ==============
     // Initialization
@@ -45,6 +55,7 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
         this.ApplyFiltersCommand = new DelegateCommand(this.ApplyFilters);
         this.SelectAllCategoriesCommand = new DelegateCommand(this.SelectAllCategories);
         this.UnselectAllCategoriesCommand = new DelegateCommand(this.UnselectAllCategories);
+        this.ClearNotesCommand = new DelegateCommand(this.ClearNotes);
 
         this._categoryService.Categories.CollectionChanged += Categories_CollectionChanged;
         this.ReinitializeCategorySelections(true);
@@ -71,6 +82,7 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     private void ApplyFilters()
     {
         this.FilterByCategories();
+        this.FilterByNotes();
     }
 
     private void SelectAllCategories()
@@ -83,6 +95,11 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     {
         this.ReinitializeCategorySelections(false);
         this.ApplyFilters();
+    }
+
+    private void ClearNotes()
+    {
+        this.InputNotes = "";
     }
     
     // ==============
@@ -101,5 +118,10 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
         }
         
         this._entryService.ReadAllByCategories(selected);
+    }
+
+    private void FilterByNotes()
+    {
+        this._entryService.ReadAllByNotes(this.InputNotes);
     }
 }

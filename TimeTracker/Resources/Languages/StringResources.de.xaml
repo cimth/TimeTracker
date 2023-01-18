@@ -23,6 +23,7 @@
     <system:String x:Key="Str_Open">Öffnen</system:String>
     <system:String x:Key="Str_SelectAll">Alle auswählen</system:String>
     <system:String x:Key="Str_UnselectAll">Auswahl aufheben</system:String>
+    <system:String x:Key="Str_Clear">Eingabe entfernen</system:String>
     
     <system:String x:Key="Str_Category">Kategorie</system:String>
     <system:String x:Key="Str_Categories">Kategorien</system:String>

@@ -66,6 +66,40 @@
                         Style="{StaticResource Button}"
                         Command="{Binding UnselectAllCategoriesCommand}" />
             </StackPanel>
+        </GroupBox>
+        
+        <!-- Filter by Category -->
+        <GroupBox>
+            <GroupBox.Header>
+                <TextBlock Text="{DynamicResource Str_EntryNotes}"
+                           Padding="5"
+                           FontWeight="Bold" />  
+            </GroupBox.Header>
+            
+            <StackPanel>
+                <TextBox VerticalContentAlignment="Center"
+                         Padding="3"
+                         Margin="5"
+                         Text="{Binding InputNotes, UpdateSourceTrigger=PropertyChanged}"
+                         GotFocus="TextBox_OnGotFocus">
+                    <!-- 
+                        Use Interaction.Triggers to bind events to commands.
+                        With the elements XML properties, only Code-Behind methods can be called.
+                    -->
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="TextChanged">
+                            <b:InvokeCommandAction Command="{Binding ApplyFiltersCommand}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </TextBox>
+                    
+                <!-- Clear -->
+                <Button Content="{DynamicResource Str_Clear}"
+                        Padding="5"
+                        Margin="5"
+                        Style="{StaticResource Button}"
+                        Command="{Binding ClearNotesCommand}" />
+            </StackPanel>
         </GroupBox> 
     </StackPanel>
 </UserControl>
