@@ -318,7 +318,7 @@ public class CreateUpdateEntryViewModel : NotifyPropertyChangedImpl
         TimeSpan pause = this.GetTimeFromRawInput(this.InputPauseTime);
 
         // Create and return the entry.
-        return new Entry(this.InputCategory, start, end, pause, this.InputNotes);
+        return new Entry(this.InputCategory!, start, end, pause, this.InputNotes);
     }
     
     // ==============
