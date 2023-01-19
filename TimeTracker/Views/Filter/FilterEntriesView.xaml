@@ -69,7 +69,7 @@
         </GroupBox>
         
         <!-- Filter by Notes -->
-        <GroupBox>
+        <GroupBox Margin="0,15,0,0">
             <GroupBox.Header>
                 <TextBlock Text="{DynamicResource Str_EntryNotes}"
                            Padding="5"
@@ -103,7 +103,7 @@
         </GroupBox> 
         
         <!-- Filter by Date -->
-        <GroupBox>
+        <GroupBox Margin="0,15,0,0">
             <GroupBox.Header>
                 <TextBlock Text="{DynamicResource Str_Date}"
                            Padding="5"
