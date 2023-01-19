@@ -101,5 +101,74 @@
                         Command="{Binding ClearNotesCommand}" />
             </StackPanel>
         </GroupBox> 
+        
+        <!-- Filter by Date -->
+        <GroupBox>
+            <GroupBox.Header>
+                <TextBlock Text="{DynamicResource Str_Date}"
+                           Padding="5"
+                           FontWeight="Bold" />  
+            </GroupBox.Header>
+            
+            <StackPanel>
+                <!-- Min date -->
+                <StackPanel>
+                    <!-- Header -->
+                    <Label Content="{DynamicResource Str_From}"
+                           Margin="5,0" />
+                    
+                    <!-- Select date -->
+                    <DatePicker Margin="10,5"
+                                Focusable="False"
+                                SelectedDate="{Binding InputDateMin}">
+                        <!-- 
+                            Use Interaction.Triggers to bind the events to commands.
+                            With the elements XML properties, only Code-Behind methods can be called.
+                        -->
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectedDateChanged">
+                                <b:InvokeCommandAction Command="{Binding ApplyFiltersCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </DatePicker>
+                        
+                    <!-- Clear -->
+                    <Button Content="{DynamicResource Str_Clear}"
+                            Padding="5"
+                            Margin="5"
+                            Style="{StaticResource Button}"
+                            Command="{Binding ClearInputDateMinCommand}" />
+                </StackPanel>
+                
+                <!-- Max date -->
+                <StackPanel>
+                    <!-- Header -->
+                    <Label Content="{DynamicResource Str_To}"
+                           Margin="5,0" />
+                    
+                    <!-- Select date -->
+                    <DatePicker Margin="10,5"
+                                Focusable="False"
+                                SelectedDate="{Binding InputDateMax}">
+                        <!-- 
+                            Use Interaction.Triggers to bind the events to commands.
+                            With the elements XML properties, only Code-Behind methods can be called.
+                        -->
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectedDateChanged">
+                                <b:InvokeCommandAction Command="{Binding ApplyFiltersCommand}"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </DatePicker>
+                        
+                    <!-- Clear -->
+                    <Button Content="{DynamicResource Str_Clear}"
+                            Padding="5"
+                            Margin="5"
+                            Style="{StaticResource Button}"
+                            Command="{Binding ClearInputDateMaxCommand}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox> 
     </StackPanel>
 </UserControl>

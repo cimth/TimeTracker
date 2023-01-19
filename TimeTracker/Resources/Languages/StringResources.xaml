@@ -24,6 +24,8 @@
     <system:String x:Key="Str_SelectAll">Select all</system:String>
     <system:String x:Key="Str_UnselectAll">Unselect All</system:String>
     <system:String x:Key="Str_Clear">Clear Input</system:String>
+    <system:String x:Key="Str_From">From</system:String>
+    <system:String x:Key="Str_To">To</system:String>
     
     <system:String x:Key="Str_Category">Category</system:String>
     <system:String x:Key="Str_Categories">Categories</system:String>
@@ -58,6 +60,8 @@
     
     <system:String x:Key="Str_Week">Week</system:String>
     <system:String x:Key="Str_DayName">Day</system:String>
+    
+    <system:String x:Key="Str_Date">Date</system:String>
     
     <system:String x:Key="Str_LastOpenedDatabaseFiles">Last opened Files</system:String>
     <system:String x:Key="Str_RemoveFromList">Remove from List</system:String>

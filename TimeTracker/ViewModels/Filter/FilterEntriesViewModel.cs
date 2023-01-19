@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -23,6 +24,18 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
         set => SetField(ref this._inputNotes, value);
     }
 
+    public DateTime? InputDateMin
+    {
+        get => this._inputDateMin;
+        set => SetField(ref this._inputDateMin, value);
+    }
+    
+    public DateTime? InputDateMax
+    {
+        get => this._inputDateMax;
+        set => SetField(ref this._inputDateMax, value);
+    }
+
     // ==============
     // Commands
     // ==============
@@ -33,6 +46,8 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     public ICommand UnselectAllCategoriesCommand { get; }
     
     public ICommand ClearNotesCommand { get; }
+    public ICommand ClearInputDateMinCommand { get; }
+    public ICommand ClearInputDateMaxCommand { get; }
 
     // ==============
     // Fields
@@ -42,6 +57,8 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     private readonly EntryService _entryService;
     
     private string _inputNotes = "";
+    private DateTime? _inputDateMin;
+    private DateTime? _inputDateMax;
 
     // ==============
     // Initialization
@@ -56,6 +73,8 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
         this.SelectAllCategoriesCommand = new DelegateCommand(this.SelectAllCategories);
         this.UnselectAllCategoriesCommand = new DelegateCommand(this.UnselectAllCategories);
         this.ClearNotesCommand = new DelegateCommand(this.ClearNotes);
+        this.ClearInputDateMinCommand = new DelegateCommand(this.ClearInputDateMin);
+        this.ClearInputDateMaxCommand = new DelegateCommand(this.ClearInputDateMax);
 
         this._categoryService.Categories.CollectionChanged += Categories_CollectionChanged;
         this.ReinitializeCategorySelections(true);
@@ -81,7 +100,7 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
 
     private void ApplyFilters()
     {
-        this._entryService.ReadWithFilters(this.GetSelectedCategories(), this.InputNotes);
+        this._entryService.ReadWithFilters(this.GetSelectedCategories(), this.InputNotes, this.InputDateMin, this.InputDateMax);
     }
 
     private void SelectAllCategories()
@@ -99,6 +118,16 @@ public class FilterEntriesViewModel : NotifyPropertyChangedImpl
     private void ClearNotes()
     {
         this.InputNotes = "";
+    }
+    
+    private void ClearInputDateMin()
+    {
+        this.InputDateMin = null;
+    }
+    
+    private void ClearInputDateMax()
+    {
+        this.InputDateMax = null;
     }
     
     // ==============

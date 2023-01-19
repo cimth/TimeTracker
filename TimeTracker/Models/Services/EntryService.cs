@@ -52,12 +52,13 @@ public class EntryService
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, this._dbContext.Entries.ToList());
     }
 
-    public void ReadWithFilters(List<Category> categories, string notes)
+    public void ReadWithFilters(List<Category> categories, string notes, DateTime? minDate, DateTime? maxDate)
     {
         IQueryable<Entry> filtered = this._dbContext.Entries;
             
         filtered = this.FilterByCategories(filtered, categories);
         filtered = this.FilterByNotes(filtered, notes);
+        filtered = this.FilterByDates(filtered, minDate, maxDate);
 
         ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered.ToList());
     }
@@ -95,5 +96,29 @@ public class EntryService
     private IQueryable<Entry> FilterByNotes(IQueryable<Entry> entries, string notes)
     {
         return entries.Where(entry => entry.Notes.ToLower().Contains(notes.ToLower()));
+    }
+    
+    private IQueryable<Entry> FilterByDates(IQueryable<Entry> entries, DateTime? minDate, DateTime? maxDate)
+    {
+        // The min and max dates are given, so all entries between them are returned.
+        if (minDate.HasValue && maxDate.HasValue)
+        {
+            return entries.Where(entry => entry.Start >= minDate && entry.End <= maxDate);
+        }
+
+        // Only the min date is given, so all entries after this date are returned.
+        if (minDate.HasValue)
+        {
+            return entries.Where(entry => entry.Start >= minDate);
+        }
+
+        // Only the max date is given, so all entries before this date are returned.
+        if (maxDate.HasValue)
+        {
+            return entries.Where(entry => entry.End <= maxDate);
+        }
+
+        // No date is given, so all entries are returned..
+        return entries;
     }
 }
