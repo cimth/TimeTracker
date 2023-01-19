@@ -68,7 +68,7 @@
             </StackPanel>
         </GroupBox>
         
-        <!-- Filter by Category -->
+        <!-- Filter by Notes -->
         <GroupBox>
             <GroupBox.Header>
                 <TextBlock Text="{DynamicResource Str_EntryNotes}"
@@ -79,7 +79,7 @@
             <StackPanel>
                 <TextBox VerticalContentAlignment="Center"
                          Padding="3"
-                         Margin="5"
+                         Margin="10,5"
                          Text="{Binding InputNotes, UpdateSourceTrigger=PropertyChanged}"
                          GotFocus="TextBox_OnGotFocus">
                     <!-- 
