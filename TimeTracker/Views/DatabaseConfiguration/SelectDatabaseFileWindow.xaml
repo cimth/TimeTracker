@@ -1,0 +1,104 @@
+<Window x:Class="TimeTracker.Views.DatabaseConfiguration.SelectDatabaseFileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:templates="clr-namespace:TimeTracker.Views.Templates"
+        mc:Ignorable="d"
+        Title="{DynamicResource Str_SelectDatabaseFile}"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        Width="700"
+        MaxHeight="500" MaxWidth="700">
+    <Grid Margin="20">
+        <!-- Layout -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- Create / Open file -->
+        <UniformGrid Grid.Row="0" 
+                     Rows="1">
+            <!-- Create -->
+            <Button Content="{DynamicResource Str_CreateDatabaseFile}"
+                    Margin="0,0,5,0"
+                    Command="{Binding CreateFileCommand}"
+                    Style="{StaticResource Button}" />
+            
+            <!-- Open -->
+            <Button Content="{DynamicResource Str_SelectExistingDatabaseFile}"
+                    Margin="5,0,0,0"
+                    Command="{Binding OpenFileFromFilesystemCommand}"
+                    Style="{StaticResource Button}" />
+        </UniformGrid>
+        
+        <!-- Separator -->
+        <Separator Grid.Row="1" 
+                   Margin="10,15,10,5" />
+        
+        <!-- Last opened database files -->
+        <Label Grid.Row="2" Content="{DynamicResource Str_LastOpenedDatabaseFiles}"
+               FontWeight="Bold" />
+        
+        <Border Grid.Row="3" 
+                Visibility="{Binding ShowGrid, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+            </Border.Effect>
+            
+            <templates:BasicDataGrid ItemsSource="{Binding LastOpenedDatabaseFiles}"
+                                     SelectedItem="{Binding SelectedDatabaseFile}"
+                                     GridLinesVisibility="None"
+                                     HeadersVisibility="None">
+                <DataGrid.Columns>
+                    <!-- File name and path -->
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="10">
+                                    <!-- File name -->
+                                    <TextBlock Text="{Binding Path=., Converter={StaticResource FilePathToFileNameConverter}}"
+                                               FontWeight="Bold" />
+                                
+                                    <!-- File path -->
+                                    <TextBlock Text="{Binding}"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                
+                    <!-- Actions -->
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <UniformGrid Rows="1">
+                                    <!-- Open -->
+                                    <Button Command="{Binding Path=DataContext.OpenSelectedFileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                            Style="{StaticResource ColumnButton}"
+                                            Content="{DynamicResource Str_Open}" />
+                                
+                                    <!-- Remove from list -->
+                                    <Button Command="{Binding Path=DataContext.RemoveSelectedFileFromListCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                            Style="{StaticResource ColumnButton}"
+                                            Content="{DynamicResource Str_RemoveFromList}" />
+                                </UniformGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </templates:BasicDataGrid>
+        </Border>
+        
+        <!-- Note that no items are available -->
+        <TextBlock Grid.Row="3" 
+                   Visibility="{Binding ShowGrid, Converter={StaticResource InvertBooleanToVisibilityConverter}}"
+                   Margin="5"
+                   TextAlignment="Center"
+                   Text="{DynamicResource Str_NoItemsFound}" />
+    </Grid>
+</Window>

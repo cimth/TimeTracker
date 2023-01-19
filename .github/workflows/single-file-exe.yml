@@ -1,0 +1,54 @@
+name: Create a standalone, single-file win10-x64 EXE 
+
+on:
+  # Run when manually triggering in the GitHub GUI.
+  workflow_dispatch:
+    
+env:
+  DOTNET_VERSION: '7.0.x'
+  RETENTION_DAYS: 3
+  MAIN_SOLUTION_NAME: 'TimeTracker'
+  APP_NAME: 'TimeTracker'
+
+jobs:
+  create-exe:
+
+    runs-on: windows-latest
+
+    steps:
+    
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Create standalone, self-contained .exe
+      run: |
+        dotnet publish ${{ env.MAIN_SOLUTION_NAME }} `
+          -c=Release `
+          -r=win-x64 `
+          -o ./publish `
+          --self-contained=true `
+          -p:PublishSingleFile=true `
+          -p:IncludeNativeLibrariesForSelfExtract=true `
+          -p:DebugType=None `
+          -p:DebugSymbols=false
+      
+    - uses: actions/upload-artifact@v3
+      name: Upload ZIP file with .exe
+      with:
+        name: ${{ env.APP_NAME }}
+        path: ./publish/*.exe
+        if-no-files-found: error
+        retention-days: ${{ env.RETENTION_DAYS }}

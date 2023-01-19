@@ -1,0 +1,72 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Net.Primitives">
+    <system:String x:Key="Str_WindowTitle">TimeTracker</system:String>
+    <system:String x:Key="Str_ConfirmDialog">Confirm</system:String>
+    
+    <system:String x:Key="Str_Navigation">Navigation</system:String>
+    <system:String x:Key="Str_Filters">Filters</system:String>
+    
+    <system:String x:Key="Str_Error">Error!</system:String>
+    <system:String x:Key="Str_Success">Success!</system:String>
+    
+    <system:String x:Key="Str_NoItemsFound">No items found</system:String>
+    
+    <system:String x:Key="Str_Ok">OK</system:String>
+    <system:String x:Key="Str_Yes">Yes</system:String>
+    <system:String x:Key="Str_No">No</system:String>
+    <system:String x:Key="Str_Create">Create</system:String>
+    <system:String x:Key="Str_Update">Update</system:String>
+    <system:String x:Key="Str_Delete">Delete</system:String>
+    <system:String x:Key="Str_Save">Save</system:String>
+    <system:String x:Key="Str_Actions">Actions</system:String>
+    <system:String x:Key="Str_Open">Open</system:String>
+    <system:String x:Key="Str_SelectAll">Select all</system:String>
+    <system:String x:Key="Str_UnselectAll">Unselect All</system:String>
+    <system:String x:Key="Str_Clear">Clear Input</system:String>
+    <system:String x:Key="Str_From">From</system:String>
+    <system:String x:Key="Str_To">To</system:String>
+    
+    <system:String x:Key="Str_Category">Category</system:String>
+    <system:String x:Key="Str_Categories">Categories</system:String>
+    <system:String x:Key="Str_CategoryName">Name</system:String>
+    
+    <system:String x:Key="Str_CreateCategory">Create Category</system:String>
+    <system:String x:Key="Str_UpdateCategory">Update Category</system:String>
+    <system:String x:Key="Str_ConfirmDeleteCategory">Do you really want to remove the Category?</system:String>
+    <system:String x:Key="Str_CategoryDeletedSuccess">The Category was successfully deleted.</system:String>
+    <system:String x:Key="Str_CategoryNotDeletedBecauseInUse">The Category cannot be deleted because it is used in at least one Entry.</system:String>
+    
+    <system:String x:Key="Str_NewCategory">New Category</system:String>
+    <system:String x:Key="Str_SelectCategory">-- Select Category --</system:String>
+    <system:String x:Key="Str_FilterByCategory">-- Filter by Category --</system:String>
+    
+    <system:String x:Key="Str_Entries">Entries</system:String>
+    
+    <system:String x:Key="Str_EntryStart">Start</system:String>
+    <system:String x:Key="Str_EntryStartDate">Start Date</system:String>
+    <system:String x:Key="Str_EntryStartTime">Start Time</system:String>
+    <system:String x:Key="Str_EntryEnd">End</system:String>
+    <system:String x:Key="Str_EntryEndDate">End Date</system:String>
+    <system:String x:Key="Str_EntryEndTime">End Time</system:String>
+    <system:String x:Key="Str_EntryPause">Pause</system:String>
+    <system:String x:Key="Str_EntryTotalTime">Total Time</system:String>
+    <system:String x:Key="Str_EntryNotes">Notes</system:String>
+    
+    <system:String x:Key="Str_CreateEntry">Create Entry</system:String>
+    <system:String x:Key="Str_UpdateEntry">Update Entry</system:String>
+    <system:String x:Key="Str_ConfirmDeleteEntry">Do you really want to remove the Entry?</system:String>
+    <system:String x:Key="Str_EntryDeletedSuccess">The Entry was successfully deleted.</system:String>
+    
+    <system:String x:Key="Str_Week">Week</system:String>
+    <system:String x:Key="Str_DayName">Day</system:String>
+    
+    <system:String x:Key="Str_Date">Date</system:String>
+    
+    <system:String x:Key="Str_LastOpenedDatabaseFiles">Last opened Files</system:String>
+    <system:String x:Key="Str_RemoveFromList">Remove from List</system:String>
+    <system:String x:Key="Str_CreateDatabaseFile">Create a new File</system:String>
+    <system:String x:Key="Str_SelectDatabaseFile">Select File</system:String>
+    <system:String x:Key="Str_SelectExistingDatabaseFile">Select a File from the File System</system:String>
+    <system:String x:Key="Str_UsedDatabaseFile">Current File</system:String>
+</ResourceDictionary>

@@ -1,0 +1,24 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Colors -->
+    <Color x:Key="AppLight">SeaShell</Color>
+    <Color x:Key="AppSelectedLight">LavenderBlush</Color>
+    <Color x:Key="AppSelectedMedium">Pink</Color>
+    <Color x:Key="AppHighlighted">MistyRose</Color>
+    
+    <Color x:Key="AppLeftBar">LavenderBlush</Color>
+    <Color x:Key="AppTopBar">LavenderBlush</Color>
+    
+    <Color x:Key="GroupHeader">LightPink</Color>
+    
+    <!-- Brushes (You have to use Brushes when setting a Background color or similar) -->
+    <SolidColorBrush x:Key="AppLightBrush" Color="{StaticResource AppLight}" />
+    <SolidColorBrush x:Key="AppSelectedLightBrush" Color="{StaticResource AppSelectedLight}" />
+    <SolidColorBrush x:Key="AppSelectedMediumBrush" Color="{StaticResource AppSelectedMedium}" />
+    <SolidColorBrush x:Key="AppHighlightedBrush" Color="{StaticResource AppHighlighted}" />
+    
+    <SolidColorBrush x:Key="AppLeftBarBrush" Color="{StaticResource AppLeftBar}" />
+    <SolidColorBrush x:Key="AppTopBarBrush" Color="{StaticResource AppTopBar}" />
+    
+    <SolidColorBrush x:Key="GroupHeaderBrush" Color="{StaticResource GroupHeader}" />
+</ResourceDictionary>

@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:TimeTracker.Converters">
+    <!-- Pre-made converters -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    
+    <!-- Custom converters -->
+    <converters:EntryGroupToTotalTimeSumConverter x:Key="EntryToTotalTimeSumConverter" />
+    <converters:WeekGroupToIsExpandedConverter x:Key="WeekGroupToIsExpandedConverter" />
+    <converters:FilePathToFileNameConverter x:Key="FilePathToFileNameConverter" />
+    <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
+    <converters:TimeSpanToTotalHoursAndMinutesConverter x:Key="TimeSpanToTotalHoursAndMinutesConverter" />
+</ResourceDictionary>

@@ -1,19 +1,57 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <PackageId>TimeTracker</PackageId>
+        <Authors>Cindy Maria Thewes</Authors>
+        <Company>Cindy Maria Thewes</Company>
+        <Product>TimeTracker</Product>
+        <AssemblyTitle>TimeTracker</AssemblyTitle>
+        <ApplicationIcon>Resources\Icons\TimeTracker 256.ico</ApplicationIcon>
     </PropertyGroup>
 
+    <!-- Disable creating .pdb files for Release builds -->
+    <!-- See: https://stackoverflow.com/questions/71476329/dotnet-publish-cli-exclude-pdb -->
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DebugSymbols>False</DebugSymbols>
+        <DebugType>None</DebugType>
+    </PropertyGroup>
+
+
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Views\MainWindow.xaml">
+      <Page Update="Views\Category\CreateUpdateCategoryView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Category\CreateUpdateEntryView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Read\ReadEntriesView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\Styles\DataGrids.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="Resources\Styles\Buttons.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Start\MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
@@ -21,7 +59,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\Converters" />
+      <ApplicationDefinition Include="Start\App.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </ApplicationDefinition>
     </ItemGroup>
 
 </Project>
