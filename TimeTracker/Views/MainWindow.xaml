@@ -8,6 +8,7 @@
         xmlns:createUpdate="clr-namespace:TimeTracker.Views.CreateUpdate"
         xmlns:read="clr-namespace:TimeTracker.Views.Read"
         xmlns:filter="clr-namespace:TimeTracker.Views.Filter"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="{DynamicResource Str_WindowTitle}" 
@@ -23,105 +24,113 @@
                 <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
             </Border.Effect>
             
-            <StackPanel>
-                <!-- File name -->
-                <Border>
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
-                    </Border.Effect>
-                    
-                    <GroupBox Margin="5" 
-                              Background="White">
-                        <!-- Header -->
-                        <GroupBox.Header>
-                            <Border>
-                                <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
-                                </Border.Effect>
-                                <TextBlock Text="{DynamicResource Str_UsedDatabaseFile}"
-                                           Background="{StaticResource GroupHeaderBrush}"
-                                           Padding="5"
-                                           FontWeight="Bold" />  
-                            </Border>
-                        </GroupBox.Header>
-                        
-                        <!-- Content -->
-                        <StackPanel Margin="10">
-                            <TextBlock Text="{Binding DatabaseFile}"
-                                       TextAlignment="Center"
-                                       FontWeight="Bold" />
-                        </StackPanel>
-                    </GroupBox>
-                </Border>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer.Resources>
+                    <!-- Decrease the width of the scroll bar -->
+                    <!-- See: https://stackoverflow.com/questions/1321247/how-to-increase-scrollbar-width-in-wpf-scrollviewer -->
+                    <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">5</system:Double>
+                </ScrollViewer.Resources>
                 
-                <!-- Choose whether Categories or Entries should be shown. -->
-                <Border>
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
-                    </Border.Effect>
-                    
-                    <GroupBox Margin="5" 
-                              Background="White">
-                        <!-- Header -->
-                        <GroupBox.Header>
-                            <Border>
-                                <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
-                                </Border.Effect>
-                                <TextBlock Text="{DynamicResource Str_Navigation}"
-                                           Background="{StaticResource GroupHeaderBrush}"
-                                           Padding="5"
-                                           FontWeight="Bold" />  
-                            </Border>
-                        </GroupBox.Header>
+                <StackPanel>
+                    <!-- File name -->
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                        </Border.Effect>
                         
-                        <!-- Content -->
-                        <StackPanel Margin="10">
-                            <ToggleButton Padding="5"
-                                          Margin="5"
-                                          IsChecked="{Binding IsCategoriesViewShown}"
-                                          Command="{Binding ShowCategoriesViewCommand}" 
-                                          Content="{DynamicResource Str_Categories}"
-                                          Style="{StaticResource ToggleButton}" />
-                            <ToggleButton Padding="5"
-                                          Margin="5"
-                                          IsChecked="{Binding IsEntriesViewShown}"
-                                          Command="{Binding ShowEntriesViewCommand}"
-                                          Content="{DynamicResource Str_Entries}"
-                                          Style="{StaticResource ToggleButton}" />
-                        </StackPanel>
-                    </GroupBox>
-                </Border>
-            
-                <!-- Filters for the main view -->
-                <Border Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
-                    </Border.Effect>
+                        <GroupBox Margin="5" 
+                                  Background="White">
+                            <!-- Header -->
+                            <GroupBox.Header>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                    </Border.Effect>
+                                    <TextBlock Text="{DynamicResource Str_UsedDatabaseFile}"
+                                               Background="{StaticResource GroupHeaderBrush}"
+                                               Padding="5"
+                                               FontWeight="Bold" />  
+                                </Border>
+                            </GroupBox.Header>
+                            
+                            <!-- Content -->
+                            <StackPanel Margin="10">
+                                <TextBlock Text="{Binding DatabaseFile}"
+                                           TextAlignment="Center"
+                                           FontWeight="Bold" />
+                            </StackPanel>
+                        </GroupBox>
+                    </Border>
                     
-                    <GroupBox Margin="5"
-                              Background="White">
-                        <!-- Header -->
-                        <GroupBox.Header>
-                            <Border>
-                                <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
-                                </Border.Effect>
-                                <TextBlock Text="{DynamicResource Str_Filters}"
-                                           Background="{StaticResource GroupHeaderBrush}"
-                                           Padding="5"
-                                           FontWeight="Bold" />  
-                            </Border>
-                        </GroupBox.Header>
+                    <!-- Choose whether Categories or Entries should be shown. -->
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                        </Border.Effect>
                         
-                        <!-- Content -->
-                        <StackPanel Margin="10" 
-                                    Background="White">
-                            <filter:FilterEntriesView DataContext="{Binding FilterEntriesViewModel}" />
-                        </StackPanel>
-                    </GroupBox>
-                </Border>
-            </StackPanel>
+                        <GroupBox Margin="5" 
+                                  Background="White">
+                            <!-- Header -->
+                            <GroupBox.Header>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                    </Border.Effect>
+                                    <TextBlock Text="{DynamicResource Str_Navigation}"
+                                               Background="{StaticResource GroupHeaderBrush}"
+                                               Padding="5"
+                                               FontWeight="Bold" />  
+                                </Border>
+                            </GroupBox.Header>
+                            
+                            <!-- Content -->
+                            <StackPanel Margin="10">
+                                <ToggleButton Padding="5"
+                                              Margin="5"
+                                              IsChecked="{Binding IsCategoriesViewShown}"
+                                              Command="{Binding ShowCategoriesViewCommand}" 
+                                              Content="{DynamicResource Str_Categories}"
+                                              Style="{StaticResource ToggleButton}" />
+                                <ToggleButton Padding="5"
+                                              Margin="5"
+                                              IsChecked="{Binding IsEntriesViewShown}"
+                                              Command="{Binding ShowEntriesViewCommand}"
+                                              Content="{DynamicResource Str_Entries}"
+                                              Style="{StaticResource ToggleButton}" />
+                            </StackPanel>
+                        </GroupBox>
+                    </Border>
+                
+                    <!-- Filters for the main view -->
+                    <Border Visibility="{Binding IsEntriesViewShown, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                        </Border.Effect>
+                        
+                        <GroupBox Margin="5"
+                                  Background="White">
+                            <!-- Header -->
+                            <GroupBox.Header>
+                                <Border>
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                    </Border.Effect>
+                                    <TextBlock Text="{DynamicResource Str_Filters}"
+                                               Background="{StaticResource GroupHeaderBrush}"
+                                               Padding="5"
+                                               FontWeight="Bold" />  
+                                </Border>
+                            </GroupBox.Header>
+                            
+                            <!-- Content -->
+                            <StackPanel Margin="10" 
+                                        Background="White">
+                                <filter:FilterEntriesView DataContext="{Binding FilterEntriesViewModel}" />
+                            </StackPanel>
+                        </GroupBox>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
         
         <!-- Main view -->
