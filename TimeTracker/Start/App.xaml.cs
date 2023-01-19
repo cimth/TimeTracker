@@ -7,7 +7,7 @@ using TimeTracker.ViewModels.DatabaseConfiguration;
 using TimeTracker.Views;
 using TimeTracker.Views.DatabaseConfiguration;
 
-namespace TimeTracker
+namespace TimeTracker.Start
 {
     /// <summary>
     /// Interaction logic for App.xaml

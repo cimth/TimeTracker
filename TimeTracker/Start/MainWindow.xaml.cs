@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using TimeTracker.Utils;
 
-namespace TimeTracker.Views
+namespace TimeTracker.Start
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
