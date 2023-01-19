@@ -54,14 +54,14 @@ public class EntryService
 
     public void ReadWithFilters(List<Category> categories, string notes)
     {
-        List<Entry> filtered = this._dbContext.Entries
-                                              .Where(entry => categories.Contains(entry.Category))
-                                              .Where(entry => entry.Notes.ToLower().Contains(notes.ToLower()))
-                                              .ToList();
-        
-        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered);
+        IQueryable<Entry> filtered = this._dbContext.Entries;
+            
+        filtered = this.FilterByCategories(filtered, categories);
+        filtered = this.FilterByNotes(filtered, notes);
+
+        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, filtered.ToList());
     }
-    
+
     // ==============
     // Update
     // ==============
@@ -81,5 +81,19 @@ public class EntryService
         
         this._dbContext.Remove(entry);
         this._dbContext.SaveChanges();
+    }
+    
+    // ==============
+    // Filtering methods
+    // ==============
+    
+    private IQueryable<Entry> FilterByCategories(IQueryable<Entry> filtered, List<Category> categories)
+    {
+        return filtered.Where(entry => categories.Contains(entry.Category));
+    }
+
+    private IQueryable<Entry> FilterByNotes(IQueryable<Entry> entries, string notes)
+    {
+        return entries.Where(entry => entry.Notes.ToLower().Contains(notes.ToLower()));
     }
 }
