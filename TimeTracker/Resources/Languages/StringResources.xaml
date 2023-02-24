@@ -53,6 +53,8 @@
     <system:String x:Key="Str_EntryTotalTime">Total Time</system:String>
     <system:String x:Key="Str_EntryNotes">Notes</system:String>
     
+    <system:String x:Key="Str_TotalTimeOfShownEntries">Total Time of the shown Entries: </system:String>
+    
     <system:String x:Key="Str_CreateEntry">Create Entry</system:String>
     <system:String x:Key="Str_UpdateEntry">Update Entry</system:String>
     <system:String x:Key="Str_ConfirmDeleteEntry">Do you really want to remove the Entry?</system:String>

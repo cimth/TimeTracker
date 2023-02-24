@@ -21,6 +21,12 @@ public class ReadEntriesViewModel : NotifyPropertyChangedImpl
 
     public ObservableCollection<Entry> Entries => this._entryService.Entries;
 
+    public string TotalTimeOfShownEntries
+    {
+        get => this._totalTimeOfShownEntries; 
+        private set => SetField(ref this._totalTimeOfShownEntries, value);
+    }
+
     public Entry? SelectedEntry { get; set; }
     
     public bool ShowGrid
@@ -48,6 +54,8 @@ public class ReadEntriesViewModel : NotifyPropertyChangedImpl
     
     private bool _showGrid;
 
+    private string _totalTimeOfShownEntries = "00:00";
+
     // ==============
     // Initialization
     // ==============
@@ -63,10 +71,15 @@ public class ReadEntriesViewModel : NotifyPropertyChangedImpl
         this.UpdateCommand = new DelegateCommand(this.Update);
         this.DeleteCommand = new DelegateCommand(this.Delete);
 
+        // Update the if the grid should be shown when changing the Entries collection.
         this.Entries.CollectionChanged += this.UpdateShowGrid;
         this.UpdateShowGrid(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        
+        // Update the total time of all current Entries when changing the Entries collection.
+        this.Entries.CollectionChanged += UpdateTotalTimeOfCurrentEntries;
+        this.UpdateTotalTimeOfCurrentEntries(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
-    
+
     // ==============
     // Show / hide grid
     // ==============
@@ -74,6 +87,21 @@ public class ReadEntriesViewModel : NotifyPropertyChangedImpl
     private void UpdateShowGrid(object? sender, NotifyCollectionChangedEventArgs eventArgs)
     {
         this.ShowGrid = this.Entries.Count > 0;
+    }
+    
+    // ==============
+    // Update the total time of the shown entries
+    // ==============
+    
+    private void UpdateTotalTimeOfCurrentEntries(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        // Sum up the total time of all current Entries.
+        TimeSpan sum = TimeSpan.Zero;
+        foreach (Entry entry in this.Entries)
+        {
+            sum = sum.Add(entry.TotalTime);
+        }
+        this.TotalTimeOfShownEntries = TimeSpanStringFormatter.FormatTotalHourAndMinutes(sum);
     }
     
     // ==============

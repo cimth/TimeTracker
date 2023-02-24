@@ -53,6 +53,8 @@
     <system:String x:Key="Str_EntryTotalTime">Gesamtzeit</system:String>
     <system:String x:Key="Str_EntryNotes">Anmerkungen</system:String>
     
+    <system:String x:Key="Str_TotalTimeOfShownEntries">Gesamtzeit für die angezeigten Einträge: </system:String>
+    
     <system:String x:Key="Str_CreateEntry">Eintrag erstellen</system:String>
     <system:String x:Key="Str_UpdateEntry">Eintrag ändern</system:String>
     <system:String x:Key="Str_ConfirmDeleteEntry">Soll der Eintrag wirklich gelöscht werden?</system:String>

@@ -26,19 +26,41 @@
     </UserControl.Resources>
     
     <DockPanel>
-        <!-- Create a new Entry -->
         <Border DockPanel.Dock="Top"
                 Background="{StaticResource AppTopBarBrush}"
                 BorderThickness="5">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
             </Border.Effect>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 
-            <Button Command="{Binding CreateCommand}"
-                    HorizontalAlignment="Left"
-                    Margin="5" Padding="3"
-                    Content="{DynamicResource Str_CreateEntry}"
-                    Style="{StaticResource Button}" />
+                <!-- Create a new Entry -->
+                <Button Grid.Column="0" 
+                        Command="{Binding CreateCommand}"
+                        HorizontalAlignment="Left"
+                        Margin="5" Padding="3"
+                        Content="{DynamicResource Str_CreateEntry}"
+                        Style="{StaticResource Button}" />
+                
+                <!-- Show the sum of the shown Entries' total time -->
+                <StackPanel Grid.Column="1" 
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="5">
+                    <Label Content="{DynamicResource Str_TotalTimeOfShownEntries}"
+                           HorizontalAlignment="Right" />
+                    
+                    <Label Content="{Binding TotalTimeOfShownEntries}"
+                           HorizontalAlignment="Right"
+                           FontWeight="Bold" />
+                </StackPanel>
+            </Grid>
         </Border>
         
         <!-- List with Entries -->
