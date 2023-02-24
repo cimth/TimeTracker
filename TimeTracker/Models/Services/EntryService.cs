@@ -70,6 +70,12 @@ public class EntryService
     public void Update()
     {
         this._dbContext.SaveChanges();
+        
+        // Re-add the current Entries to the observable collection to assure that the updates are propagated
+        // to the GUI correctly. If not doing this, when e.g. changing the pause time (or the start or end time without
+        // changing the date) the total time in the GUI's group headers will not be updated but only the Entries
+        // themselves.
+        ObservableCollectionUtil.ChangeObservableCollection(this.Entries, this.Entries.ToList());
     }
     
     // ==============

@@ -46,12 +46,14 @@
     <system:String x:Key="Str_EntryStart">Start</system:String>
     <system:String x:Key="Str_EntryStartDate">Startdatum</system:String>
     <system:String x:Key="Str_EntryStartTime">Startzeit</system:String>
-    <system:String x:Key="Str_EntryEnd">End</system:String>
+    <system:String x:Key="Str_EntryEnd">Ende</system:String>
     <system:String x:Key="Str_EntryEndDate">Enddatum</system:String>
     <system:String x:Key="Str_EntryEndTime">Endzeit</system:String>
     <system:String x:Key="Str_EntryPause">Pause</system:String>
     <system:String x:Key="Str_EntryTotalTime">Gesamtzeit</system:String>
     <system:String x:Key="Str_EntryNotes">Anmerkungen</system:String>
+    
+    <system:String x:Key="Str_TotalTimeOfShownEntries">Gesamtzeit für die angezeigten Einträge: </system:String>
     
     <system:String x:Key="Str_CreateEntry">Eintrag erstellen</system:String>
     <system:String x:Key="Str_UpdateEntry">Eintrag ändern</system:String>
