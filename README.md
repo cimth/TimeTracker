@@ -15,6 +15,10 @@ __An overview of the application features:__
 
 * Create and use different database files e.g. for different purposes, years etc.
 
+Screenshot
+----------
+
+![Screenshot](Screenshot.png)
 
 Included dependencies
 ---------------------
