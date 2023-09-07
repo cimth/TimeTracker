@@ -26,8 +26,8 @@ Included dependencies
 | Dependency                           | Version | Notes                                                |
 |--------------------------------------|---------|------------------------------------------------------|
 | .NET                                 | 7       |                                                      |
-| Microsoft.EntityFrameworkCore        | 7.0.2   | Used for ORM                                         |
-| Microsoft.EntityFrameworkCore.Sqlite | 7.0.2   | Used for storing data in a SQLite file               |
+| Microsoft.EntityFrameworkCore        | 7.0.10  | Used for ORM                                         |
+| Microsoft.EntityFrameworkCore.Sqlite | 7.0.10  | Used for storing data in a SQLite file               |
 | Microsoft.Xaml.Behaviors.Wpf         | 1.1.39  | Used for binding commands to events of XAML elements |
 | NUnit                                | 3.13.3  | Used for unit tests                                  |
 
