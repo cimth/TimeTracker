@@ -6,6 +6,9 @@
     <Color x:Key="AppSelectedMedium">Pink</Color>
     <Color x:Key="AppHighlighted">MistyRose</Color>
     
+    <Color x:Key="AppLightDisabled">WhiteSmoke</Color>
+    <Color x:Key="AppLightDisabledText">DarkGray</Color>
+    
     <Color x:Key="AppLeftBar">LavenderBlush</Color>
     <Color x:Key="AppTopBar">LavenderBlush</Color>
     
@@ -16,6 +19,9 @@
     <SolidColorBrush x:Key="AppSelectedLightBrush" Color="{StaticResource AppSelectedLight}" />
     <SolidColorBrush x:Key="AppSelectedMediumBrush" Color="{StaticResource AppSelectedMedium}" />
     <SolidColorBrush x:Key="AppHighlightedBrush" Color="{StaticResource AppHighlighted}" />
+    
+    <SolidColorBrush x:Key="AppLightDisabledBrush" Color="{StaticResource AppLightDisabled}" />
+    <SolidColorBrush x:Key="AppLightDisabledTextBrush" Color="{StaticResource AppLightDisabledText}" />
     
     <SolidColorBrush x:Key="AppLeftBarBrush" Color="{StaticResource AppLeftBar}" />
     <SolidColorBrush x:Key="AppTopBarBrush" Color="{StaticResource AppTopBar}" />

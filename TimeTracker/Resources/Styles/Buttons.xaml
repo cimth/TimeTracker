@@ -24,9 +24,15 @@
         
         <!-- Overwrite on different states. -->
         <Style.Triggers>
-            <!-- IsMoueOver -->
+            <!-- IsMouseOver -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
+            </Trigger>
+            
+            <!-- IsEnabled -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource AppLightDisabledBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource AppLightDisabledTextBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -54,7 +60,7 @@
         
         <!-- Overwrite on different states. -->
         <Style.Triggers>
-            <!-- IsMoueOver -->
+            <!-- IsMouseOver -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource AppHighlightedBrush}" />
             </Trigger>
@@ -64,7 +70,7 @@
                 <Setter Property="Background" Value="{StaticResource AppSelectedMediumBrush}" />
             </Trigger>
             
-            <!-- IsMoueOver AND IsChecked -->
+            <!-- IsMouseOver AND IsChecked -->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver" Value="True" />
